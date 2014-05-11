@@ -1,0 +1,4 @@
+*.pyc
+.codekit-cache/*
+config.codekit
+app.db

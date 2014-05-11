@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+	{% for condate in condates %}
+		{{ condate.convention.title }} - {{ condate.start_date }}
+	{% endfor %}
+{% endblock content %}
