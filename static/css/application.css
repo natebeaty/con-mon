@@ -1,0 +1,388 @@
+/**
+ * html5doctor.com Reset Stylesheet v1.6.1 (http://html5doctor.com/html-5-reset-stylesheet/)
+ * Richard Clark (http://richclarkdesign.com)
+ * http://cssreset.com
+ */
+/* line 6, ../scss/_reset.scss */
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent; }
+
+/* line 26, ../scss/_reset.scss */
+body {
+  line-height: 1; }
+
+/* line 29, ../scss/_reset.scss */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+/* line 33, ../scss/_reset.scss */
+nav ul {
+  list-style: none; }
+
+/* line 36, ../scss/_reset.scss */
+blockquote, q {
+  quotes: none; }
+
+/* line 39, ../scss/_reset.scss */
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+/* line 44, ../scss/_reset.scss */
+a {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent; }
+
+/* change colours to suit your needs */
+/* line 52, ../scss/_reset.scss */
+ins {
+  background-color: #ff9;
+  color: #000;
+  text-decoration: none; }
+
+/* change colours to suit your needs */
+/* line 58, ../scss/_reset.scss */
+mark {
+  background-color: #ff9;
+  color: #000;
+  font-style: italic;
+  font-weight: bold; }
+
+/* line 64, ../scss/_reset.scss */
+del {
+  text-decoration: line-through; }
+
+/* line 67, ../scss/_reset.scss */
+abbr[title], dfn[title] {
+  border-bottom: 1px dotted;
+  cursor: help; }
+
+/* line 71, ../scss/_reset.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/* change border colour to suit your needs */
+/* line 76, ../scss/_reset.scss */
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #cccccc;
+  margin: 1em 0;
+  padding: 0; }
+
+/* line 84, ../scss/_reset.scss */
+input, select {
+  vertical-align: middle; }
+
+/* line 1, ../scss/_clndr.scss */
+.clearfix:after, .cal1 .clndr .clndr-controls:after, .cal2 .clndr .clndr-controls:after, .cal2 .clndr .clndr-grid:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0; }
+
+/* line 10, ../scss/_clndr.scss */
+.clearfix, .cal1 .clndr .clndr-controls, .cal2 .clndr .clndr-controls, .cal2 .clndr .clndr-grid {
+  display: inline-block; }
+
+/* line 14, ../scss/_clndr.scss */
+html[xmlns] .clearfix, html[xmlns] .cal1 .clndr .clndr-controls, .cal1 .clndr html[xmlns] .clndr-controls, html[xmlns] .cal2 .clndr .clndr-controls, .cal2 .clndr html[xmlns] .clndr-controls, html[xmlns] .cal2 .clndr .clndr-grid, .cal2 .clndr html[xmlns] .clndr-grid {
+  display: block; }
+
+/* line 18, ../scss/_clndr.scss */
+* html .clearfix, * html .cal1 .clndr .clndr-controls, .cal1 .clndr * html .clndr-controls, * html .cal2 .clndr .clndr-controls, .cal2 .clndr * html .clndr-controls, * html .cal2 .clndr .clndr-grid, .cal2 .clndr * html .clndr-grid {
+  height: 1%; }
+
+/* line 22, ../scss/_clndr.scss */
+.noselect, .cal1 .clndr .clndr-controls .clndr-control-button .clndr-next-button, .cal1 .clndr .clndr-controls .clndr-control-button .clndr-previous-button, .cal2 .clndr .clndr-controls .clndr-previous-button, .cal2 .clndr .clndr-controls .clndr-next-button {
+  -webkit-user-select: none;
+  /* Chrome/Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE10+ */ }
+
+/* line 29, ../scss/_clndr.scss */
+h4 {
+  width: 75%;
+  text-align: center;
+  font-family: 'Lora';
+  font-weight: normal;
+  color: white;
+  font-size: 14px;
+  margin: 0 auto 1em auto;
+  padding: 1em;
+  background: #b63642; }
+
+/* line 42, ../scss/_clndr.scss */
+p {
+  text-align: center;
+  font-family: 'Lora';
+  margin: 3em auto 1em auto;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-bottom: 2px solid #414141;
+  background: #f4f4f4; }
+
+/* line 57, ../scss/_clndr.scss */
+.cal1 {
+  margin: 30px auto;
+  max-width: 600px;
+  font-family: 'Lora';
+  font-size: 14px; }
+  /* line 66, ../scss/_clndr.scss */
+  .cal1 .clndr .clndr-controls {
+    width: 100%;
+    position: relative;
+    margin-bottom: 10px; }
+    /* line 73, ../scss/_clndr.scss */
+    .cal1 .clndr .clndr-controls .month {
+      float: left;
+      width: 33%;
+      text-align: center; }
+    /* line 80, ../scss/_clndr.scss */
+    .cal1 .clndr .clndr-controls .clndr-control-button {
+      float: left;
+      width: 33%; }
+      /* line 85, ../scss/_clndr.scss */
+      .cal1 .clndr .clndr-controls .clndr-control-button.rightalign {
+        text-align: right;
+        width: 34%; }
+      /* line 90, ../scss/_clndr.scss */
+      .cal1 .clndr .clndr-controls .clndr-control-button .clndr-next-button {
+        cursor: pointer; }
+        /* line 94, ../scss/_clndr.scss */
+        .cal1 .clndr .clndr-controls .clndr-control-button .clndr-next-button:hover {
+          background: #ddd; }
+        /* line 95, ../scss/_clndr.scss */
+        .cal1 .clndr .clndr-controls .clndr-control-button .clndr-next-button.inactive {
+          opacity: 0.5; }
+          /* line 98, ../scss/_clndr.scss */
+          .cal1 .clndr .clndr-controls .clndr-control-button .clndr-next-button.inactive:hover {
+            background: none;
+            cursor: default; }
+      /* line 105, ../scss/_clndr.scss */
+      .cal1 .clndr .clndr-controls .clndr-control-button .clndr-previous-button {
+        cursor: pointer; }
+        /* line 109, ../scss/_clndr.scss */
+        .cal1 .clndr .clndr-controls .clndr-control-button .clndr-previous-button:hover {
+          background: #ddd; }
+        /* line 110, ../scss/_clndr.scss */
+        .cal1 .clndr .clndr-controls .clndr-control-button .clndr-previous-button.inactive {
+          opacity: 0.5; }
+          /* line 113, ../scss/_clndr.scss */
+          .cal1 .clndr .clndr-controls .clndr-control-button .clndr-previous-button.inactive:hover {
+            background: none;
+            cursor: default; }
+  /* line 123, ../scss/_clndr.scss */
+  .cal1 .clndr .clndr-table {
+    table-layout: fixed;
+    width: 100%; }
+    /* line 128, ../scss/_clndr.scss */
+    .cal1 .clndr .clndr-table .header-days {
+      height: 30px;
+      font-size: 10px;
+      background: #0D70A6; }
+      /* line 134, ../scss/_clndr.scss */
+      .cal1 .clndr .clndr-table .header-days .header-day {
+        vertical-align: middle;
+        text-align: center;
+        border-left: 1px solid black;
+        border-top: 1px solid black;
+        color: #fff; }
+        /* line 143, ../scss/_clndr.scss */
+        .cal1 .clndr .clndr-table .header-days .header-day:last-child {
+          border-right: 1px solid black; }
+    /* line 150, ../scss/_clndr.scss */
+    .cal1 .clndr .clndr-table tr {
+      height: 85px; }
+      /* line 154, ../scss/_clndr.scss */
+      .cal1 .clndr .clndr-table tr td {
+        vertical-align: top; }
+      /* line 159, ../scss/_clndr.scss */
+      .cal1 .clndr .clndr-table tr .day {
+        border-left: 1px solid black;
+        border-top: 1px solid black;
+        width: 100%;
+        height: inherit; }
+        /* line 166, ../scss/_clndr.scss */
+        .cal1 .clndr .clndr-table tr .day:hover {
+          background: #eee; }
+        /* line 168, ../scss/_clndr.scss */
+        .cal1 .clndr .clndr-table tr .day.today {
+          background: #9AD6E3; }
+          /* line 171, ../scss/_clndr.scss */
+          .cal1 .clndr .clndr-table tr .day.today:hover {
+            background: #72c6d8; }
+          /* line 172, ../scss/_clndr.scss */
+          .cal1 .clndr .clndr-table tr .day.today.event {
+            background: #a7dbc1; }
+        /* line 178, ../scss/_clndr.scss */
+        .cal1 .clndr .clndr-table tr .day.event {
+          background: #B4E09F; }
+          /* line 181, ../scss/_clndr.scss */
+          .cal1 .clndr .clndr-table tr .day.event:hover {
+            background: #96d478; }
+        /* line 187, ../scss/_clndr.scss */
+        .cal1 .clndr .clndr-table tr .day.inactive {
+          background: #ddd; }
+        /* line 192, ../scss/_clndr.scss */
+        .cal1 .clndr .clndr-table tr .day:last-child {
+          border-right: 1px solid black; }
+        /* line 197, ../scss/_clndr.scss */
+        .cal1 .clndr .clndr-table tr .day .day-contents {
+          box-sizing: border-box;
+          padding: 8px;
+          font-size: 12px;
+          text-align: right; }
+      /* line 208, ../scss/_clndr.scss */
+      .cal1 .clndr .clndr-table tr .empty, .cal1 .clndr .clndr-table tr .adjacent-month {
+        border-left: 1px solid black;
+        border-top: 1px solid black;
+        width: 100%;
+        height: inherit;
+        background: #eee; }
+        /* line 216, ../scss/_clndr.scss */
+        .cal1 .clndr .clndr-table tr .empty:hover, .cal1 .clndr .clndr-table tr .adjacent-month:hover {
+          background: #ddd; }
+        /* line 218, ../scss/_clndr.scss */
+        .cal1 .clndr .clndr-table tr .empty:last-child, .cal1 .clndr .clndr-table tr .adjacent-month:last-child {
+          border-right: 1px solid black; }
+      /* line 226, ../scss/_clndr.scss */
+      .cal1 .clndr .clndr-table tr:last-child .day {
+        border-bottom: 1px solid black; }
+      /* line 231, ../scss/_clndr.scss */
+      .cal1 .clndr .clndr-table tr:last-child .empty {
+        border-bottom: 1px solid black; }
+
+/* line 244, ../scss/_clndr.scss */
+.cal2 {
+  max-width: 177px;
+  margin: 0 auto;
+  font-family: 'Lora'; }
+  /* line 253, ../scss/_clndr.scss */
+  .cal2 .clndr .clndr-controls {
+    display: block;
+    width: 100%;
+    margin-bottom: 3px; }
+    /* line 260, ../scss/_clndr.scss */
+    .cal2 .clndr .clndr-controls .clndr-previous-button {
+      float: left;
+      width: 10%;
+      text-align: left;
+      cursor: pointer; }
+      /* line 267, ../scss/_clndr.scss */
+      .cal2 .clndr .clndr-controls .clndr-previous-button:hover {
+        background-color: #f4f4f4; }
+    /* line 272, ../scss/_clndr.scss */
+    .cal2 .clndr .clndr-controls .month {
+      float: left;
+      width: 80%;
+      text-align: center; }
+    /* line 278, ../scss/_clndr.scss */
+    .cal2 .clndr .clndr-controls .clndr-next-button {
+      float: left;
+      width: 10%;
+      text-align: right;
+      cursor: pointer; }
+      /* line 285, ../scss/_clndr.scss */
+      .cal2 .clndr .clndr-controls .clndr-next-button:hover {
+        background-color: #f4f4f4; }
+  /* line 292, ../scss/_clndr.scss */
+  .cal2 .clndr .clndr-grid {
+    text-align: center;
+    border: 1px solid #FF4545; }
+    /* line 298, ../scss/_clndr.scss */
+    .cal2 .clndr .clndr-grid .header-day {
+      float: left;
+      width: 25px;
+      height: 25px;
+      background: #FF4545; }
+    /* line 307, ../scss/_clndr.scss */
+    .cal2 .clndr .clndr-grid .day {
+      float: left;
+      width: 25px;
+      height: 25px; }
+      /* line 313, ../scss/_clndr.scss */
+      .cal2 .clndr .clndr-grid .day.event {
+        background-color: #B4E09F; }
+      /* line 318, ../scss/_clndr.scss */
+      .cal2 .clndr .clndr-grid .day.today {
+        background-color: #E3C57F; }
+    /* line 324, ../scss/_clndr.scss */
+    .cal2 .clndr .clndr-grid .empty, .cal2 .clndr .clndr-grid .adjacent-month {
+      float: left;
+      width: 25px;
+      height: 25px;
+      background: #ddd; }
+  /* line 333, ../scss/_clndr.scss */
+  .cal2 .clndr .clndr-today-button {
+    width: 100%;
+    text-align: center;
+    cursor: pointer; }
+    /* line 338, ../scss/_clndr.scss */
+    .cal2 .clndr .clndr-today-button:hover {
+      background-color: #ddd; }
+
+/* line 4, ../scss/application.scss */
+body {
+  font-size: 100%;
+  background: #eee; }
+
+/* line 8, ../scss/application.scss */
+#content {
+  width: 50em;
+  margin: 2em auto; }
+
+/* line 12, ../scss/application.scss */
+h1, h2, h3 {
+  font-family: 'Lora', serif;
+  margin: .5em 0 1em; }
+
+/* line 16, ../scss/application.scss */
+h1 {
+  font-size: 6em;
+  color: #fff;
+  margin: 0;
+  text-align: center; }
+
+/* line 22, ../scss/application.scss */
+h2 {
+  font-size: 2em; }
+
+/* line 25, ../scss/application.scss */
+header {
+  background: #70ae26;
+  border-bottom: 1px solid #e64c66;
+  margin-bottom: 2em; }
+  /* line 29, ../scss/application.scss */
+  header .wrap {
+    width: 50em;
+    margin: 0 auto;
+    padding: 2em; }

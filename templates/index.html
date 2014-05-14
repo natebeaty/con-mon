@@ -1,6 +1,45 @@
 {% extends "base.html" %}
 {% block content %}
-	{% for condate in condates %}
-		{{ condate.convention.title }} - {{ condate.start_date }}
-	{% endfor %}
+	
+	<h2>Upcoming Conventions</h2>
+	{% if condates %}
+		<ul class="upcoming">
+		{% for condate in condates %}
+			<li>
+				<h2><a href="{{ condate.convention.url }}">{{ condate.convention.title }}</a></h2>
+				<h3 class="date">{{ condate.start_date }}
+				{% if condate.end_date and condate.end_date != condate.start_date %}
+					- {{ condate.end_date }}
+				{% endif %}
+				</h3>
+			</li>
+		{% endfor %}
+		</ul>
+	{% endif %}
+
+	<h2>Calendar</h2>
+	<div class="calendar">
+		<div class="cal1"></div>
+		<div class="cal2">
+			<script type="text/template" id="template-calendar">
+				<div class="clndr-controls">
+				  <div class="clndr-previous-button">&lsaquo;</div>
+				  <div class="month"><%= month %></div>
+				  <div class="clndr-next-button">&rsaquo;</div>
+				</div>
+				<div class="clndr-grid">
+				  <div class="days-of-the-week">
+				    <% _.each(daysOfTheWeek, function(day) { %>
+				      <div class="header-day"><%= day %></div>
+				    <% }); %>
+				    <div class="days">
+				      <% _.each(days, function(day) { %>
+				        <div class="<%= day.classes %>"><%= day.day %></div>
+				      <% }); %>
+				    </div>
+				  </div>
+				</div>
+			</script>
+		</div>
+	</div>
 {% endblock content %}

@@ -2,6 +2,7 @@ from flask import Flask,render_template
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.admin import Admin
 from datetime import date
+from marshmallow import Serializer, fields, pprint
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -40,6 +41,16 @@ class Condate(db.Model):
 		def __unicode__(self):
 				return self.title
 
+class ConventionSerializer(Serializer):
+	class Meta:
+	    fields = ('id', 'title', 'body', 'url')
+
+class CondateSerializer(Serializer):
+	convention = fields.Nested(ConventionSerializer)
+	class Meta:
+	    fields = ('id', 'title', 'body', 'start_date', 'end_date', 'registration_opens')
+
+
 admin = Admin(app)
 admin.add_view(ModelView(Convention, db.session))
 admin.add_view(ModelView(Condate, db.session))
@@ -49,6 +60,11 @@ def index():
 	return render_template('index.html',
 		condates = Condate.query.filter(Condate.start_date >= date.today()).all()
 		)
+
+@app.route('/condates.json')
+def condates():
+	condates = Condate.query.filter(Condate.start_date >= date.today()).all()
+	return CondateSerializer(condates, many=True).json
 
 if __name__ == '__main__':
 		app.run(host='0.0.0.0')
