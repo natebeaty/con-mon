@@ -18,40 +18,40 @@ $clndr-border: 1px solid #000;
     }
     li {
         background:#fff;
-        border-bottom: 1px solid $highlight;
+        border-bottom: 1px solid rgba($dark,.15);
         display: block;
         float: left;
         width: 14.24%;
         height: 34px;
         line-height: 34px;
         text-align: center;
-        color: #999;
+        color: rgba($dark,.5);
         &.today {
             color: #000;
             box-shadow: inset 0 0 10px $highlight;
         }
         &.event {
-            background: #ff6919;
+            background: $highlight;
             color: #fff;
-            box-shadow: inset 0 0 10px rgba($dark,.5);
+            box-shadow: inset 0 0 10px rgba($dark,.3);
         }
         &.empty {
-            background: $highlight;
+            background: rgba($dark,.15);
         }
     }
     .days-of-the-week {
         li {
             font: bold 12px/1 'Arvo';
-            background: $vibrant;
+            background: rgba($dark,.65);
             color: #fff;
             height: 34px;
             line-height: 34px;
-            border-bottom: 1px solid #333;
+            border-bottom: 1px solid rgba($dark,.35);
         }
     }
     .month {
         text-transform: uppercase;
-        color: $vibrant;
+        color: $dark;
     }
     .event-detail {
         display: none;
