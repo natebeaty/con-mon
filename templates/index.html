@@ -8,11 +8,10 @@
 		{% for condate in condates %}
 			<li>
 				<h2><a href="{{ condate.convention.url }}">{{ condate.convention.title }}</a></h2>
-				<h3 class="date">{{ condate.start_date.strftime('%b %e') }}
-				{% if condate.end_date and condate.end_date != condate.start_date %}
-					- {{ condate.end_date.strftime('%b %e') }}
-				{% endif %}
-				{{ condate.start_date.strftime('%Y') }}
+				<h3 class="date">{{ condate.start_date.strftime('%b %e')|trim }}
+				{%- if condate.end_date and condate.end_date != condate.start_date -%}
+					&ndash;{{ condate.end_date.strftime('%e')|trim }}
+				{%- endif %}, {{ condate.start_date.strftime('%Y') }}
 				</h3>
 			</li>
 		{% endfor %}
@@ -38,9 +37,9 @@
 			<% _.each(days, function(day) { %>
 				<li class="<%= day.classes %>">
 				<%= day.day %>
-				<% _.each(day.events, function(event){ %>
-					<div class="event-detail" title="<%= event.title %>"><h3><%= event.title %></h3></div>
-				<% }) %>
+				<div class="event-detail" title="<%= event.title %>"><% _.each(day.events, function(event){ %>
+					<h3><%= event.title %></h3>
+				<% }) %></div>
 				</li>
 			<% }); %>
 		</ul>
