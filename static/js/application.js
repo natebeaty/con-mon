@@ -41,9 +41,20 @@ $.concalendar = (function() {
             });
         }
         $('.event').each(function() {
-            var tip = $(this).find('.event-detail').html();
+            var $tip = $(this).find('.event-detail');
+            $(this).on('mouseenter', function() {
+                var id = $(this).find('h3:first').data('condate-id');
+                console.log(id);
+                $('.days li').removeClass('current');
+                $dates = $('.event-detail h3[data-condate-id="'+id+'"]');
+                $dates.each(function() {
+                    $(this).parents('li:first').addClass('current');
+                });
+            }).on('mouseleave', function() {
+                $('.days li').removeClass('current');
+            });
             $(this).tooltipster({
-                content: tip,
+                content: $tip.html(),
                 delay: 0,
                 contentAsHTML: true,
                 animation: 'slide',

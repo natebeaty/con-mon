@@ -26,8 +26,8 @@ $clndr-border: 1px solid #000;
         line-height: 34px;
         text-align: center;
         color: rgba($dark,.5);
-        -webkit-transition: opacity .2s;
-        transition: opacity .2s;
+        -webkit-transition: opacity .2s, background .25s;
+        transition: opacity .2s, background .25s;
         transition-delay: .1s;
         -webkit-transition-delay: .1s;
         &.today {
@@ -44,6 +44,9 @@ $clndr-border: 1px solid #000;
         }
         &.inactive {
             opacity: .3;
+        }
+        &.current {
+            background: $vibrant !important;
         }
     }
     .days-of-the-week {
