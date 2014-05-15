@@ -16,21 +16,36 @@ $.concalendar = (function() {
     }
 
     function _initClndr() {
-        calendars.clndr1 = $('.cal1').clndr({
-          events: eventsArray,
-          clickEvents: {
-            click: function(target) {
-              console.log(target);
-            }
-          },
-          multiDayEvents: {
-            startDate: 'start_date',
-            endDate: 'end_date'
-          },
-          showAdjacentMonths: true,
-          adjacentDaysChangeMonth: false
+        for (var i = 0; i < 13; i++) {
+            calendars.clndr1 = $('.cal'+i).clndr({
+                template: $('#template-calendar').html(),
+                startWithMonth: moment().add('month', i-1),
+                events: eventsArray,
+                clickEvents: {
+                    click: function(target) {
+                        if (target.events.length > 0) {
+                            // console.log($(this).find('.event-details'));
+                        }
+                    }
+                },
+                multiDayEvents: {
+                startDate: 'start_date',
+                endDate: 'end_date'
+                },
+                showAdjacentMonths: false,
+                adjacentDaysChangeMonth: false
+            });
+        }
+        $('.event').each(function() {
+            var tip = $(this).find('.event-detail').html();
+            $(this).tooltipster({
+                content: tip,
+                contentAsHTML: true,
+                animation: 'fade',
+                delay: 0
+            });
         });
-}
+    }
 
     function _resize() {
         var screen_width = document.documentElement.clientWidth;

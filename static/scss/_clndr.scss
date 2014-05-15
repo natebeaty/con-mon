@@ -26,40 +26,64 @@ html[xmlns] .clearfix {
     -ms-user-select: none; /* IE10+ */
 }
 
-h4
-{
-    width: 75%;
-    text-align: center;
-    font-family: 'Lora';
-    font-weight: normal;
-    color: white;
-    font-size: 14px;
-    margin: 0 auto 1em auto;
-    padding: 1em;
-    background: #b63642;
-}
-
-p
-{
-    text-align: center;
-    font-family: 'Lora';
-    margin: 3em auto 1em auto;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    border-bottom: 2px solid #414141;
-    background: #f4f4f4;
-}
-
 //////////////////////////////////
 
 $clndr-border: 1px solid #000;
 
-.cal1
+.clndr-grid {
+    .days {
+        // border: 1px solid #ccc;
+        // overflow: hidden;
+    }
+    li {
+        background:#fff;
+        border-bottom: 1px solid #ddd;
+        display: block;
+        float: left;
+        width: 42px;
+        height: 34px;
+        line-height: 34px;
+        text-align: center;
+        color: #999;
+        &.today {
+            color: #000;
+            background: #9aee9b;
+        }
+        &.event {
+            background: #bcd7ee;
+            color: #000;
+        }
+        &.empty {
+            background: #ddd;
+        }
+    }
+    .days-of-the-week {
+        li {
+            font: bold 12px/1 'Arvo';
+            background: #70ae26;
+            color: #fff;
+            height: 34px;
+            line-height: 34px;
+        }
+    }
+    .month {
+        text-transform: uppercase;
+    }
+    .event-detail {
+        display: none;
+    }
+
+}
+
+.cal
 {
-    margin: 30px auto;
-    max-width: 600px;
-    font-family: 'Lora';
+    float: left;
+    width: 294px;
+    margin: 0 16px 20px 0;
     font-size: 14px;
+    &:nth-child(3n+1) {
+        clear: left;
+    }
 
     .clndr
     {
@@ -72,15 +96,16 @@ $clndr-border: 1px solid #000;
 
             .month
             {
-                float: left;
-                width: 33%;
-                text-align: center;
+                // float: left;
+                // width: 33%;
+                // text-align: center;
             }
 
             .clndr-control-button
             {
                 float: left;
                 width: 33%;
+                display: none;
 
                 &.rightalign
                 {
@@ -149,7 +174,7 @@ $clndr-border: 1px solid #000;
 
             tr
             {
-                height: 85px;
+                height: 35px;
 
                 td
                 {
@@ -237,108 +262,4 @@ $clndr-border: 1px solid #000;
         }
     }
 
-}
-
-$box-size: 25px;
-
-.cal2
-{
-    max-width: 177px;
-    margin: 0 auto;
-
-    font-family: 'Lora';
-
-    .clndr
-    {
-        .clndr-controls
-        {
-            display: block;
-            @extend .clearfix;
-            width: 100%;
-            margin-bottom: 3px;
-
-            .clndr-previous-button
-            {
-                float: left;
-                width: 10%;
-                text-align: left;
-                cursor: pointer;
-                @extend .noselect;
-                &:hover
-                {
-                    background-color: #f4f4f4;
-                }
-            }
-            .month
-            {
-                float: left;
-                width: 80%;
-                text-align: center;
-            }
-            .clndr-next-button
-            {
-                float: left;
-                width: 10%;
-                text-align: right;
-                cursor: pointer;
-                @extend .noselect;
-                &:hover
-                {
-                    background-color: #f4f4f4;
-                }
-            }
-        }
-
-        .clndr-grid
-        {
-            text-align: center;
-            border: 1px solid #FF4545;
-            @extend .clearfix;
-
-            .header-day
-            {
-                float: left;
-                width: $box-size;
-                height: $box-size;
-                // padding-top: 5px;
-                background: #FF4545;
-            }
-
-            .day
-            {
-                float: left;
-                width: $box-size;
-                height: $box-size;
-
-                &.event
-                {
-                    background-color: #B4E09F;
-                }
-
-                &.today
-                {
-                    background-color: #E3C57F;
-                }
-            }
-
-            .empty, .adjacent-month
-            {
-                float: left;
-                width: $box-size;
-                height: $box-size;
-                background: #ddd;
-            }
-        }
-
-        .clndr-today-button
-        {
-            width: 100%;
-            text-align: center;
-            cursor: pointer;
-            &:hover
-            {
-                background-color: #ddd;
-            }
-        }
-    }
 }

@@ -1,16 +1,18 @@
 @import 'reset';
 @import 'clndr';
+@import 'tooltipster';
 
 body {
 	font-size: 100%;
 	background:#eee;
+	font-family: 'Arimo';
 }
 #content {
-	width: 50em;
+	width: 930px;
 	margin: 2em auto;
 }
 h1,h2,h3 {
-	font-family: 'Lora', serif;
+	font-family: 'Arvo';
 	margin: .5em 0 1em;
 }
 h1 {
@@ -22,13 +24,24 @@ h1 {
 h2 {
 	font-size: 2em;
 }
+h3 {
+	margin: 0 0 .3em;
+}
 header {
 	background: #70ae26;
 	border-bottom: 1px solid #e64c66;
 	margin-bottom: 2em;
 	.wrap {
-		width: 50em;
-		margin: 0 auto;
 		padding: 2em;
 	}
+}
+.upcoming {
+	list-style: none;
+	h2,h3 {
+		display: inline-block;
+		margin: 0 0 .2em;
+	}
+}
+.calendars {
+	margin-top: 2em;
 }
