@@ -6,13 +6,13 @@ $.concalendar = (function() {
         small_width = false,
         calendars = {}
         eventArray = [];
+
+    function _init() {
+        _resize();
         $.getJSON( "/condates.json", function( data ) {
             eventsArray = data;
             _initClndr();
         });
-
-    function _init() {
-        _resize();
     }
 
     function _initClndr() {
@@ -44,6 +44,17 @@ $.concalendar = (function() {
                 animation: 'fade',
                 delay: 0
             });
+        });
+        $('.upcoming li a').on('mouseenter', function() {
+            var id = $(this).parents('li:first').data('condate-id');
+            $('.cal,.days li').addClass('inactive');
+            $dates = $('.event-detail h3[data-condate-id="'+id+'"]');
+            $dates.each(function() {
+                $(this).parents('li:first').removeClass('inactive');
+                $(this).parents('.cal:first').removeClass('inactive');
+            });
+        }).on('mouseleave', function() {
+            $('.days li,.cal').removeClass('inactive');
         });
     }
 

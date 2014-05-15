@@ -119,7 +119,11 @@ input, select {
   height: 34px;
   line-height: 34px;
   text-align: center;
-  color: rgba(84, 55, 41, 0.5); }
+  color: rgba(84, 55, 41, 0.5);
+  -webkit-transition: opacity .2s;
+  transition: opacity .2s;
+  transition-delay: .1s;
+  -webkit-transition-delay: .1s; }
   .clndr-grid li.today {
     color: #000;
     box-shadow: inset 0 0 10px #00acee; }
@@ -129,6 +133,8 @@ input, select {
     box-shadow: inset 0 0 10px rgba(84, 55, 41, 0.3); }
   .clndr-grid li.empty {
     background: rgba(84, 55, 41, 0.15); }
+  .clndr-grid li.inactive {
+    opacity: .2; }
 .clndr-grid .days-of-the-week li {
   font: bold 12px/1 'Arvo';
   background: rgba(84, 55, 41, 0.65);
@@ -145,9 +151,15 @@ input, select {
 .cal {
   width: 90%;
   margin: 0 auto 24px;
-  font-size: 14px; }
+  font-size: 14px;
+  -webkit-transition: opacity .2s;
+  transition: opacity .2s;
+  transition-delay: .1s;
+  -webkit-transition-delay: .1s; }
   .cal:nth-child(3n+1) {
     clear: left; }
+  .cal.inactive {
+    opacity: .25; }
   .cal .clndr .clndr-controls {
     width: 100%;
     position: relative;

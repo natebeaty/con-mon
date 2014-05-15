@@ -6,7 +6,7 @@
 	{% if condates %}
 		<ul>
 		{% for condate in condates %}
-			<li>
+			<li data-condate-id="{{ condate.id }}">
 				<h2><a href="{{ condate.convention.url }}">{{ condate.convention.title }}</a></h2>
 				 <span class="date">
 				 <time class="dtstart" datetime="{{ condate.start_date }}">{{ condate.start_date.strftime('%b %e')|trim }}</time>
@@ -40,7 +40,7 @@
 				<li class="<%= day.classes %>">
 				<%= day.day %>
 				<div class="event-detail" title="<%= event.title %>"><% _.each(day.events, function(event){ %>
-					<h3><%= event.title %></h3>
+					<h3 data-condate-id="<%= event.id %>"><%= event.title %></h3>
 				<% }) %></div>
 				</li>
 			<% }); %>
