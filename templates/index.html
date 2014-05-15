@@ -8,11 +8,13 @@
 		{% for condate in condates %}
 			<li>
 				<h2><a href="{{ condate.convention.url }}">{{ condate.convention.title }}</a></h2>
-				<h3 class="date">{{ condate.start_date.strftime('%b %e')|trim }}
+				 <span class="date">
+				 <time class="dtstart" datetime="{{ condate.start_date }}">{{ condate.start_date.strftime('%b %e')|trim }}</time>
 				{%- if condate.end_date and condate.end_date != condate.start_date -%}
-					&ndash;{{ condate.end_date.strftime('%e')|trim }}
+					&ndash;<time class="dtstart" datetime="{{ condate.end_date }}">{{ condate.end_date.strftime('%e')|trim }}</time>
 				{%- endif %}, {{ condate.start_date.strftime('%Y') }}
-				</h3>
+					<span class="days-away">{{ condate.start_date|timeaway }}</span>
+				</span>
 			</li>
 		{% endfor %}
 		</ul>

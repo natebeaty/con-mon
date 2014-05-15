@@ -41,6 +41,11 @@ header {
 }
 .upcoming {
 	text-align: center;
+	.days-away {
+		margin-left: .3rem;
+		font-size: .8rem;
+		color: rgba($dark, .3);
+	}
 	ul {
 		margin-top: .5rem;
 		list-style: none;
@@ -48,7 +53,7 @@ header {
 	}
 	h2,h3 {
 		display: inline-block;
-		margin: 0 .1rem .2rem;
+		margin: 0 .2rem .2rem;
 	}
 }
 .calendars {

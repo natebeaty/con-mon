@@ -1,9 +1,9 @@
 from flask import Flask,render_template
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.admin import Admin
-from datetime import date
-from marshmallow import Serializer, fields, pprint
+from datetime import datetime, date
 import os
+from marshmallow import Serializer, fields, pprint
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 from flask.ext import admin
@@ -16,6 +16,30 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'ap
 db = SQLAlchemy(app)
 
 app.debug = True
+
+@app.template_filter()
+def timeaway(dt, default="tomorrow"):
+    """
+    Returns string representing "time away" e.g.
+    3 days away, 5 hours away etc.
+    """
+
+    now = datetime.utcnow().date()
+    diff = dt - now
+
+    periods = (
+        (diff.days / 365, "year", "years"),
+        (diff.days / 30, "month", "months"),
+        (diff.days / 7, "week", "weeks"),
+        (diff.days, "day", "days"),
+    )
+
+    for period, singular, plural in periods:
+
+        if period:
+            return "%d %s away" % (period, singular if period == 1 else plural)
+
+    return default
 
 class Convention(db.Model):
 		id = db.Column(db.Integer, primary_key=True)

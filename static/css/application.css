@@ -450,13 +450,17 @@ header {
 
 .upcoming {
   text-align: center; }
+  .upcoming .days-away {
+    margin-left: .3rem;
+    font-size: .8rem;
+    color: rgba(84, 55, 41, 0.3); }
   .upcoming ul {
     margin-top: .5rem;
     list-style: none;
     line-height: 1.3; }
   .upcoming h2, .upcoming h3 {
     display: inline-block;
-    margin: 0 .1rem .2rem; }
+    margin: 0 .2rem .2rem; }
 
 .calendars {
   margin-top: 2rem; }
