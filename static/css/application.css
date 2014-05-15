@@ -134,7 +134,7 @@ input, select {
   .clndr-grid li.empty {
     background: rgba(84, 55, 41, 0.15); }
   .clndr-grid li.inactive {
-    opacity: .2; }
+    opacity: .3; }
 .clndr-grid .days-of-the-week li {
   font: bold 12px/1 'Arvo';
   background: rgba(84, 55, 41, 0.65);
