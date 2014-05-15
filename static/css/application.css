@@ -414,7 +414,6 @@ input, select {
   transform: scale(1.1, 1.1); }
 
 body {
-  font-size: 70%;
   background: #f4f0f2;
   font-family: 'Arimo';
   color: #543729; }
@@ -431,7 +430,7 @@ p {
   margin: .5rem 0; }
 
 h1 {
-  font-size: 3rem;
+  font-size: 2rem;
   margin: 0;
   text-align: center; }
 
@@ -452,7 +451,7 @@ header {
 .upcoming {
   text-align: center; }
   .upcoming ul {
-    margin-top: .5em;
+    margin-top: .5rem;
     list-style: none;
     line-height: 1.3; }
   .upcoming h2, .upcoming h3 {
@@ -472,6 +471,9 @@ footer {
     color: #fff; }
 
 @media only screen and (min-width: 1024px) {
+  h1 {
+    font-size: 3rem; }
+
   #content {
     width: 930px;
     margin: 2rem auto; }
