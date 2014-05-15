@@ -12,6 +12,7 @@
 				{% if condate.end_date and condate.end_date != condate.start_date %}
 					- {{ condate.end_date.strftime('%b %e') }}
 				{% endif %}
+				{{ condate.start_date.strftime('%Y') }}
 				</h3>
 			</li>
 		{% endfor %}
