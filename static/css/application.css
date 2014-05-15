@@ -3,7 +3,6 @@
  * Richard Clark (http://richclarkdesign.com)
  * http://cssreset.com
  */
-/* line 6, ../scss/_reset.scss */
 html, body, div, span, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 abbr, address, cite, code,
@@ -24,30 +23,24 @@ time, mark, audio, video {
   vertical-align: baseline;
   background: transparent; }
 
-/* line 26, ../scss/_reset.scss */
 body {
   line-height: 1; }
 
-/* line 29, ../scss/_reset.scss */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block; }
 
-/* line 33, ../scss/_reset.scss */
 nav ul {
   list-style: none; }
 
-/* line 36, ../scss/_reset.scss */
 blockquote, q {
   quotes: none; }
 
-/* line 39, ../scss/_reset.scss */
 blockquote:before, blockquote:after,
 q:before, q:after {
   content: '';
   content: none; }
 
-/* line 44, ../scss/_reset.scss */
 a {
   margin: 0;
   padding: 0;
@@ -56,36 +49,30 @@ a {
   background: transparent; }
 
 /* change colours to suit your needs */
-/* line 52, ../scss/_reset.scss */
 ins {
   background-color: #ff9;
   color: #000;
   text-decoration: none; }
 
 /* change colours to suit your needs */
-/* line 58, ../scss/_reset.scss */
 mark {
   background-color: #ff9;
   color: #000;
   font-style: italic;
   font-weight: bold; }
 
-/* line 64, ../scss/_reset.scss */
 del {
   text-decoration: line-through; }
 
-/* line 67, ../scss/_reset.scss */
 abbr[title], dfn[title] {
   border-bottom: 1px dotted;
   cursor: help; }
 
-/* line 71, ../scss/_reset.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0; }
 
 /* change border colour to suit your needs */
-/* line 76, ../scss/_reset.scss */
 hr {
   display: block;
   height: 1px;
@@ -94,12 +81,10 @@ hr {
   margin: 1em 0;
   padding: 0; }
 
-/* line 84, ../scss/_reset.scss */
 input, select {
   vertical-align: middle; }
 
-/* line 1, ../scss/_clndr.scss */
-.clearfix:after, .cal1 .clndr .clndr-controls:after, .cal2 .clndr .clndr-controls:after, .cal2 .clndr .clndr-grid:after {
+.clearfix:after, .cal .clndr .clndr-controls:after {
   content: ".";
   display: block;
   clear: both;
@@ -107,20 +92,16 @@ input, select {
   line-height: 0;
   height: 0; }
 
-/* line 10, ../scss/_clndr.scss */
-.clearfix, .cal1 .clndr .clndr-controls, .cal2 .clndr .clndr-controls, .cal2 .clndr .clndr-grid {
+.clearfix, .cal .clndr .clndr-controls {
   display: inline-block; }
 
-/* line 14, ../scss/_clndr.scss */
-html[xmlns] .clearfix, html[xmlns] .cal1 .clndr .clndr-controls, .cal1 .clndr html[xmlns] .clndr-controls, html[xmlns] .cal2 .clndr .clndr-controls, .cal2 .clndr html[xmlns] .clndr-controls, html[xmlns] .cal2 .clndr .clndr-grid, .cal2 .clndr html[xmlns] .clndr-grid {
+html[xmlns] .clearfix, html[xmlns] .cal .clndr .clndr-controls, .cal .clndr html[xmlns] .clndr-controls {
   display: block; }
 
-/* line 18, ../scss/_clndr.scss */
-* html .clearfix, * html .cal1 .clndr .clndr-controls, .cal1 .clndr * html .clndr-controls, * html .cal2 .clndr .clndr-controls, .cal2 .clndr * html .clndr-controls, * html .cal2 .clndr .clndr-grid, .cal2 .clndr * html .clndr-grid {
+* html .clearfix, * html .cal .clndr .clndr-controls, .cal .clndr * html .clndr-controls {
   height: 1%; }
 
-/* line 22, ../scss/_clndr.scss */
-.noselect, .cal1 .clndr .clndr-controls .clndr-control-button .clndr-next-button, .cal1 .clndr .clndr-controls .clndr-control-button .clndr-previous-button, .cal2 .clndr .clndr-controls .clndr-previous-button, .cal2 .clndr .clndr-controls .clndr-next-button {
+.noselect, .cal .clndr .clndr-controls .clndr-control-button .clndr-next-button, .cal .clndr .clndr-controls .clndr-control-button .clndr-previous-button {
   -webkit-user-select: none;
   /* Chrome/Safari */
   -moz-user-select: none;
@@ -128,261 +109,412 @@ html[xmlns] .clearfix, html[xmlns] .cal1 .clndr .clndr-controls, .cal1 .clndr ht
   -ms-user-select: none;
   /* IE10+ */ }
 
-/* line 29, ../scss/_clndr.scss */
-h4 {
-  width: 75%;
+.clndr-grid li {
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+  display: block;
+  float: left;
+  width: 42px;
+  height: 34px;
+  line-height: 34px;
   text-align: center;
-  font-family: 'Lora';
-  font-weight: normal;
-  color: white;
-  font-size: 14px;
-  margin: 0 auto 1em auto;
-  padding: 1em;
-  background: #b63642; }
+  color: #999; }
+  .clndr-grid li.today {
+    color: #000;
+    background: #9aee9b; }
+  .clndr-grid li.event {
+    background: #bcd7ee;
+    color: #000; }
+  .clndr-grid li.empty {
+    background: #ddd; }
+.clndr-grid .days-of-the-week li {
+  font: bold 12px/1 'Arvo';
+  background: #70ae26;
+  color: #fff;
+  height: 34px;
+  line-height: 34px; }
+.clndr-grid .month {
+  text-transform: uppercase; }
+.clndr-grid .event-detail {
+  display: none; }
 
-/* line 42, ../scss/_clndr.scss */
-p {
-  text-align: center;
-  font-family: 'Lora';
-  margin: 3em auto 1em auto;
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-  border-bottom: 2px solid #414141;
-  background: #f4f4f4; }
-
-/* line 57, ../scss/_clndr.scss */
-.cal1 {
-  margin: 30px auto;
-  max-width: 600px;
-  font-family: 'Lora';
+.cal {
+  float: left;
+  width: 294px;
+  margin: 0 16px 20px 0;
   font-size: 14px; }
-  /* line 66, ../scss/_clndr.scss */
-  .cal1 .clndr .clndr-controls {
+  .cal:nth-child(3n+1) {
+    clear: left; }
+  .cal .clndr .clndr-controls {
     width: 100%;
     position: relative;
     margin-bottom: 10px; }
-    /* line 73, ../scss/_clndr.scss */
-    .cal1 .clndr .clndr-controls .month {
+    .cal .clndr .clndr-controls .clndr-control-button {
       float: left;
       width: 33%;
-      text-align: center; }
-    /* line 80, ../scss/_clndr.scss */
-    .cal1 .clndr .clndr-controls .clndr-control-button {
-      float: left;
-      width: 33%; }
-      /* line 85, ../scss/_clndr.scss */
-      .cal1 .clndr .clndr-controls .clndr-control-button.rightalign {
+      display: none; }
+      .cal .clndr .clndr-controls .clndr-control-button.rightalign {
         text-align: right;
         width: 34%; }
-      /* line 90, ../scss/_clndr.scss */
-      .cal1 .clndr .clndr-controls .clndr-control-button .clndr-next-button {
+      .cal .clndr .clndr-controls .clndr-control-button .clndr-next-button {
         cursor: pointer; }
-        /* line 94, ../scss/_clndr.scss */
-        .cal1 .clndr .clndr-controls .clndr-control-button .clndr-next-button:hover {
+        .cal .clndr .clndr-controls .clndr-control-button .clndr-next-button:hover {
           background: #ddd; }
-        /* line 95, ../scss/_clndr.scss */
-        .cal1 .clndr .clndr-controls .clndr-control-button .clndr-next-button.inactive {
+        .cal .clndr .clndr-controls .clndr-control-button .clndr-next-button.inactive {
           opacity: 0.5; }
-          /* line 98, ../scss/_clndr.scss */
-          .cal1 .clndr .clndr-controls .clndr-control-button .clndr-next-button.inactive:hover {
+          .cal .clndr .clndr-controls .clndr-control-button .clndr-next-button.inactive:hover {
             background: none;
             cursor: default; }
-      /* line 105, ../scss/_clndr.scss */
-      .cal1 .clndr .clndr-controls .clndr-control-button .clndr-previous-button {
+      .cal .clndr .clndr-controls .clndr-control-button .clndr-previous-button {
         cursor: pointer; }
-        /* line 109, ../scss/_clndr.scss */
-        .cal1 .clndr .clndr-controls .clndr-control-button .clndr-previous-button:hover {
+        .cal .clndr .clndr-controls .clndr-control-button .clndr-previous-button:hover {
           background: #ddd; }
-        /* line 110, ../scss/_clndr.scss */
-        .cal1 .clndr .clndr-controls .clndr-control-button .clndr-previous-button.inactive {
+        .cal .clndr .clndr-controls .clndr-control-button .clndr-previous-button.inactive {
           opacity: 0.5; }
-          /* line 113, ../scss/_clndr.scss */
-          .cal1 .clndr .clndr-controls .clndr-control-button .clndr-previous-button.inactive:hover {
+          .cal .clndr .clndr-controls .clndr-control-button .clndr-previous-button.inactive:hover {
             background: none;
             cursor: default; }
-  /* line 123, ../scss/_clndr.scss */
-  .cal1 .clndr .clndr-table {
+  .cal .clndr .clndr-table {
     table-layout: fixed;
     width: 100%; }
-    /* line 128, ../scss/_clndr.scss */
-    .cal1 .clndr .clndr-table .header-days {
+    .cal .clndr .clndr-table .header-days {
       height: 30px;
       font-size: 10px;
       background: #0D70A6; }
-      /* line 134, ../scss/_clndr.scss */
-      .cal1 .clndr .clndr-table .header-days .header-day {
+      .cal .clndr .clndr-table .header-days .header-day {
         vertical-align: middle;
         text-align: center;
         border-left: 1px solid black;
         border-top: 1px solid black;
         color: #fff; }
-        /* line 143, ../scss/_clndr.scss */
-        .cal1 .clndr .clndr-table .header-days .header-day:last-child {
+        .cal .clndr .clndr-table .header-days .header-day:last-child {
           border-right: 1px solid black; }
-    /* line 150, ../scss/_clndr.scss */
-    .cal1 .clndr .clndr-table tr {
-      height: 85px; }
-      /* line 154, ../scss/_clndr.scss */
-      .cal1 .clndr .clndr-table tr td {
+    .cal .clndr .clndr-table tr {
+      height: 35px; }
+      .cal .clndr .clndr-table tr td {
         vertical-align: top; }
-      /* line 159, ../scss/_clndr.scss */
-      .cal1 .clndr .clndr-table tr .day {
+      .cal .clndr .clndr-table tr .day {
         border-left: 1px solid black;
         border-top: 1px solid black;
         width: 100%;
         height: inherit; }
-        /* line 166, ../scss/_clndr.scss */
-        .cal1 .clndr .clndr-table tr .day:hover {
+        .cal .clndr .clndr-table tr .day:hover {
           background: #eee; }
-        /* line 168, ../scss/_clndr.scss */
-        .cal1 .clndr .clndr-table tr .day.today {
+        .cal .clndr .clndr-table tr .day.today {
           background: #9AD6E3; }
-          /* line 171, ../scss/_clndr.scss */
-          .cal1 .clndr .clndr-table tr .day.today:hover {
+          .cal .clndr .clndr-table tr .day.today:hover {
             background: #72c6d8; }
-          /* line 172, ../scss/_clndr.scss */
-          .cal1 .clndr .clndr-table tr .day.today.event {
+          .cal .clndr .clndr-table tr .day.today.event {
             background: #a7dbc1; }
-        /* line 178, ../scss/_clndr.scss */
-        .cal1 .clndr .clndr-table tr .day.event {
+        .cal .clndr .clndr-table tr .day.event {
           background: #B4E09F; }
-          /* line 181, ../scss/_clndr.scss */
-          .cal1 .clndr .clndr-table tr .day.event:hover {
+          .cal .clndr .clndr-table tr .day.event:hover {
             background: #96d478; }
-        /* line 187, ../scss/_clndr.scss */
-        .cal1 .clndr .clndr-table tr .day.inactive {
+        .cal .clndr .clndr-table tr .day.inactive {
           background: #ddd; }
-        /* line 192, ../scss/_clndr.scss */
-        .cal1 .clndr .clndr-table tr .day:last-child {
+        .cal .clndr .clndr-table tr .day:last-child {
           border-right: 1px solid black; }
-        /* line 197, ../scss/_clndr.scss */
-        .cal1 .clndr .clndr-table tr .day .day-contents {
+        .cal .clndr .clndr-table tr .day .day-contents {
           box-sizing: border-box;
           padding: 8px;
           font-size: 12px;
           text-align: right; }
-      /* line 208, ../scss/_clndr.scss */
-      .cal1 .clndr .clndr-table tr .empty, .cal1 .clndr .clndr-table tr .adjacent-month {
+      .cal .clndr .clndr-table tr .empty, .cal .clndr .clndr-table tr .adjacent-month {
         border-left: 1px solid black;
         border-top: 1px solid black;
         width: 100%;
         height: inherit;
         background: #eee; }
-        /* line 216, ../scss/_clndr.scss */
-        .cal1 .clndr .clndr-table tr .empty:hover, .cal1 .clndr .clndr-table tr .adjacent-month:hover {
+        .cal .clndr .clndr-table tr .empty:hover, .cal .clndr .clndr-table tr .adjacent-month:hover {
           background: #ddd; }
-        /* line 218, ../scss/_clndr.scss */
-        .cal1 .clndr .clndr-table tr .empty:last-child, .cal1 .clndr .clndr-table tr .adjacent-month:last-child {
+        .cal .clndr .clndr-table tr .empty:last-child, .cal .clndr .clndr-table tr .adjacent-month:last-child {
           border-right: 1px solid black; }
-      /* line 226, ../scss/_clndr.scss */
-      .cal1 .clndr .clndr-table tr:last-child .day {
+      .cal .clndr .clndr-table tr:last-child .day {
         border-bottom: 1px solid black; }
-      /* line 231, ../scss/_clndr.scss */
-      .cal1 .clndr .clndr-table tr:last-child .empty {
+      .cal .clndr .clndr-table tr:last-child .empty {
         border-bottom: 1px solid black; }
 
-/* line 244, ../scss/_clndr.scss */
-.cal2 {
-  max-width: 177px;
-  margin: 0 auto;
-  font-family: 'Lora'; }
-  /* line 253, ../scss/_clndr.scss */
-  .cal2 .clndr .clndr-controls {
-    display: block;
-    width: 100%;
-    margin-bottom: 3px; }
-    /* line 260, ../scss/_clndr.scss */
-    .cal2 .clndr .clndr-controls .clndr-previous-button {
-      float: left;
-      width: 10%;
-      text-align: left;
-      cursor: pointer; }
-      /* line 267, ../scss/_clndr.scss */
-      .cal2 .clndr .clndr-controls .clndr-previous-button:hover {
-        background-color: #f4f4f4; }
-    /* line 272, ../scss/_clndr.scss */
-    .cal2 .clndr .clndr-controls .month {
-      float: left;
-      width: 80%;
-      text-align: center; }
-    /* line 278, ../scss/_clndr.scss */
-    .cal2 .clndr .clndr-controls .clndr-next-button {
-      float: left;
-      width: 10%;
-      text-align: right;
-      cursor: pointer; }
-      /* line 285, ../scss/_clndr.scss */
-      .cal2 .clndr .clndr-controls .clndr-next-button:hover {
-        background-color: #f4f4f4; }
-  /* line 292, ../scss/_clndr.scss */
-  .cal2 .clndr .clndr-grid {
-    text-align: center;
-    border: 1px solid #FF4545; }
-    /* line 298, ../scss/_clndr.scss */
-    .cal2 .clndr .clndr-grid .header-day {
-      float: left;
-      width: 25px;
-      height: 25px;
-      background: #FF4545; }
-    /* line 307, ../scss/_clndr.scss */
-    .cal2 .clndr .clndr-grid .day {
-      float: left;
-      width: 25px;
-      height: 25px; }
-      /* line 313, ../scss/_clndr.scss */
-      .cal2 .clndr .clndr-grid .day.event {
-        background-color: #B4E09F; }
-      /* line 318, ../scss/_clndr.scss */
-      .cal2 .clndr .clndr-grid .day.today {
-        background-color: #E3C57F; }
-    /* line 324, ../scss/_clndr.scss */
-    .cal2 .clndr .clndr-grid .empty, .cal2 .clndr .clndr-grid .adjacent-month {
-      float: left;
-      width: 25px;
-      height: 25px;
-      background: #ddd; }
-  /* line 333, ../scss/_clndr.scss */
-  .cal2 .clndr .clndr-today-button {
-    width: 100%;
-    text-align: center;
-    cursor: pointer; }
-    /* line 338, ../scss/_clndr.scss */
-    .cal2 .clndr .clndr-today-button:hover {
-      background-color: #ddd; }
+/* This is the default Tooltipster theme (feel free to modify or duplicate and create multiple themes!): */
+.tooltipster-default {
+  background: #4c4c4c;
+  color: #fff; }
 
-/* line 4, ../scss/application.scss */
+/* Use this next selector to style things like font-size and line-height: */
+.tooltipster-default .tooltipster-content {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 16px;
+  padding: 8px 10px;
+  overflow: hidden; }
+
+/* This next selector defines the color of the border on the outside of the arrow. This will automatically match the color and size of the border set on the main tooltip styles. Set display: none; if you would like a border around the tooltip but no border around the arrow */
+.tooltipster-default .tooltipster-arrow .tooltipster-arrow-border {
+  /* border-color: ... !important; */ }
+
+/* If you're using the icon option, use this next selector to style them */
+.tooltipster-icon {
+  cursor: help;
+  margin-left: 4px; }
+
+/* This is the base styling required to make all Tooltipsters work */
+.tooltipster-base {
+  padding: 0;
+  font-size: 0;
+  line-height: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 9999999;
+  pointer-events: none;
+  width: auto;
+  overflow: visible; }
+
+.tooltipster-base .tooltipster-content {
+  overflow: hidden; }
+
+/* These next classes handle the styles for the little arrow attached to the tooltip. By default, the arrow will inherit the same colors and border as what is set on the main tooltip itself. */
+.tooltipster-arrow {
+  display: block;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1; }
+
+.tooltipster-arrow span, .tooltipster-arrow-border {
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute; }
+
+.tooltipster-arrow-top span, .tooltipster-arrow-top-right span, .tooltipster-arrow-top-left span {
+  border-left: 8px solid transparent !important;
+  border-right: 8px solid transparent !important;
+  border-top: 8px solid;
+  bottom: -7px; }
+
+.tooltipster-arrow-top .tooltipster-arrow-border, .tooltipster-arrow-top-right .tooltipster-arrow-border, .tooltipster-arrow-top-left .tooltipster-arrow-border {
+  border-left: 9px solid transparent !important;
+  border-right: 9px solid transparent !important;
+  border-top: 9px solid;
+  bottom: -7px; }
+
+.tooltipster-arrow-bottom span, .tooltipster-arrow-bottom-right span, .tooltipster-arrow-bottom-left span {
+  border-left: 8px solid transparent !important;
+  border-right: 8px solid transparent !important;
+  border-bottom: 8px solid;
+  top: -7px; }
+
+.tooltipster-arrow-bottom .tooltipster-arrow-border, .tooltipster-arrow-bottom-right .tooltipster-arrow-border, .tooltipster-arrow-bottom-left .tooltipster-arrow-border {
+  border-left: 9px solid transparent !important;
+  border-right: 9px solid transparent !important;
+  border-bottom: 9px solid;
+  top: -7px; }
+
+.tooltipster-arrow-top span, .tooltipster-arrow-top .tooltipster-arrow-border, .tooltipster-arrow-bottom span, .tooltipster-arrow-bottom .tooltipster-arrow-border {
+  left: 0;
+  right: 0;
+  margin: 0 auto; }
+
+.tooltipster-arrow-top-left span, .tooltipster-arrow-bottom-left span {
+  left: 6px; }
+
+.tooltipster-arrow-top-left .tooltipster-arrow-border, .tooltipster-arrow-bottom-left .tooltipster-arrow-border {
+  left: 5px; }
+
+.tooltipster-arrow-top-right span, .tooltipster-arrow-bottom-right span {
+  right: 6px; }
+
+.tooltipster-arrow-top-right .tooltipster-arrow-border, .tooltipster-arrow-bottom-right .tooltipster-arrow-border {
+  right: 5px; }
+
+.tooltipster-arrow-left span, .tooltipster-arrow-left .tooltipster-arrow-border {
+  border-top: 8px solid transparent !important;
+  border-bottom: 8px solid transparent !important;
+  border-left: 8px solid;
+  top: 50%;
+  margin-top: -7px;
+  right: -7px; }
+
+.tooltipster-arrow-left .tooltipster-arrow-border {
+  border-top: 9px solid transparent !important;
+  border-bottom: 9px solid transparent !important;
+  border-left: 9px solid;
+  margin-top: -8px; }
+
+.tooltipster-arrow-right span, .tooltipster-arrow-right .tooltipster-arrow-border {
+  border-top: 8px solid transparent !important;
+  border-bottom: 8px solid transparent !important;
+  border-right: 8px solid;
+  top: 50%;
+  margin-top: -7px;
+  left: -7px; }
+
+.tooltipster-arrow-right .tooltipster-arrow-border {
+  border-top: 9px solid transparent !important;
+  border-bottom: 9px solid transparent !important;
+  border-right: 9px solid;
+  margin-top: -8px; }
+
+/* Some CSS magic for the awesome animations - feel free to make your own custom animations and reference it in your Tooltipster settings! */
+.tooltipster-fade {
+  opacity: 0;
+  -webkit-transition-property: opacity;
+  -moz-transition-property: opacity;
+  -o-transition-property: opacity;
+  -ms-transition-property: opacity;
+  transition-property: opacity; }
+
+.tooltipster-fade-show {
+  opacity: 1; }
+
+.tooltipster-grow {
+  -webkit-transform: scale(0, 0);
+  -moz-transform: scale(0, 0);
+  -o-transform: scale(0, 0);
+  -ms-transform: scale(0, 0);
+  transform: scale(0, 0);
+  -webkit-transition-property: -webkit-transform;
+  -moz-transition-property: -moz-transform;
+  -o-transition-property: -o-transform;
+  -ms-transition-property: -ms-transform;
+  transition-property: transform;
+  -webkit-backface-visibility: hidden; }
+
+.tooltipster-grow-show {
+  -webkit-transform: scale(1, 1);
+  -moz-transform: scale(1, 1);
+  -o-transform: scale(1, 1);
+  -ms-transform: scale(1, 1);
+  transform: scale(1, 1);
+  -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+  -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  -moz-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  -ms-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  -o-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15); }
+
+.tooltipster-swing {
+  opacity: 0;
+  -webkit-transform: rotateZ(4deg);
+  -moz-transform: rotateZ(4deg);
+  -o-transform: rotateZ(4deg);
+  -ms-transform: rotateZ(4deg);
+  transform: rotateZ(4deg);
+  -webkit-transition-property: -webkit-transform, opacity;
+  -moz-transition-property: -moz-transform;
+  -o-transition-property: -o-transform;
+  -ms-transition-property: -ms-transform;
+  transition-property: transform; }
+
+.tooltipster-swing-show {
+  opacity: 1;
+  -webkit-transform: rotateZ(0deg);
+  -moz-transform: rotateZ(0deg);
+  -o-transform: rotateZ(0deg);
+  -ms-transform: rotateZ(0deg);
+  transform: rotateZ(0deg);
+  -webkit-transition-timing-function: cubic-bezier(0.23, 0.635, 0.495, 1);
+  -webkit-transition-timing-function: cubic-bezier(0.23, 0.635, 0.495, 2.4);
+  -moz-transition-timing-function: cubic-bezier(0.23, 0.635, 0.495, 2.4);
+  -ms-transition-timing-function: cubic-bezier(0.23, 0.635, 0.495, 2.4);
+  -o-transition-timing-function: cubic-bezier(0.23, 0.635, 0.495, 2.4);
+  transition-timing-function: cubic-bezier(0.23, 0.635, 0.495, 2.4); }
+
+.tooltipster-fall {
+  top: 0;
+  -webkit-transition-property: top;
+  -moz-transition-property: top;
+  -o-transition-property: top;
+  -ms-transition-property: top;
+  transition-property: top;
+  -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+  -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  -moz-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  -ms-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  -o-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15); }
+
+.tooltipster-fall.tooltipster-dying {
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -o-transition-property: all;
+  -ms-transition-property: all;
+  transition-property: all;
+  top: 0px !important;
+  opacity: 0; }
+
+.tooltipster-slide {
+  left: -40px;
+  -webkit-transition-property: left;
+  -moz-transition-property: left;
+  -o-transition-property: left;
+  -ms-transition-property: left;
+  transition-property: left;
+  -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+  -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  -moz-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  -ms-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  -o-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15); }
+
+.tooltipster-slide.tooltipster-dying {
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -o-transition-property: all;
+  -ms-transition-property: all;
+  transition-property: all;
+  left: 0px !important;
+  opacity: 0; }
+
+/* CSS transition for when contenting is changing in a tooltip that is still open. The only properties that will NOT transition are: width, height, top, and left */
+.tooltipster-content-changing {
+  opacity: 0.5;
+  -webkit-transform: scale(1.1, 1.1);
+  -moz-transform: scale(1.1, 1.1);
+  -o-transform: scale(1.1, 1.1);
+  -ms-transform: scale(1.1, 1.1);
+  transform: scale(1.1, 1.1); }
+
 body {
   font-size: 100%;
-  background: #eee; }
+  background: #eee;
+  font-family: 'Arimo'; }
 
-/* line 8, ../scss/application.scss */
 #content {
-  width: 50em;
+  width: 930px;
   margin: 2em auto; }
 
-/* line 12, ../scss/application.scss */
 h1, h2, h3 {
-  font-family: 'Lora', serif;
+  font-family: 'Arvo';
   margin: .5em 0 1em; }
 
-/* line 16, ../scss/application.scss */
 h1 {
   font-size: 6em;
   color: #fff;
   margin: 0;
   text-align: center; }
 
-/* line 22, ../scss/application.scss */
 h2 {
   font-size: 2em; }
 
-/* line 25, ../scss/application.scss */
+h3 {
+  margin: 0 0 .3em; }
+
 header {
   background: #70ae26;
   border-bottom: 1px solid #e64c66;
   margin-bottom: 2em; }
-  /* line 29, ../scss/application.scss */
   header .wrap {
-    width: 50em;
-    margin: 0 auto;
     padding: 2em; }
+
+.upcoming {
+  list-style: none; }
+  .upcoming h2, .upcoming h3 {
+    display: inline-block;
+    margin: 0 0 .2em; }
+
+.calendars {
+  margin-top: 2em; }

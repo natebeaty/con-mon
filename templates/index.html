@@ -7,9 +7,9 @@
 		{% for condate in condates %}
 			<li>
 				<h2><a href="{{ condate.convention.url }}">{{ condate.convention.title }}</a></h2>
-				<h3 class="date">{{ condate.start_date }}
+				<h3 class="date">{{ condate.start_date.strftime('%b %e') }}
 				{% if condate.end_date and condate.end_date != condate.start_date %}
-					- {{ condate.end_date }}
+					- {{ condate.end_date.strftime('%b %e') }}
 				{% endif %}
 				</h3>
 			</li>
@@ -17,29 +17,30 @@
 		</ul>
 	{% endif %}
 
-	<h2>Calendar</h2>
-	<div class="calendar">
-		<div class="cal1"></div>
-		<div class="cal2">
-			<script type="text/template" id="template-calendar">
-				<div class="clndr-controls">
-				  <div class="clndr-previous-button">&lsaquo;</div>
-				  <div class="month"><%= month %></div>
-				  <div class="clndr-next-button">&rsaquo;</div>
-				</div>
-				<div class="clndr-grid">
-				  <div class="days-of-the-week">
-				    <% _.each(daysOfTheWeek, function(day) { %>
-				      <div class="header-day"><%= day %></div>
-				    <% }); %>
-				    <div class="days">
-				      <% _.each(days, function(day) { %>
-				        <div class="<%= day.classes %>"><%= day.day %></div>
-				      <% }); %>
-				    </div>
-				  </div>
-				</div>
-			</script>
-		</div>
+	<div class="calendars">
+		{% for i in "012345678901" %}
+			<div class="cal cal{{ loop.index }}"></div>
+		{% endfor %}
 	</div>
+
+	<script type="text/template" id="template-calendar">
+	<div class="clndr-grid">
+		<div class="month clearfix tooltip" title="foo"><h3><%= month %> <%= year %></h3></div>
+		<ul class="days-of-the-week clearfix">
+			<% _.each(daysOfTheWeek, function(day) { %>
+				<li><%= day %></li>
+			<% }); %>
+		</ul>
+		<ul class="days clearfix">
+			<% _.each(days, function(day) { %>
+				<li class="<%= day.classes %>">
+				<%= day.day %>
+				<% _.each(day.events, function(event){ %>
+					<div class="event-detail" title="<%= event.title %>"><h3><%= event.title %></h3></div>
+				<% }) %>
+				</li>
+			<% }); %>
+		</ul>
+	</div>
+	</script>
 {% endblock content %}
