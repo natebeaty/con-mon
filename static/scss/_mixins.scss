@@ -1,0 +1,14 @@
+$dark: #593b4d;
+$vibrant: #d43142;
+$vibrant2: #fa384d;
+$highlight: #34d4cd;
+$background: #f4f0f2;
+
+.cf:before,
+.cf:after {
+    content: " ";
+    display: table;
+}
+.cf:after {
+    clear: both;
+}

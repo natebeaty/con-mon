@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
 	
+	<section class="upcoming">
 	<h2>Upcoming Conventions</h2>
 	{% if condates %}
-		<ul class="upcoming">
+		<ul>
 		{% for condate in condates %}
 			<li>
 				<h2><a href="{{ condate.convention.url }}">{{ condate.convention.title }}</a></h2>
@@ -16,22 +17,23 @@
 		{% endfor %}
 		</ul>
 	{% endif %}
+	</section>
 
-	<div class="calendars">
+	<section class="calendars cf">
 		{% for i in "012345678901" %}
 			<div class="cal cal{{ loop.index }}"></div>
 		{% endfor %}
-	</div>
+	</section>
 
 	<script type="text/template" id="template-calendar">
 	<div class="clndr-grid">
-		<div class="month clearfix tooltip" title="foo"><h3><%= month %> <%= year %></h3></div>
-		<ul class="days-of-the-week clearfix">
+		<div class="month cf tooltip" title="foo"><h3><%= month %> <%= year %></h3></div>
+		<ul class="days-of-the-week cf">
 			<% _.each(daysOfTheWeek, function(day) { %>
 				<li><%= day %></li>
 			<% }); %>
 		</ul>
-		<ul class="days clearfix">
+		<ul class="days cf">
 			<% _.each(days, function(day) { %>
 				<li class="<%= day.classes %>">
 				<%= day.day %>

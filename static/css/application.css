@@ -84,22 +84,23 @@ hr {
 input, select {
   vertical-align: middle; }
 
-.clearfix:after, .cal .clndr .clndr-controls:after {
-  content: ".";
-  display: block;
-  clear: both;
-  visibility: hidden;
-  line-height: 0;
-  height: 0; }
+.cf:before, .cal .clndr .clndr-controls:before,
+.cf:after,
+.cal .clndr .clndr-controls:after {
+  content: " ";
+  display: table; }
 
-.clearfix, .cal .clndr .clndr-controls {
-  display: inline-block; }
+.cf:after, .cal .clndr .clndr-controls:after {
+  clear: both; }
 
-html[xmlns] .clearfix, html[xmlns] .cal .clndr .clndr-controls, .cal .clndr html[xmlns] .clndr-controls {
-  display: block; }
+.cf:before, .cal .clndr .clndr-controls:before,
+.cf:after,
+.cal .clndr .clndr-controls:after {
+  content: " ";
+  display: table; }
 
-* html .clearfix, * html .cal .clndr .clndr-controls, .cal .clndr * html .clndr-controls {
-  height: 1%; }
+.cf:after, .cal .clndr .clndr-controls:after {
+  clear: both; }
 
 .noselect, .cal .clndr .clndr-controls .clndr-control-button .clndr-next-button, .cal .clndr .clndr-controls .clndr-control-button .clndr-previous-button {
   -webkit-user-select: none;
@@ -111,37 +112,39 @@ html[xmlns] .clearfix, html[xmlns] .cal .clndr .clndr-controls, .cal .clndr html
 
 .clndr-grid li {
   background: #fff;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #34d4cd;
   display: block;
   float: left;
-  width: 42px;
+  width: 14.24%;
   height: 34px;
   line-height: 34px;
   text-align: center;
   color: #999; }
   .clndr-grid li.today {
     color: #000;
-    background: #9aee9b; }
+    box-shadow: inset 0 0 10px #34d4cd; }
   .clndr-grid li.event {
-    background: #bcd7ee;
-    color: #000; }
+    background: #ff6919;
+    color: #fff;
+    box-shadow: inset 0 0 10px rgba(89, 59, 77, 0.5); }
   .clndr-grid li.empty {
-    background: #ddd; }
+    background: #34d4cd; }
 .clndr-grid .days-of-the-week li {
   font: bold 12px/1 'Arvo';
-  background: #70ae26;
+  background: #d43142;
   color: #fff;
   height: 34px;
-  line-height: 34px; }
+  line-height: 34px;
+  border-bottom: 1px solid #333; }
 .clndr-grid .month {
-  text-transform: uppercase; }
+  text-transform: uppercase;
+  color: #d43142; }
 .clndr-grid .event-detail {
   display: none; }
 
 .cal {
-  float: left;
-  width: 294px;
-  margin: 0 16px 20px 0;
+  width: 90%;
+  margin: 0 auto 24px;
   font-size: 14px; }
   .cal:nth-child(3n+1) {
     clear: left; }
@@ -159,7 +162,7 @@ html[xmlns] .clearfix, html[xmlns] .cal .clndr .clndr-controls, .cal .clndr html
       .cal .clndr .clndr-controls .clndr-control-button .clndr-next-button {
         cursor: pointer; }
         .cal .clndr .clndr-controls .clndr-control-button .clndr-next-button:hover {
-          background: #ddd; }
+          background: #34d4cd; }
         .cal .clndr .clndr-controls .clndr-control-button .clndr-next-button.inactive {
           opacity: 0.5; }
           .cal .clndr .clndr-controls .clndr-control-button .clndr-next-button.inactive:hover {
@@ -168,7 +171,7 @@ html[xmlns] .clearfix, html[xmlns] .cal .clndr .clndr-controls, .cal .clndr html
       .cal .clndr .clndr-controls .clndr-control-button .clndr-previous-button {
         cursor: pointer; }
         .cal .clndr .clndr-controls .clndr-control-button .clndr-previous-button:hover {
-          background: #ddd; }
+          background: #34d4cd; }
         .cal .clndr .clndr-controls .clndr-control-button .clndr-previous-button.inactive {
           opacity: 0.5; }
           .cal .clndr .clndr-controls .clndr-control-button .clndr-previous-button.inactive:hover {
@@ -180,7 +183,7 @@ html[xmlns] .clearfix, html[xmlns] .cal .clndr .clndr-controls, .cal .clndr html
     .cal .clndr .clndr-table .header-days {
       height: 30px;
       font-size: 10px;
-      background: #0D70A6; }
+      background: #d43142; }
       .cal .clndr .clndr-table .header-days .header-day {
         vertical-align: middle;
         text-align: center;
@@ -211,7 +214,7 @@ html[xmlns] .clearfix, html[xmlns] .cal .clndr .clndr-controls, .cal .clndr html
           .cal .clndr .clndr-table tr .day.event:hover {
             background: #96d478; }
         .cal .clndr .clndr-table tr .day.inactive {
-          background: #ddd; }
+          background: #34d4cd; }
         .cal .clndr .clndr-table tr .day:last-child {
           border-right: 1px solid black; }
         .cal .clndr .clndr-table tr .day .day-contents {
@@ -226,7 +229,7 @@ html[xmlns] .clearfix, html[xmlns] .cal .clndr .clndr-controls, .cal .clndr html
         height: inherit;
         background: #eee; }
         .cal .clndr .clndr-table tr .empty:hover, .cal .clndr .clndr-table tr .adjacent-month:hover {
-          background: #ddd; }
+          background: #34d4cd; }
         .cal .clndr .clndr-table tr .empty:last-child, .cal .clndr .clndr-table tr .adjacent-month:last-child {
           border-right: 1px solid black; }
       .cal .clndr .clndr-table tr:last-child .day {
@@ -234,18 +237,26 @@ html[xmlns] .clearfix, html[xmlns] .cal .clndr .clndr-controls, .cal .clndr html
       .cal .clndr .clndr-table tr:last-child .empty {
         border-bottom: 1px solid black; }
 
-/* This is the default Tooltipster theme (feel free to modify or duplicate and create multiple themes!): */
+.cf:before, .cal .clndr .clndr-controls:before,
+.cf:after,
+.cal .clndr .clndr-controls:after {
+  content: " ";
+  display: table; }
+
+.cf:after, .cal .clndr .clndr-controls:after {
+  clear: both; }
+
 .tooltipster-default {
-  background: #4c4c4c;
+  background: #593b4d;
   color: #fff; }
 
 /* Use this next selector to style things like font-size and line-height: */
 .tooltipster-default .tooltipster-content {
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  line-height: 16px;
-  padding: 8px 10px;
+  padding: 10px;
   overflow: hidden; }
+  .tooltipster-default .tooltipster-content h3 {
+    line-height: 1;
+    margin: 0; }
 
 /* This next selector defines the color of the border on the outside of the arrow. This will automatically match the color and size of the border set on the main tooltip styles. Set display: none; if you would like a border around the tooltip but no border around the arrow */
 .tooltipster-default .tooltipster-arrow .tooltipster-arrow-border {
@@ -370,82 +381,6 @@ html[xmlns] .clearfix, html[xmlns] .cal .clndr .clndr-controls, .cal .clndr html
 .tooltipster-fade-show {
   opacity: 1; }
 
-.tooltipster-grow {
-  -webkit-transform: scale(0, 0);
-  -moz-transform: scale(0, 0);
-  -o-transform: scale(0, 0);
-  -ms-transform: scale(0, 0);
-  transform: scale(0, 0);
-  -webkit-transition-property: -webkit-transform;
-  -moz-transition-property: -moz-transform;
-  -o-transition-property: -o-transform;
-  -ms-transition-property: -ms-transform;
-  transition-property: transform;
-  -webkit-backface-visibility: hidden; }
-
-.tooltipster-grow-show {
-  -webkit-transform: scale(1, 1);
-  -moz-transform: scale(1, 1);
-  -o-transform: scale(1, 1);
-  -ms-transform: scale(1, 1);
-  transform: scale(1, 1);
-  -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
-  -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
-  -moz-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
-  -ms-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
-  -o-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
-  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15); }
-
-.tooltipster-swing {
-  opacity: 0;
-  -webkit-transform: rotateZ(4deg);
-  -moz-transform: rotateZ(4deg);
-  -o-transform: rotateZ(4deg);
-  -ms-transform: rotateZ(4deg);
-  transform: rotateZ(4deg);
-  -webkit-transition-property: -webkit-transform, opacity;
-  -moz-transition-property: -moz-transform;
-  -o-transition-property: -o-transform;
-  -ms-transition-property: -ms-transform;
-  transition-property: transform; }
-
-.tooltipster-swing-show {
-  opacity: 1;
-  -webkit-transform: rotateZ(0deg);
-  -moz-transform: rotateZ(0deg);
-  -o-transform: rotateZ(0deg);
-  -ms-transform: rotateZ(0deg);
-  transform: rotateZ(0deg);
-  -webkit-transition-timing-function: cubic-bezier(0.23, 0.635, 0.495, 1);
-  -webkit-transition-timing-function: cubic-bezier(0.23, 0.635, 0.495, 2.4);
-  -moz-transition-timing-function: cubic-bezier(0.23, 0.635, 0.495, 2.4);
-  -ms-transition-timing-function: cubic-bezier(0.23, 0.635, 0.495, 2.4);
-  -o-transition-timing-function: cubic-bezier(0.23, 0.635, 0.495, 2.4);
-  transition-timing-function: cubic-bezier(0.23, 0.635, 0.495, 2.4); }
-
-.tooltipster-fall {
-  top: 0;
-  -webkit-transition-property: top;
-  -moz-transition-property: top;
-  -o-transition-property: top;
-  -ms-transition-property: top;
-  transition-property: top;
-  -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
-  -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
-  -moz-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
-  -ms-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
-  -o-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
-  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15); }
-
-.tooltipster-fall.tooltipster-dying {
-  -webkit-transition-property: all;
-  -moz-transition-property: all;
-  -o-transition-property: all;
-  -ms-transition-property: all;
-  transition-property: all;
-  top: 0px !important;
-  opacity: 0; }
-
 .tooltipster-slide {
   left: -40px;
   -webkit-transition-property: left;
@@ -479,42 +414,70 @@ html[xmlns] .clearfix, html[xmlns] .cal .clndr .clndr-controls, .cal .clndr html
   transform: scale(1.1, 1.1); }
 
 body {
-  font-size: 100%;
-  background: #eee;
-  font-family: 'Arimo'; }
+  font-size: 70%;
+  background: #f4f0f2;
+  font-family: 'Arimo';
+  color: #593b4d; }
 
-#content {
-  width: 930px;
-  margin: 2em auto; }
+a {
+  color: #d43142; }
 
 h1, h2, h3 {
   font-family: 'Arvo';
-  margin: .5em 0 1em; }
+  margin: .5rem 0 1rem; }
+
+p {
+  font: 1rem/1.4 'Arimo';
+  margin: .5rem 0; }
 
 h1 {
-  font-size: 6em;
-  color: #fff;
+  font-size: 3rem;
   margin: 0;
   text-align: center; }
 
 h2 {
-  font-size: 2em; }
+  font-size: 1.5rem; }
 
 h3 {
-  margin: 0 0 .3em; }
+  font-size: 1rem;
+  margin: 0 0 .3rem; }
 
 header {
-  background: #70ae26;
-  border-bottom: 1px solid #e64c66;
-  margin-bottom: 2em; }
+  background: #593b4d;
+  color: #34d4cd;
+  margin-bottom: 2rem; }
   header .wrap {
-    padding: 2em; }
+    padding: 1rem; }
 
 .upcoming {
-  list-style: none; }
+  text-align: center; }
+  .upcoming ul {
+    margin-top: .5em;
+    list-style: none;
+    line-height: 1.3; }
   .upcoming h2, .upcoming h3 {
     display: inline-block;
-    margin: 0 0 .2em; }
+    margin: 0 .1rem .2rem; }
 
 .calendars {
-  margin-top: 2em; }
+  margin-top: 2rem; }
+
+footer {
+  clear: both;
+  background: #593b4d;
+  text-align: center;
+  color: #34d4cd;
+  padding: 1rem; }
+  footer a {
+    color: #fff; }
+
+@media only screen and (min-width: 1024px) {
+  #content {
+    width: 930px;
+    margin: 2rem auto; }
+
+  .cal {
+    float: left;
+    width: 294px;
+    margin: 0 16px 20px 0;
+    overflow: hidden; } }

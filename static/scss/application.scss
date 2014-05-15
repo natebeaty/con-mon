@@ -1,47 +1,84 @@
 @import 'reset';
+@import 'mixins';
 @import 'clndr';
 @import 'tooltipster';
 
 body {
-	font-size: 100%;
-	background:#eee;
+	font-size: 70%;
+	background: $background;
 	font-family: 'Arimo';
+	color: $dark;
 }
-#content {
-	width: 930px;
-	margin: 2em auto;
+a {
+	color: $vibrant;
 }
 h1,h2,h3 {
 	font-family: 'Arvo';
-	margin: .5em 0 1em;
+	margin: .5rem 0 1rem;
+}
+p {
+	font: 1rem/1.4 'Arimo';
+	margin: .5rem 0;
 }
 h1 {
-	font-size: 6em;
-	color: #fff;
+	font-size: 3rem;
 	margin: 0;
 	text-align: center;
 }
 h2 {
-	font-size: 2em;
+	font-size: 1.5rem;
 }
 h3 {
-	margin: 0 0 .3em;
+	font-size: 1rem;
+	margin: 0 0 .3rem;
 }
 header {
-	background: #70ae26;
-	border-bottom: 1px solid #e64c66;
-	margin-bottom: 2em;
+	background: $dark;
+	color: $highlight;
+	margin-bottom: 2rem;
 	.wrap {
-		padding: 2em;
+		padding: 1rem;
 	}
 }
 .upcoming {
-	list-style: none;
+	text-align: center;
+	ul {
+		margin-top: .5em;
+		list-style: none;
+		line-height: 1.3;
+	}
 	h2,h3 {
 		display: inline-block;
-		margin: 0 0 .2em;
+		margin: 0 .1rem .2rem;
 	}
 }
 .calendars {
-	margin-top: 2em;
+	margin-top: 2rem;
+}
+
+footer {
+	clear: both;
+	background: $dark;
+	text-align: center;
+	color: $highlight;
+	padding: 1rem;
+	a {
+		color: #fff;
+	}
+}
+
+@media only screen and (min-width: 1024px) {
+	.upcoming {
+		// text-align: left;
+	}
+	#content {
+		width: 930px;
+		margin: 2rem auto;
+	}
+	.cal {
+		float: left;
+		width: 294px;
+		margin: 0 16px 20px 0;
+		overflow: hidden;
+	}
 }
