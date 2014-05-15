@@ -2,3 +2,5 @@
 .codekit-cache/*
 config.codekit
 app.db
+.venv/*
+
