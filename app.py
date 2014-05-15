@@ -58,12 +58,12 @@ admin.add_view(ModelView(Condate, db.session))
 @app.route('/')
 def index():
 	return render_template('index.html',
-		condates = Condate.query.filter(Condate.start_date >= date.today()).all()
+		condates = Condate.query.filter(Condate.start_date >= date.today()).order_by(Condate.start_date).all()
 		)
 
 @app.route('/condates.json')
 def condates():
-	condates = Condate.query.filter(Condate.start_date >= date.today()).all()
+	condates = Condate.query.filter(Condate.start_date >= date.today()).order_by(Condate.start_date).all()
 	return CondateSerializer(condates, many=True).json
 
 if __name__ == '__main__':
