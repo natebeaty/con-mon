@@ -1,7 +1,7 @@
 @import "mixins";
 
 .tooltipster-default {
-    background: $dark;
+    background: $highlight;
     color: #fff;
 }
 
@@ -9,6 +9,9 @@
 .tooltipster-default .tooltipster-content {
     padding: 10px;
     overflow: hidden;
+    line-height: 1;
+    color: #fff;
+    font-size: .7rem;
     h3 {
         line-height: 1;
         margin: 0;
@@ -152,12 +155,12 @@
 }
 
 .tooltipster-slide {
-    left: -40px;
-    -webkit-transition-property: left;
-    -moz-transition-property: left;
-    -o-transition-property: left;
-    -ms-transition-property: left;
-    transition-property: left;
+    margin-top: 8px;
+    -webkit-transition-property: margin-top;
+    -moz-transition-property: margin-top;
+    -o-transition-property: margin-top;
+    -ms-transition-property: margin-top;
+    transition-property: margin-top;
     -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
     -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1.15); 
     -moz-transition-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1.15); 
@@ -166,6 +169,7 @@
     transition-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1.15);
 }
 .tooltipster-slide.tooltipster-slide-show {
+    margin-top: 5px !important;
 }
 .tooltipster-slide.tooltipster-dying {
     -webkit-transition-property: all;
@@ -173,7 +177,7 @@
     -o-transition-property: all;
     -ms-transition-property: all;
     transition-property: all;
-    left: 0px !important;
+    margin-top: 8px !important;
     opacity: 0;
 }
 

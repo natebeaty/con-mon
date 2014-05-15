@@ -9,6 +9,10 @@ $.concalendar = (function() {
 
     function _init() {
         _resize();
+        $('.tooltip').tooltipster({
+            delay: 0,
+            animation: 'slide'
+        });
         $.getJSON( "/condates.json", function( data ) {
             eventsArray = data;
             _initClndr();
@@ -40,8 +44,9 @@ $.concalendar = (function() {
             var tip = $(this).find('.event-detail').html();
             $(this).tooltipster({
                 content: tip,
+                delay: 0,
                 contentAsHTML: true,
-                animation: 'fade',
+                animation: 'slide',
                 delay: 0
             });
         });
@@ -50,11 +55,12 @@ $.concalendar = (function() {
             $('.cal,.days li').addClass('inactive');
             $dates = $('.event-detail h3[data-condate-id="'+id+'"]');
             $dates.each(function() {
-                $(this).parents('li:first').removeClass('inactive');
+                $(this).parents('li:first').removeClass('inactive'); //.tooltipster('show');
                 $(this).parents('.cal:first').removeClass('inactive');
             });
         }).on('mouseleave', function() {
             $('.days li,.cal').removeClass('inactive');
+            // $('.tooltipstered').tooltipster('hide');
         });
     }
 

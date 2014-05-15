@@ -7,7 +7,7 @@
 		<ul>
 		{% for condate in condates %}
 			<li data-condate-id="{{ condate.id }}">
-				<h2><a href="{{ condate.convention.url }}">{{ condate.convention.title }}</a></h2>
+				<h2><a href="{{ condate.convention.url }}" class="tooltip" title="{{ condate.convention.body }}">{{ condate.convention.title }}</a></h2>
 				 <span class="date">
 				 <time class="dtstart" datetime="{{ condate.start_date }}">{{ condate.start_date.strftime('%b %e')|trim }}</time>
 				{%- if condate.end_date and condate.end_date != condate.start_date -%}
