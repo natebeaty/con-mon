@@ -38,6 +38,19 @@ header {
 	.wrap {
 		padding: 1rem;
 	}
+	h1 {
+		line-height: 100px;
+
+	}
+	h1:before {
+		content: ' ';
+		display: inline-block;
+		width: 100px;
+		height: 114px;
+		background: url('/static/img/con-mon.png') no-repeat;
+		background-size: 100px 114px;
+		vertical-align: middle;
+	}
 }
 .missing {
 	font-size: .8rem;

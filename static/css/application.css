@@ -227,8 +227,7 @@ input, select {
   -webkit-transition: opacity .2s, background .25s;
   transition: opacity .2s, background .25s;
   transition-delay: .1s;
-  -webkit-transition-delay: .1s;
-  cursor: pointer; }
+  -webkit-transition-delay: .1s; }
   .clndr-grid li.today {
     color: #000;
     box-shadow: inset 0 0 10px #00acee; }
@@ -624,6 +623,16 @@ header {
   margin-bottom: 2rem; }
   header .wrap {
     padding: 1rem; }
+  header h1 {
+    line-height: 100px; }
+  header h1:before {
+    content: ' ';
+    display: inline-block;
+    width: 100px;
+    height: 114px;
+    background: url("/static/img/con-mon.png") no-repeat;
+    background-size: 100px 114px;
+    vertical-align: middle; }
 
 .missing {
   font-size: .8rem; }
