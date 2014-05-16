@@ -468,6 +468,10 @@ header {
   header .wrap {
     padding: 1rem; }
 
+.missing {
+  font-size: .8rem;
+  color: rgba(84, 55, 41, 0.3); }
+
 .upcoming {
   text-align: center; }
   .upcoming .days-away {

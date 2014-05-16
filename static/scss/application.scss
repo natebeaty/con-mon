@@ -39,6 +39,10 @@ header {
 		padding: 1rem;
 	}
 }
+.missing {
+	font-size: .8rem;
+	color: rgba($dark, .3);
+}
 .upcoming {
 	text-align: center;
 	.days-away {
