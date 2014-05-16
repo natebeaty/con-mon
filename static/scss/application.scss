@@ -41,7 +41,9 @@ header {
 }
 .missing {
 	font-size: .8rem;
-	color: rgba($dark, .3);
+	a {
+		color: $highlight;
+	}
 }
 .upcoming {
 	text-align: center;
@@ -62,6 +64,8 @@ header {
 }
 .calendars {
 	margin-top: 2rem;
+	position: relative;
+	min-height: 400px;
 }
 
 footer {

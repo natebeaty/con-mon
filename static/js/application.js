@@ -27,8 +27,7 @@ $.concalendar = (function() {
                 events: eventsArray,
                 clickEvents: {
                     click: function(target) {
-                        if (target.events.length > 0) {
-                            // console.log($(this).find('.event-details'));
+                        if (target.events.length == 1) {
                         }
                     }
                 },
@@ -73,6 +72,7 @@ $.concalendar = (function() {
             $('.days li,.cal').removeClass('inactive');
             // $('.tooltipstered').tooltipster('hide');
         });
+        $('body').addClass('loaded');
     }
 
     function _resize() {
