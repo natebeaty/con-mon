@@ -3,21 +3,54 @@
 	
 	<section class="upcoming">
 	<h2>Upcoming Conventions</h2>
+	<p class="tags">
+	Filter: 
+	{% for tag in tags %}
+		<a class="tag" href="/tagged/{{ tag.title }}/">{{ tag.title }}</a>
+	{% endfor %}
+	</p>
 	{% if condates %}
-		<ul>
+		<table><tbody>
+		<tr><th>Con</th><th>Date</th><th>Keep Drawing</th><th>Registration Status</th></tr>
 		{% for condate in condates %}
-			<li data-condate-id="{{ condate.id }}">
-				<h2><a href="{{ condate.convention.url }}" class="tooltip" title="{{ condate.convention.body }}">{{ condate.convention.title }}</a></h2>
-				 <span class="date">
+			<tr class="condate {% for tag in condate.convention.tags %}tag-{{ tag.title }}{% endfor %}" data-condate-id="{{ condate.id }}">
+				<td><h2><a href="{{ condate.convention.url }}" class="tooltip" title="{{ condate.convention.body }}">{{ condate.convention.title }}</a></h2></td>
+				 <td class="date">
 				 <time class="dtstart" datetime="{{ condate.start_date }}">{{ condate.start_date.strftime('%b %e')|trim }}</time>
 				{%- if condate.end_date and condate.end_date != condate.start_date -%}
 					&ndash;<time class="dtstart" datetime="{{ condate.end_date }}">{{ condate.end_date.strftime('%e')|trim }}</time>
 				{%- endif %}, {{ condate.start_date.strftime('%Y') }}
+				</td><td>
 					<span class="days-away">{{ condate.start_date|timeaway }}</span>
-				</span>
-			</li>
+				</td>
+				<td>
+				{% if condate.registration_opens %}
+					{% if condate.registration_closes and condate.registration_closes|in_past %}
+						<span class="reg-status tag closed">Registration Closed</span>
+					{% elif condate.registration_opens|in_past %}
+						{% if condate.registration_closes %}
+							<span class="reg-status tag">Registration Closes {{ condate.registration_closes.strftime('%b %e')|trim }}</span>
+						{% else %}
+							<span class="reg-status tag">Registration Open</span>
+						{% endif %}
+					{% else %}
+						<span class="reg-status tag">Registration Opens {{ condate.registration_opens.strftime('%b %e')|trim }}</span>
+					{% endif %}
+				{% else %}
+					<span class="reg-status tag closed">Unknown</span>
+				{% endif %}
+
+				</td>
+{# 				<td>
+				{% if condate.convention.tags %}
+					{% for tag in condate.convention.tags %}
+						<span class="tag">{{ tag.title }}</span>
+					{% endfor %}
+				{% endif %}
+				</td>
+ #}			</tr>
 		{% endfor %}
-		</ul>
+		</tbody></table>
 	{% endif %}
 	<p class="missing">Am I missing something? Email <a href="mailto:nate@clixel.com">nate@clixel.com</a></p>
 	</section>

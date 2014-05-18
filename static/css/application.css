@@ -417,6 +417,7 @@ input, select {
   100% {
     -webkit-transform: translate(30px); } }
 .tooltipster-default {
+  border-radius: 3px;
   background: #00acee;
   color: #fff; }
 
@@ -634,13 +635,53 @@ header {
     background-size: 114px 114px;
     vertical-align: middle; }
 
+a.tag {
+  text-decoration: none;
+  background: #00acee; }
+  a.tag.on, a.tag:hover {
+    background: #ffcc2f; }
+
+.tag {
+  display: inline-block;
+  padding: 4px 8px;
+  background: rgba(84, 55, 41, 0.65);
+  color: #fff;
+  font-size: .7rem;
+  line-height: 1;
+  border-radius: 4px; }
+  .tag.closed {
+    background: rgba(84, 55, 41, 0.3); }
+
+.tags {
+  font-size: .7rem; }
+  .tags.filtering .tag:not(.on) {
+    background: #ccc; }
+
 .missing {
-  font-size: .8rem; }
-  .missing a {
-    color: #00acee; }
+  font-size: .8rem;
+  color: rgba(84, 55, 41, 0.3); }
 
 .upcoming {
   text-align: center; }
+  .upcoming table {
+    width: 90%;
+    margin: 20px auto; }
+  .upcoming th {
+    font-size: .7em;
+    background: #ccc;
+    color: #543729;
+    text-transform: uppercase;
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 4px;
+    vertical-align: middle; }
+  .upcoming tr:hover td {
+    background: #f4f4f4; }
+  .upcoming td {
+    vertical-align: middle;
+    border: 1px solid #ccc;
+    padding: 4px;
+    background: #fff; }
   .upcoming .days-away {
     margin-left: .3rem;
     font-size: .8rem;
@@ -650,8 +691,10 @@ header {
     list-style: none;
     line-height: 1.3; }
   .upcoming h2, .upcoming h3 {
-    display: inline-block;
-    margin: 0 .2rem .2rem; }
+    margin: 0; }
+
+.condate.inactive {
+  opacity: .3; }
 
 .calendars {
   margin-top: 2rem;
@@ -664,15 +707,17 @@ footer {
   text-align: center;
   color: #00acee;
   padding: 1rem; }
-  footer a {
-    color: #fff; }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 768px) {
+  .upcoming table {
+    width: 80%;
+    margin: 20px auto; }
+
   h1 {
     font-size: 3rem; }
 
   #content {
-    width: 930px;
+    max-width: 930px;
     margin: 2rem auto; }
 
   .cal {

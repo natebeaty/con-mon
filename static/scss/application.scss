@@ -52,13 +52,67 @@ header {
 		vertical-align: middle;
 	}
 }
-.missing {
-	font-size: .8rem;
-	a {
-		color: $highlight;
+
+a.tag { 
+	text-decoration: none; 
+	background: $highlight;
+	&.on,
+	&:hover {
+		background: $vibrant;
 	}
 }
+.tag {
+	display: inline-block;
+	padding: 4px 8px;
+	background: rgba($dark,.65);
+	color: #fff;
+	font-size: .7rem;
+	line-height: 1;
+	border-radius: 4px;
+	&.closed {
+		background: rgba($dark,.3);
+	}
+}
+.tags {
+	font-size: .7rem;
+	&.filtering {
+		.tag {
+			&:not(.on) {
+				background: #ccc;
+			}
+		}
+	}
+}
+.missing {
+	font-size: .8rem;
+	color: rgba($dark, .3);
+}
 .upcoming {
+	table {
+		width: 90%;
+		margin: 20px auto;
+	}
+	th {
+		font-size: .7em;
+		background: #ccc;
+		color: $dark;
+		text-transform: uppercase;
+		text-align: center;
+		border: 1px solid #ccc;
+		padding: 4px;
+		vertical-align: middle;
+	}
+	tr:hover {
+		td {
+			background: #f4f4f4;
+		}
+	}
+	td {
+		vertical-align: middle;
+		border: 1px solid #ccc;
+		padding: 4px;
+		background: #fff;
+	}
 	text-align: center;
 	.days-away {
 		margin-left: .3rem;
@@ -71,8 +125,12 @@ header {
 		line-height: 1.3;
 	}
 	h2,h3 {
-		display: inline-block;
-		margin: 0 .2rem .2rem;
+		margin: 0;
+	}
+}
+.condate {
+	&.inactive {
+		opacity: .3;
 	}
 }
 .calendars {
@@ -87,12 +145,15 @@ footer {
 	text-align: center;
 	color: $highlight;
 	padding: 1rem;
-	a {
-		color: #fff;
-	}
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 768px) {
+	.upcoming {
+		table {
+			width: 80%;
+			margin: 20px auto;
+		}
+	}
 	h1 {
 		font-size: 3rem;
 	}
@@ -100,7 +161,7 @@ footer {
 		// text-align: left;
 	}
 	#content {
-		width: 930px;
+		max-width: 930px;
 		margin: 2rem auto;
 	}
 	.cal {

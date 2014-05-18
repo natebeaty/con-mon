@@ -1,6 +1,7 @@
 @import "mixins";
 
 .tooltipster-default {
+    border-radius: 3px; 
     background: $highlight;
     color: #fff;
 }

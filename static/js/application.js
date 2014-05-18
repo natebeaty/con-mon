@@ -39,11 +39,22 @@ $.concalendar = (function() {
                 adjacentDaysChangeMonth: false
             });
         }
+        $('.tags').on('click', 'a', function(e) {
+            e.preventDefault();
+            $(this).toggleClass('on');
+            if ($('.tags a.on').length>0) {
+                $('.tags').addClass('filtering');
+                _filterCondates();
+            } else {
+                $('.tags').removeClass('filtering');
+                $('.condate').removeClass('inactive');
+            }
+        });
         $('.event').each(function() {
             var $tip = $(this).find('.event-detail');
             $(this).on('mouseenter', function() {
                 var id = $(this).find('h3:first').data('condate-id');
-                console.log(id);
+                // console.log(id);
                 $('.days li').removeClass('current');
                 $dates = $('.event-detail h3[data-condate-id="'+id+'"]');
                 $dates.each(function() {
@@ -60,8 +71,9 @@ $.concalendar = (function() {
                 delay: 0
             });
         });
-        $('.upcoming li a').on('mouseenter', function() {
-            var id = $(this).parents('li:first').data('condate-id');
+        $('.upcoming tr').on('mouseenter', function() {
+            if ($(this).hasClass('inactive')) return;
+            var id = $(this).data('condate-id');
             $('.cal,.days li').addClass('inactive');
             $dates = $('.event-detail h3[data-condate-id="'+id+'"]');
             $dates.each(function() {
@@ -74,7 +86,12 @@ $.concalendar = (function() {
         });
         $('body').addClass('loaded');
     }
-
+    function _filterCondates() {
+        $('.condate').addClass('inactive');
+        $('.tag.on').each(function() {
+            $('.condate.tag-' + $(this).text()).removeClass('inactive');
+        });
+    }
     function _resize() {
         var screen_width = document.documentElement.clientWidth;
         medium_width = screen_width <= 768;
