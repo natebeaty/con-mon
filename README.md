@@ -1,7 +1,7 @@
 Con-Mon
 =======
 
-![con-mon](static/image/con-mon.png?raw=true)
+![con-mon](https://raw.githubusercontent.com/natebeaty/con-mon/master/static/img/con-mon.png)
 
 Flask app to help frazzled cartoonists keep track of the myriad of conventions in a year.
 
