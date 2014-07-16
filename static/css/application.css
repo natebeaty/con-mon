@@ -708,13 +708,28 @@ footer {
   color: #00acee;
   padding: 1rem; }
 
+.keep-drawing {
+  display: none; }
+
+.large-only {
+  display: none; }
+
 @media only screen and (min-width: 768px) {
   .upcoming table {
     width: 80%;
     margin: 20px auto; }
 
+  .large-only {
+    display: block; }
+
+  .small-only {
+    display: none; }
+
   h1 {
     font-size: 3rem; }
+
+  .keep-drawing {
+    display: block; }
 
   #content {
     max-width: 930px;

@@ -147,6 +147,14 @@ footer {
 	padding: 1rem;
 }
 
+.keep-drawing {
+	display: none;
+}
+.large-only {
+	display: none;
+}
+
+// mobile
 @media only screen and (min-width: 768px) {
 	.upcoming {
 		table {
@@ -154,8 +162,17 @@ footer {
 			margin: 20px auto;
 		}
 	}
+	.large-only {
+		display: block;
+	}
+	.small-only {
+		display: none;
+	}
 	h1 {
 		font-size: 3rem;
+	}
+	.keep-drawing {
+		display: block;
 	}
 	.upcoming {
 		// text-align: left;

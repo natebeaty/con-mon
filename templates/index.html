@@ -11,7 +11,7 @@
 	</p>
 	{% if condates %}
 		<table><tbody>
-		<tr><th>Con</th><th>Date</th><th>Keep Drawing</th><th>Registration Status</th></tr>
+		<tr><th>Con</th><th>Date</th><th class="keep-drawing">Keep Drawing</th><th><span class="small-only">Reg. Status</span><span class="large-only">Registration Status</span></th></tr>
 		{% for condate in condates %}
 			<tr class="condate {% for tag in condate.convention.tags %}tag-{{ tag.title }}{% endfor %}" data-condate-id="{{ condate.id }}">
 				<td><h2><a href="{{ condate.convention.url }}" class="tooltip" title="{{ condate.convention.body }}">{{ condate.convention.title }}</a></h2></td>
@@ -20,7 +20,8 @@
 				{%- if condate.end_date and condate.end_date != condate.start_date -%}
 					&ndash;<time class="dtstart" datetime="{{ condate.end_date }}">{{ condate.end_date.strftime('%e')|trim }}</time>
 				{%- endif %}, {{ condate.start_date.strftime('%Y') }}
-				</td><td>
+				</td>
+				<td class="keep-drawing">
 					<span class="days-away">{{ condate.start_date|timeaway }}</span>
 				</td>
 				<td>
