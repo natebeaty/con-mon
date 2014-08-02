@@ -38,8 +38,8 @@ $.concalendar = (function() {
                     }
                 },
                 multiDayEvents: {
-                startDate: 'start_date',
-                endDate: 'end_date'
+                    startDate: 'start_date',
+                    endDate: 'end_date'
                 },
                 showAdjacentMonths: false,
                 adjacentDaysChangeMonth: false

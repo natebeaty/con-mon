@@ -75,9 +75,9 @@
 			<% _.each(days, function(day) { %>
 				<li class="<%= day.classes %>">
 				<%= day.day %>
-				<div class="event-detail" title="<%= event.title %>"><% _.each(day.events, function(event){ %>
+				<div class="event-detail"><% _.each(day.events, function(event){ %>
 					<h3 data-condate-id="<%= event.id %>"><%= event.title %></h3>
-				<% }) %></div>
+				<% }); %></div>
 				</li>
 			<% }); %>
 		</ul>
