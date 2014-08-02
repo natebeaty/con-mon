@@ -1,5 +1,5 @@
 /*
- *               ~ CLNDR v1.2.0 ~
+ *               ~ CLNDR v1.2.1 ~
  * ==============================================
  *       https://github.com/kylestetz/CLNDR
  * ==============================================
@@ -19,7 +19,23 @@
  * Licensed under the MIT license
  */
 
-;(function ( $, window, document, undefined ) {
+(function (factory) {
+
+  if (typeof define === 'function' && define.amd) {
+
+    // AMD. Register as an anonymous module.
+    define(['jquery', 'moment'], factory);
+  } else if (typeof exports === 'object') {
+
+    // Node/CommonJS
+    factory(require('jquery'), require('moment'));
+  } else {
+
+    // Browser globals
+    factory(jQuery, moment);
+  }
+
+}(function ($, moment) {
 
   // This is the default calendar template. This can be overridden.
   var clndrTemplate = "<div class='clndr-controls'>" +
@@ -210,21 +226,51 @@
       // if we're using multi-day events, the start or end must be in the current month
       if(this.options.multiDayEvents) {
         this.eventsThisMonth = $(this.options.events).filter( function() {
-          return this._clndrStartDateObject.format("YYYY-MM") <= currentMonth.format("YYYY-MM")
-          || currentMonth.format("YYYY-MM") <= this._clndrEndDateObject.format("YYYY-MM");
+//          return this._clndrStartDateObject.format("YYYY-MM") <= currentMonth.format("YYYY-MM")
+//          || currentMonth.format("YYYY-MM") <= this._clndrEndDateObject.format("YYYY-MM");
+            if ( this._clndrStartDateObject.format("YYYY-MM") === currentMonth.format("YYYY-MM")
+                    || this._clndrEndDateObject.format("YYYY-MM") === currentMonth.format("YYYY-MM") ) {
+                return true;
+            }
+            if ( this._clndrStartDateObject.format("YYYY-MM") <= currentMonth.format("YYYY-MM")
+                    && this._clndrEndDateObject.format("YYYY-MM") >= currentMonth.format("YYYY-MM") ) {
+                return true;
+            }
+
+            return false;
         }).toArray();
 
         if(this.options.showAdjacentMonths) {
           var lastMonth = currentMonth.clone().subtract('months', 1);
           var nextMonth = currentMonth.clone().add('months', 1);
           this.eventsLastMonth = $(this.options.events).filter( function() {
-            return this._clndrStartDateObject.format("YYYY-MM") <= lastMonth.format("YYYY-MM")
-          || lastMonth.format("YYYY-MM") <= this._clndrEndDateObject.format("YYYY-MM");
+//            return this._clndrStartDateObject.format("YYYY-MM") <= lastMonth.format("YYYY-MM")
+//          || lastMonth.format("YYYY-MM") <= this._clndrEndDateObject.format("YYYY-MM");
+            if ( this._clndrStartDateObject.format("YYYY-MM") === lastMonth.format("YYYY-MM")
+                    || this._clndrEndDateObject.format("YYYY-MM") === lastMonth.format("YYYY-MM") ) {
+                return true;
+            }
+            if ( this._clndrStartDateObject.format("YYYY-MM") <= lastMonth.format("YYYY-MM")
+                    && this._clndrEndDateObject.format("YYYY-MM") >= lastMonth.format("YYYY-MM") ) {
+                return true;
+            }
+
+            return false;
           }).toArray();
 
           this.eventsNextMonth = $(this.options.events).filter( function() {
-            return this._clndrStartDateObject.format("YYYY-MM") <= nextMonth.format("YYYY-MM")
-          || nextMonth.format("YYYY-MM") <= this._clndrEndDateObject.format("YYYY-MM");
+//            return this._clndrStartDateObject.format("YYYY-MM") <= nextMonth.format("YYYY-MM")
+//          || nextMonth.format("YYYY-MM") <= this._clndrEndDateObject.format("YYYY-MM");
+            if ( this._clndrStartDateObject.format("YYYY-MM") === nextMonth.format("YYYY-MM")
+                    || this._clndrEndDateObject.format("YYYY-MM") === nextMonth.format("YYYY-MM") ) {
+                return true;
+            }
+            if ( this._clndrStartDateObject.format("YYYY-MM") <= nextMonth.format("YYYY-MM")
+                    && this._clndrEndDateObject.format("YYYY-MM") >= nextMonth.format("YYYY-MM") ) {
+                return true;
+            }
+
+            return false;
           }).toArray();
         }
       }
@@ -848,4 +894,4 @@
     }
   }
 
-})( jQuery, window, document );
+}));

@@ -1,6 +1,6 @@
 {
   "name": "clndr",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "main": "clndr.min.js",
   "homepage": "http://kylestetz.github.io/CLNDR/",
   "keywords": [
@@ -20,13 +20,14 @@
     "jquery": ">=1.9",
     "moment": ">=2.2.1"
   },
-  "_release": "1.2.0",
+  "_release": "1.2.1",
   "_resolution": {
     "type": "version",
-    "tag": "1.2.0",
-    "commit": "051f832d931d59f6bdeca32aebe7a8c61756e9d4"
+    "tag": "1.2.1",
+    "commit": "1875be1e94382062e79b502983566a37109c6b49"
   },
   "_source": "git://github.com/kylestetz/CLNDR.git",
-  "_target": "*",
-  "_originalSource": "clndr"
+  "_target": "~1.2.1",
+  "_originalSource": "clndr",
+  "_direct": true
 }

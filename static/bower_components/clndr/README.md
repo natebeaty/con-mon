@@ -8,6 +8,7 @@ See a demo: [kylestetz.github.io/CLNDR/](http://kylestetz.github.io/CLNDR/)
 - [Download](https://github.com/kylestetz/CLNDR#download)
 - [Dependencies](https://github.com/kylestetz/CLNDR#dependencies)
   - [Using Bower](https://github.com/kylestetz/CLNDR#using-bower)
+  - [Clndr using Angular.js](https://github.com/kylestetz/CLNDR#clndr-using-angular)
 - [Introduction: You Write The Markup](https://github.com/kylestetz/CLNDR#introduction-you-write-the-markup)
   - [The 'days' Array](https://github.com/kylestetz/CLNDR#the-days-array)
   - [Pass in your Events](https://github.com/kylestetz/CLNDR#pass-in-your-events)
@@ -50,6 +51,9 @@ bower install clndr
 
 Underscore is not installed by default. This allows you to use whichever templating engine you want to. If you want to use the default `template` option with Underscore, just install it as a dependency of your project: `bower install underscore`.
 
+### Clndr Using Angular
+
+If you want to integrate clndr into an [angular.js](http://angularjs.org/) site, get started with this directive: [angular-clndr](https://github.com/10KB/angular-clndr).
 
 
 Introduction: You Write The Markup
@@ -506,6 +510,8 @@ Todo
 
 Changelog
 =========
+`v1.2.1 ~ 2014-07-10`: Fixed a bug in `eventsLastMonth`, `eventsThisMonth`, and `eventsNextMonth`. Added CommonJS/AMD wrapper to the plugin.
+
 `v1.2.0 ~ 2014-01-22`: BC break for Bower users! Underscore is no longer listed as a dependency in the Bower plugin, allowing you the flexibility of choosing the templating language you prefer. Also added a day of the week class to all clndr days in the format `calendar-dow-<0 - 6>`, allowing you to style weekends/specific days of the week differently.
 
 `v1.1.3 ~ 2014-01-17`: fixed a bug where multiday events longer than two months would not show up. Fixed a bug that prevented clndr from loading in IE8.

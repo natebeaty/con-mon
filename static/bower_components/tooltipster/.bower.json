@@ -1,6 +1,6 @@
 {
   "name": "tooltipster",
-  "version": "3.2.4",
+  "version": "3.2.6",
   "main": [
     "js/jquery.tooltipster.min.js",
     "css/tooltipster.css"
@@ -9,14 +9,14 @@
     "jquery": ">=1.7"
   },
   "homepage": "https://github.com/iamceege/tooltipster",
-  "_release": "3.2.4",
+  "_release": "3.2.6",
   "_resolution": {
     "type": "version",
-    "tag": "3.2.4",
-    "commit": "fc71814692dbfdd08fa2755e27077ce97d9cb4b3"
+    "tag": "3.2.6",
+    "commit": "e1d3db16f81600789f3760cfbcfb76c9374e0dea"
   },
   "_source": "git://github.com/iamceege/tooltipster.git",
-  "_target": "~3.2.4",
+  "_target": "~3.2.6",
   "_originalSource": "tooltipster",
   "_direct": true
 }

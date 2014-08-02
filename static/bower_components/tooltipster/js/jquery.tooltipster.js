@@ -1,6 +1,6 @@
 /*
 
-Tooltipster 3.2.4 | 2014-05-14
+Tooltipster 3.2.6 | 2014-07-16
 A rockin' custom tooltip jQuery plugin
 
 Developed by Caleb Jacob under the MIT license http://opensource.org/licenses/MIT
@@ -20,6 +20,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 			content: null,
 			contentAsHTML: false,
 			contentCloning: true,
+			debug: true,
 			delay: 200,
 			minWidth: 0,
 			maxWidth: null,
@@ -1164,7 +1165,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 						self = ns ? $(this).data(ns[0]) : null;
 					
 					// if the current element holds a tooltipster instance
-					if(self){
+					if (self) {
 						
 						if (typeof self[args[0]] === 'function') {
 							// note : args[1] and args[2] may not be defined
@@ -1194,8 +1195,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 				var instances = [],
 					// is there a defined value for the multiple option in the options object ?
 					multipleIsSet = args[0] && typeof args[0].multiple !== 'undefined',
-					// if the multople option is set to true, or if it's not defined but set to true in the defaults
-					multiple = (multipleIsSet && args[0].multiple) || (!multipleIsSet && defaults.multiple);
+					// if the multiple option is set to true, or if it's not defined but set to true in the defaults
+					multiple = (multipleIsSet && args[0].multiple) || (!multipleIsSet && defaults.multiple),
+					// same for debug
+					debugIsSet = args[0] && typeof args[0].debug !== 'undefined',
+					debug = (debugIsSet && args[0].debug) || (!debugIsSet && defaults.debug);
 				
 				// initialize a tooltipster instance for each element if it doesn't already have one or if the multiple option is set, and attach the object to it
 				this.each(function () {
@@ -1207,12 +1211,14 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 					if (!ns) {
 						go = true;
 					}
-					else {
-						if(multiple) go = true;
-						else console.log('Tooltipster: one or more tooltips are already attached to this element: ignoring. Use the "multiple" option to attach more tooltips.');
+					else if (multiple) {
+						go = true;
+					}
+					else if (debug) {
+						console.log('Tooltipster: one or more tooltips are already attached to this element: ignoring. Use the "multiple" option to attach more tooltips.');
 					}
 					
-					if(go) {
+					if (go) {
 						instance = new Plugin(this, args[0]);
 						
 						// save the reference of the new instance
@@ -1227,7 +1233,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 					instances.push(instance);
 				});
 				
-				if(multiple) return instances;
+				if (multiple) return instances;
 				else return this;
 			}
 		}

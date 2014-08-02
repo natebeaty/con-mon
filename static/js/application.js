@@ -1,6 +1,12 @@
 // concalendar
 // nate@clixel.com
 
+// @codekit-prepend "../bower_components/jquery/dist/jquery.js"
+// @codekit-prepend "../bower_components/underscore/underscore.js"
+// @codekit-prepend "../bower_components/moment/moment.js"
+// @codekit-prepend "../bower_components/tooltipster/js/jquery.tooltipster.js"
+// @codekit-prepend "../bower_components/clndr/src/clndr.js"
+
 $.concalendar = (function() {
     var medium_width = false,
         small_width = false,
@@ -23,7 +29,7 @@ $.concalendar = (function() {
         for (var i = 0; i < 13; i++) {
             calendars.clndr1 = $('.cal'+i).clndr({
                 template: $('#template-calendar').html(),
-                startWithMonth: moment().add('month', i-1),
+                startWithMonth: moment().add(i-1, 'month'),
                 events: eventsArray,
                 clickEvents: {
                     click: function(target) {
