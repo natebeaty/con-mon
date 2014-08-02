@@ -77,19 +77,19 @@ $.concalendar = (function() {
                 delay: 0
             });
         });
-        $('.upcoming tr').on('mouseenter', function() {
-            if ($(this).hasClass('inactive')) return;
-            var id = $(this).data('condate-id');
-            $('.cal,.days li').addClass('inactive');
-            $dates = $('.event-detail h3[data-condate-id="'+id+'"]');
-            $dates.each(function() {
-                $(this).parents('li:first').removeClass('inactive'); //.tooltipster('show');
-                $(this).parents('.cal:first').removeClass('inactive');
-            });
-        }).on('mouseleave', function() {
-            $('.days li,.cal').removeClass('inactive');
-            // $('.tooltipstered').tooltipster('hide');
-        });
+        // $('.upcoming tr').on('mouseenter', function() {
+        //     if ($(this).hasClass('inactive')) return;
+        //     var id = $(this).data('condate-id');
+        //     $('.cal,.days li').addClass('inactive');
+        //     $dates = $('.event-detail h3[data-condate-id="'+id+'"]');
+        //     $dates.each(function() {
+        //         $(this).parents('li:first').removeClass('inactive'); //.tooltipster('show');
+        //         $(this).parents('.cal:first').removeClass('inactive');
+        //     });
+        // }).on('mouseleave', function() {
+        //     $('.days li,.cal').removeClass('inactive');
+        //     // $('.tooltipstered').tooltipster('hide');
+        // });
         $('body').addClass('loaded');
     }
     function _filterCondates() {
