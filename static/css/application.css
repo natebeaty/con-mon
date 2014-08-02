@@ -729,7 +729,7 @@ footer {
     font-size: 3rem; }
 
   .keep-drawing {
-    display: block; }
+    display: table-cell; }
 
   #content {
     max-width: 930px;
