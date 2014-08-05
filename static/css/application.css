@@ -656,6 +656,8 @@ a.tag {
   font-size: .7rem; }
   .tags.filtering .tag:not(.on) {
     background: #ccc; }
+    .tags.filtering .tag:not(.on):hover {
+      background: #ffcc2f; }
 
 .missing {
   font-size: .8rem;

@@ -79,6 +79,9 @@ a.tag {
 		.tag {
 			&:not(.on) {
 				background: #ccc;
+				&:hover {
+					background: $vibrant;
+				}
 			}
 		}
 	}
@@ -130,7 +133,7 @@ a.tag {
 }
 .condate {
 	&.inactive {
-		display: none
+		display: none;
 	}
 }
 .calendars {
