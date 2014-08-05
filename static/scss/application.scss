@@ -35,6 +35,15 @@ header {
 	background: $dark;
 	color: $highlight;
 	margin-bottom: 2rem;
+	p {
+		margin-top: -2.5rem;
+		text-indent: 3rem;
+		font-size: 12px;
+		text-align: center;
+		a {
+			text-decoration: none;
+		}
+	}
 	.wrap {
 		padding: 1rem;
 	}
@@ -170,6 +179,10 @@ footer {
 	}
 	.small-only {
 		display: none;
+	}
+	header p {
+		margin-top: -2.3rem;
+		text-indent: -.2rem;
 	}
 	h1 {
 		font-size: 3rem;
