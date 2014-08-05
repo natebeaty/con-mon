@@ -3,10 +3,10 @@
 	
 	<section class="upcoming">
 	<h2>Upcoming Conventions</h2>
-	<p class="tags">
+	<p class="tags filtering">
 	Filter: 
 	{% for tag in tags %}
-		<a class="tag" href="/tagged/{{ tag.title }}/">{{ tag.title }}</a>
+		<a class="tag {% if tag.title == "Indie" %}on{% endif %}" href="/tagged/{{ tag.title }}/">{{ tag.title }}</a>
 	{% endfor %}
 	</p>
 	{% if condates %}

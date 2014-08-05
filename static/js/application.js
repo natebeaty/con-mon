@@ -23,6 +23,7 @@ $.concalendar = (function() {
             eventsArray = data;
             _initClndr();
         });
+        _filterCondates();
     }
 
     function _initClndr() {

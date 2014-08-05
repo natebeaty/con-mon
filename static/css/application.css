@@ -694,7 +694,7 @@ a.tag {
     margin: 0; }
 
 .condate.inactive {
-  opacity: .3; }
+  display: none; }
 
 .calendars {
   margin-top: 2rem;

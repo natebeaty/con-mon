@@ -130,7 +130,7 @@ a.tag {
 }
 .condate {
 	&.inactive {
-		opacity: .3;
+		display: none
 	}
 }
 .calendars {
