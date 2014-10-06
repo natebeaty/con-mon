@@ -102,6 +102,7 @@ def in_past(dt):
 def index():
     return render_template('index.html',
         tags = Tag.query.all(),
+        settings = app.config,
         condates = Condate.query.filter(Condate.start_date >= date.today()).order_by(Condate.start_date).all()
         )
 
