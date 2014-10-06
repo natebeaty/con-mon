@@ -38,10 +38,10 @@ class Twitter(Command):
 
         twitter_api = twitter.Api(consumer_key=config.TWITTER_CONSUMER_KEY, consumer_secret=config.TWITTER_CONSUMER_SECRET, access_token_key=config.TWITTER_ACCESS_TOKEN_KEY, access_token_secret=config.TWITTER_ACCESS_TOKEN_SECRET)
 
-        daily_notices = Condate.query.filter(Condate.start_date == date.today() + timedelta(days=1)).all()
-        output = "Condates happening tomorrow: \n"
+        daily_notices = Condate.query.filter(Condate.start_date == date.today() + timedelta(days=7)).all()
+        output = "Condates happening in a week: \n"
         for c in daily_notices:
-            message = "%s %s is tomorrow! %s" % (random.choice(phrases), c.convention.title, c.convention.url)
+            message = "%s %s is a week away! %s" % (random.choice(phrases), c.convention.title, c.convention.url)
             try:
                 twitter_api.PostUpdate(message)
             except:
