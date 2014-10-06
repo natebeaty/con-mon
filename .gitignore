@@ -5,3 +5,4 @@ app.db
 .venv/*
 .sass-cache/*
 static/scss/.sass-cache/*
+config.py
