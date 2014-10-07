@@ -7,13 +7,12 @@ import twitter
 import random
 
 app = Flask(__name__)
-
 manager = Manager(app)
 
 class Twitter(Command):
     """
     Twitter alerts! 
-    Daily and monthly notices of oncoming conventions
+    Weekly and monthly notices of oncoming conventions
     Weekly notices of oncoming deadlines
     """
 
@@ -48,14 +47,14 @@ class Twitter(Command):
         output = "Condates happening in a week: \n"
         for c in daily_notices:
             message = "%s %s is a week away! %s" % (random.choice(phrases), c.convention.title, c.convention.url)
-            output = output + self.post_to_twitter(twitter_api,message) + message
+            output = output + self.post_to_twitter(twitter_api,message) + "\n" + message
 
         # cons that are a month away
         monthly_notices = Condate.query.filter(Condate.start_date == date.today() + timedelta(days=30)).all()
         output = output + "\nCondates happening in a month: \n"
         for c in monthly_notices:
             message = "%s %s is a month away! %s" % (random.choice(phrases), c.convention.title, c.convention.url)
-            output = output + self.post_to_twitter(twitter_api,message) + message
+            output = output + self.post_to_twitter(twitter_api,message) + "\n" + message
 
         # cons that have registrations closing in a week
         weekly_registration_notices = Condate.query.filter(Condate.registration_closes == date.today() + timedelta(days=7)).all()
