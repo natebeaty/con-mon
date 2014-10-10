@@ -32,7 +32,8 @@
 		</div>
 	</header>
 	<div id="content">
-			{% block content %}{% endblock content %}
+		{% include 'flash.html' %}
+		{% block content %}{% endblock content %}
 	</div><!-- END #content -->
 
 	<footer>

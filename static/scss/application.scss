@@ -2,6 +2,7 @@
 @import 'mixins';
 @import 'clndr';
 @import 'tooltipster';
+@import 'datepicker';
 
 body {
 	background: $background;
@@ -30,6 +31,46 @@ h2 {
 h3 {
 	font-size: 1rem;
 	margin: 0 0 .3rem;
+}
+input[type=text],
+textarea {
+	padding: 4px 6px;
+}
+textarea {
+	margin: 10px 0;
+}
+.actions {
+	margin: 8px 0 0;
+}
+label {
+	display: none;
+	&.checkbox {
+		display: inline-block;
+	}
+	// &.inline {
+	// 	display: inline-block;
+	// }
+	font-size: .7rem;
+	color: $dark;
+	text-transform: uppercase;
+	margin: 8px 0 0;
+	em {
+		font-style: normal;
+		text-transform: none;
+		color: #aaa;
+	}
+}
+.submit-con {
+	padding: 10px;
+	border: 1px solid #ccc;
+	background: #f8f8f8;
+	fieldset {
+	}
+	.extras {
+		input,textarea {
+			width: 100%;
+		}
+	}
 }
 header {
 	background: $dark;
@@ -166,12 +207,37 @@ footer {
 	display: none;
 }
 
+.flashes {
+	width: 50%;
+	margin: 0 auto 20px;
+	padding: 8px;
+	border: 1px solid #ccc;
+	background: #e4ffca;
+	text-align: center;
+	list-style: none;
+	li {
+		list-style: none;
+	}
+}
+
+
 // mobile
 @media only screen and (min-width: 768px) {
 	.upcoming {
 		table {
 			width: 80%;
 			margin: 20px auto;
+		}
+	}
+	.submit-con {
+		.row {
+			float: left;
+			width: 20%;
+		}
+		.extras {
+			input,textarea {
+				width: 300px;
+			}
 		}
 	}
 	.large-only {

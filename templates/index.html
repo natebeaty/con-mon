@@ -4,7 +4,7 @@
 	<section class="upcoming">
 	<h2>Upcoming Conventions</h2>
 	<p class="tags filtering">
-	Filter: 
+	Show: 
 	{% for tag in tags %}
 		<a class="tag {% if tag.title == "Indie" %}on{% endif %}" href="/tagged/{{ tag.title }}/">{{ tag.title }}</a>
 	{% endfor %}
@@ -14,7 +14,7 @@
 		<tr><th>Con</th><th>Date</th><th class="keep-drawing">Keep Drawing</th><th><span class="small-only">Reg. Status</span><span class="large-only">Registration Status</span></th></tr>
 		{% for condate in condates %}
 			<tr class="condate {% for tag in condate.convention.tags %}tag-{{ tag.title }} {% endfor %}" data-condate-id="{{ condate.id }}">
-				<td><h2><a target="_blank" href="{{ condate.convention.url }}" class="tooltip" title="{{ condate.convention.body }}">{{ condate.convention.title }}</a></h2></td>
+				<td><h2><a target="_blank" href="{{ condate.convention.url }}" class="tooltip" title="{{ condate.convention.location }}">{{ condate.convention.title }}</a></h2></td>
 				 <td class="date">
 				 <time class="dtstart" datetime="{{ condate.start_date }}">{{ condate.start_date.strftime('%b %e')|trim }}</time>
 				{%- if condate.end_date and condate.end_date != condate.start_date -%}
@@ -53,7 +53,68 @@
 		{% endfor %}
 		</tbody></table>
 	{% endif %}
-	<p class="missing">Am I missing something? Email <a href="mailto:nate@clixel.com">nate@clixel.com</a></p>
+	<p class="missing">Am I missing something? <a href="#" class="button">Submit a Convention Date</a></p>
+
+	<form action="/_submit_condate" method="post" class="submit-con hidden">
+
+		<fieldset>
+			<div class="row">
+				<label for="convention">Convention</label>
+				<select class="chzn" id="convention" name="convention" required>
+				<option value="">Select Convention...</option>
+				{% for convention in conventions %}
+					<option value="{{ convention.id }}">{{ convention.title }}</option>
+				{% endfor %}
+					<option value="other">Other...</option>
+				</select>
+				<div class="other-fields hidden">
+					<input type="text" name="convention_title" placeholder="Convention name">
+					<input type="text" name="convention_location" placeholder="City, ST">
+					<input type="text" name="convention_url" placeholder="http://">
+					<div>
+					{% for tag in tags %}
+						<label for="tag-{{ tag.id }}" class="checkbox"><input id="tag-{{ tag.id }}" type="checkbox" name="convention_tags" value="{{ tag.id }}"> {{ tag.title }}</label>
+					{% endfor %}
+
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<label for="start_date">Start Date</label>
+				<input class="dp" autocomplete="off" size="15" id="start_date" name="start_date" type="text" value="" placeholder="Start Date" required>
+			</div>
+			
+			<div class="row">
+				<label for="end_date">End Date</label>
+				<input class="dp" autocomplete="off" size="15" id="end_date" name="end_date" type="text" value="" placeholder="End Date">
+			</div>
+			
+			<div class="row">
+				<label for="registration_opens">Registration Opens</label>
+				<input class="dp" autocomplete="off" size="15" id="registration_opens" name="registration_opens" type="text" value="" placeholder="Reg. Opens">
+			</div>
+			
+			<div class="row">
+				<label for="registration_closes">Registration Closes</label>
+				<input class="dp" autocomplete="off" size="15" id="registration_closes" name="registration_closes" type="text" value="" placeholder="Reg. Closes">
+			</div>
+		</fieldset>
+
+		<fieldset class="extras">
+			<label for="notes">Extra Bonus Notes Section</label>
+			<textarea name="notes" id="notes" cols="50" rows="4" placeholder="Extra Bonus Notes Section"></textarea>
+			<div>
+				<label for="notes">Your Email</label>
+				<input type="text" name="email" placeholder="Your Email" size="15">
+			</div>
+		</fieldset>
+
+		<div class="actions">
+			<input type="submit" class="button" value="Looks Good!">
+		</div>
+  </form>
+
 	</section>
 
 	<section class="calendars cf">

@@ -1,4 +1,4 @@
-// concalendar
+// con-mon!
 // nate@clixel.com
 
 // @codekit-prepend "../bower_components/jquery/dist/jquery.js"
@@ -6,8 +6,9 @@
 // @codekit-prepend "../bower_components/moment/moment.js"
 // @codekit-prepend "../bower_components/tooltipster/js/jquery.tooltipster.js"
 // @codekit-prepend "../bower_components/clndr/src/clndr.js"
+// @codekit-prepend "bootstrap-datepicker.js"
 
-$.concalendar = (function() {
+CON_MON = (function() {
     var medium_width = false,
         small_width = false,
         calendars = {}
@@ -19,11 +20,23 @@ $.concalendar = (function() {
             delay: 0,
             animation: 'slide'
         });
-        $.getJSON( "/condates.json", function( data ) {
+        $.getJSON( '/condates.json', function( data ) {
             eventsArray = data;
             _initClndr();
         });
+        $('.dp').datepicker({
+            format: 'yyyy-mm-dd'
+        }).on('changeDate', function () {
+            $(this).datepicker('hide');
+        });
         _filterCondates();
+        $('.missing .button').click(function(e) {
+            e.preventDefault();
+            $('.submit-con').toggleClass('hidden');
+        });
+        $('#convention').on('change', function() {
+            $('.other-fields').toggleClass('hidden', $(this).val() != 'other');
+        });
     }
 
     function _initClndr() {
@@ -48,20 +61,15 @@ $.concalendar = (function() {
         }
         $('.tags').on('click', 'a', function(e) {
             e.preventDefault();
+            // ensure one tag is always selected
+            if ($('.tags a.on').length==1 && $(this).hasClass('on')) return;
             $(this).toggleClass('on');
-            if ($('.tags a.on').length>0) {
-                $('.tags').addClass('filtering');
-                _filterCondates();
-            } else {
-                $('.tags').removeClass('filtering');
-                $('.condate').removeClass('inactive');
-            }
+            _filterCondates();
         });
         $('.event').each(function() {
             var $tip = $(this).find('.event-detail');
             $(this).on('mouseenter', function() {
                 var id = $(this).find('h3:first').data('condate-id');
-                // console.log(id);
                 $('.days li').removeClass('current');
                 $dates = $('.event-detail h3[data-condate-id="'+id+'"]');
                 $dates.each(function() {
@@ -118,8 +126,8 @@ $.concalendar = (function() {
 
 // fire up the mothership
 $(document).ready(function(){
-    $.concalendar.init();
+    CON_MON.init();
 });
 $(window).resize(function(){
-    $.concalendar.resize();
+    CON_MON.resize();
 });
