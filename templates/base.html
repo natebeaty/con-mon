@@ -5,9 +5,9 @@
 <!DOCTYPE html>
 <head>
 	<meta charset='utf-8'>
-	<title>{% block title %}Con-Mon : A service to help cartoonists keep track of conventions{% endblock %}</title>
+	<title>{% block title %}Con-Mon{% endblock %}</title>
 	<link href='http://fonts.googleapis.com/css?family=Arvo:700|Arimo' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/application.css') }}" type="text/css" media="screen">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/application.css') }}?v3" type="text/css" media="screen">
 	<link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.png') }}"> 
 	<link rel="apple-touch-icon" href="{{ url_for('static', filename='img/apple-touch-icon.png') }}">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -28,7 +28,8 @@
 	<header>
 		<div class="wrap">
 			<h1>Con-Mon</h1>
-			<p><a href="https://twitter.com/conmonapp">@conmonapp</a></p>
+			<h2>A service to help cartoonists keep track of conventions.</h2>
+			<p>Follow me on Twitter to get a heads up on registration deadlines and upcoming conventions: <a href="https://twitter.com/conmonapp">@conmonapp</a></p>
 		</div>
 	</header>
 	<div id="content">

@@ -827,15 +827,21 @@ header {
   background: #543729;
   color: #00acee;
   margin-bottom: 2rem; }
+  header h2 {
+    font-size: 15px;
+    line-height: 1.1;
+    text-align: left;
+    margin: -4.5rem auto 1.5rem;
+    padding-left: 8rem;
+    width: 170px;
+    color: #eee; }
   header p {
-    margin-top: -2.5rem;
-    text-indent: 3rem;
     font-size: 12px;
     text-align: center; }
     header p a {
       text-decoration: none; }
   header .wrap {
-    padding: 1rem; }
+    padding: 0 1rem .5rem; }
   header h1 {
     line-height: 100px; }
   header h1:before {
@@ -845,7 +851,7 @@ header {
     height: 114px;
     background: url("/static/img/con-mon.png") no-repeat;
     background-size: 114px 114px;
-    vertical-align: middle; }
+    vertical-align: text-top; }
 
 a.tag {
   text-decoration: none;
@@ -958,9 +964,14 @@ footer {
   .small-only {
     display: none; }
 
-  header p {
-    margin-top: -2.3rem;
-    text-indent: -.2rem; }
+  header h2 {
+    font-size: 18px;
+    line-height: 1.1;
+    text-align: left;
+    margin: -3.5rem auto 1.5rem;
+    padding-left: 11.5rem;
+    width: 300px;
+    color: #eee; }
 
   h1 {
     font-size: 3rem; }
