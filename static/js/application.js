@@ -32,13 +32,21 @@ CON_MON = (function() {
         _filterCondates();
         $('.show-submit-condate').click(function(e) {
             e.preventDefault();
-            $('.submit-condate').toggleClass('hidden');
-            $('.submit-note').toggleClass('hidden', !$('.submit-condate').hasClass('hidden'));
+            if ($('.submit-condate').hasClass('hidden')) {
+                $('.submit-condate').removeClass('hidden');
+                $('.submit-note').addClass('hidden');
+            } else {
+                $('.submit-condate').addClass('hidden');
+            }
         });
         $('.show-submit-note').click(function(e) {
             e.preventDefault();
-            $('.submit-note').toggleClass('hidden');
-            $('.submit-condate').toggleClass('hidden', !$('.submit-note').hasClass('hidden'));
+            if ($('.submit-note').hasClass('hidden')) {
+                $('.submit-note').removeClass('hidden');
+                $('.submit-condate').addClass('hidden');
+            } else {
+                $('.submit-note').addClass('hidden');
+            }
         });
         $('#convention').on('change', function() {
             $('.other-fields').toggleClass('hidden', $(this).val() != 'other');
