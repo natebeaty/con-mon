@@ -110,6 +110,9 @@ a.tag {
 	&:hover {
 		background: $vibrant;
 	}
+	&.on:before {
+		content: '✓ ';
+	}
 }
 .tag {
 	display: inline-block;

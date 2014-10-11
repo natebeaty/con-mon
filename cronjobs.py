@@ -43,21 +43,21 @@ class Twitter(Command):
         twitter_api = twitter.Api(consumer_key=config.TWITTER_CONSUMER_KEY, consumer_secret=config.TWITTER_CONSUMER_SECRET, access_token_key=config.TWITTER_ACCESS_TOKEN_KEY, access_token_secret=config.TWITTER_ACCESS_TOKEN_SECRET)
 
         # cons that are a week away
-        daily_notices = Condate.query.filter(Condate.start_date == date.today() + timedelta(days=7)).all()
+        daily_notices = Condate.query.filter(Condate.start_date == date.today() + timedelta(days=7), Condate.published == True).all()
         output = "Condates happening in a week: \n"
         for c in daily_notices:
             message = "%s %s is a week away. %s" % (random.choice(phrases), c.convention.title, c.convention.url)
             output = output + self.post_to_twitter(twitter_api,message) + "\n" + message
 
         # cons that are a month away
-        monthly_notices = Condate.query.filter(Condate.start_date == date.today() + timedelta(days=30)).all()
+        monthly_notices = Condate.query.filter(Condate.start_date == date.today() + timedelta(days=30), Condate.published == True).all()
         output = output + "\nCondates happening in a month: \n"
         for c in monthly_notices:
             message = "%s %s is a month away. %s" % (random.choice(phrases), c.convention.title, c.convention.url)
             output = output + self.post_to_twitter(twitter_api,message) + "\n" + message
 
         # cons that have registrations closing in a week
-        weekly_registration_notices = Condate.query.filter(Condate.registration_closes == date.today() + timedelta(days=7)).all()
+        weekly_registration_notices = Condate.query.filter(Condate.registration_closes == date.today() + timedelta(days=7), Condate.published == True).all()
         output = output + "\nCondates with registration closing in a week: \n"
         for c in weekly_registration_notices:
             message = "%s %s registration closes in a week. %s" % (random.choice(phrases), c.convention.title, c.convention.url)
