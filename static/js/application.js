@@ -30,9 +30,15 @@ CON_MON = (function() {
             $(this).datepicker('hide');
         });
         _filterCondates();
-        $('.missing .button').click(function(e) {
+        $('.show-submit-condate').click(function(e) {
             e.preventDefault();
-            $('.submit-con').toggleClass('hidden');
+            $('.submit-condate').toggleClass('hidden');
+            $('.submit-note').toggleClass('hidden', !$('.submit-condate').hasClass('hidden'));
+        });
+        $('.show-submit-note').click(function(e) {
+            e.preventDefault();
+            $('.submit-note').toggleClass('hidden');
+            $('.submit-condate').toggleClass('hidden', !$('.submit-note').hasClass('hidden'));
         });
         $('#convention').on('change', function() {
             $('.other-fields').toggleClass('hidden', $(this).val() != 'other');

@@ -816,11 +816,11 @@ label {
     text-transform: none;
     color: #aaa; }
 
-.submit-con {
+form {
   padding: 10px;
   border: 1px solid #ccc;
   background: #f8f8f8; }
-  .submit-con .extras input, .submit-con .extras textarea {
+  form .extras input, form .extras textarea {
     width: 100%; }
 
 header {
@@ -946,10 +946,10 @@ footer {
     width: 80%;
     margin: 20px auto; }
 
-  .submit-con .row {
+  form .row {
     float: left;
     width: 20%; }
-  .submit-con .extras input, .submit-con .extras textarea {
+  form .extras input, form .extras textarea {
     width: 300px; }
 
   .large-only {

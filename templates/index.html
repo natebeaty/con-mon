@@ -53,10 +53,9 @@
 		{% endfor %}
 		</tbody></table>
 	{% endif %}
-	<p class="missing">Am I missing something? <a href="#" class="button">Submit a Convention Date</a></p>
+	<p class="missing">Am I missing something? <a href="#" class="button show-submit-condate">Submit a Convention Date</a> or just <a href="#" class="button show-submit-note">Send a Quick Note</a></p>
 
-	<form action="/_submit_condate" method="post" class="submit-con hidden">
-
+	<form action="/submit_condate" method="post" class="submit-condate hidden">
 		<fieldset>
 			<div class="row">
 				<label for="convention">Convention</label>
@@ -107,6 +106,20 @@
 			<div>
 				<label for="notes">Your Email</label>
 				<input type="text" name="email" placeholder="Your Email" size="15">
+			</div>
+		</fieldset>
+
+		<div class="actions">
+			<input type="submit" class="button" value="Looks Good!">
+		</div>
+  </form>
+
+	<form action="/submit_note" method="post" class="submit-note hidden">
+		<fieldset class="extras">
+			<textarea name="note_body" cols="50" rows="4" placeholder="Shoot Nate a quick note! Registration opening date, suggestions for improvements, blathering praise, etc." required></textarea>
+			<div>
+				<label for="notes">Your Email</label>
+				<input type="text" name="note_email" placeholder="Your Email" size="15" required>
 			</div>
 		</fieldset>
 

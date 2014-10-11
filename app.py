@@ -137,7 +137,18 @@ def condates():
     condates = Condate.query.filter(Condate.start_date >= date.today()).order_by(Condate.start_date).all()
     return CondateSerializer(condates, many=True).json
 
-@app.route('/_submit_condate', methods=['GET', 'POST'])
+@app.route('/submit_note', methods=['GET', 'POST'])
+def submit_note():
+    msg = Message("New con-mon note",
+        sender = "hal@cons.clixel.com",
+        reply_to = request.form['note_email'],
+        recipients = ["nate@clixel.com"])
+    msg.body = "%s\n\nFrom: %s\n" % (request.form['note_body'], request.form['note_email'])
+    mail.send(msg)
+    flash('Your note was sent ok! Thanks!')
+    return redirect(url_for('index'))
+
+@app.route('/submit_condate', methods=['GET', 'POST'])
 def submit_condate():
     if request.form['convention'] == 'other':
         convention = Convention.query.filter(Convention.title == request.form['convention_title']).first()
