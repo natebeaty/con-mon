@@ -880,6 +880,7 @@ a.tag {
       background: #ffcc2f; }
 
 .missing {
+  margin: 1rem;
   font-size: .8rem;
   color: rgba(84, 55, 41, 0.3); }
 
@@ -972,6 +973,9 @@ footer {
     padding-left: 11.5rem;
     width: 300px;
     color: #eee; }
+
+  .missing br {
+    display: none; }
 
   h1 {
     font-size: 3rem; }

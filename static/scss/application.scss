@@ -147,6 +147,7 @@ a.tag {
 	}
 }
 .missing {
+	margin: 1rem;
 	font-size: .8rem;
 	color: rgba($dark, .3);
 }
@@ -267,6 +268,7 @@ footer {
 			color: #eee;
 		}
 	}
+	.missing br { display: none; }
 	h1 {
 		font-size: 3rem;
 	}
