@@ -16,20 +16,35 @@ CON_MON = (function() {
 
     function _init() {
         _resize();
+
+        // init tooltips
         $('.tooltip').tooltipster({
             delay: 0,
             animation: 'slide'
         });
+
+        // pull in condate data and build year view
         $.getJSON( '/condates.json', function( data ) {
             eventsArray = data;
             _initClndr();
         });
-        $('.dp').datepicker({
-            format: 'yyyy-mm-dd'
-        }).on('changeDate', function () {
-            $(this).datepicker('hide');
-        });
+
+        // change datepickers to native if on mobile and input type=date is supported
+        if (Modernizr.inputtypes.date && Modernizr.touch) {
+            $('.dp').attr('type', 'date');
+        } else {
+            // otherwise use js datepickers
+            $('.dp').datepicker({
+                format: 'yyyy-mm-dd'
+            }).on('changeDate', function () {
+                $(this).datepicker('hide');
+            });
+        }
+
+        // init condate filters
         _filterCondates();
+
+        // init submission form handlers
         $('.show-submit-condate').click(function(e) {
             e.preventDefault();
             if ($('.submit-condate').hasClass('hidden')) {
@@ -48,6 +63,7 @@ CON_MON = (function() {
                 $('.submit-note').addClass('hidden');
             }
         });
+        // "other convention" fields hide/show
         $('#convention').on('change', function() {
             $('.other-fields').toggleClass('hidden', $(this).val() != 'other');
         });
@@ -80,6 +96,8 @@ CON_MON = (function() {
             $(this).toggleClass('on');
             _filterCondates();
         });
+
+        // highlight event dates on hover
         $('.event').each(function() {
             var $tip = $(this).find('.event-detail');
             $(this).on('mouseenter', function() {
@@ -142,6 +160,7 @@ CON_MON = (function() {
 $(document).ready(function(){
     CON_MON.init();
 });
+// handle mothership zigs and zags
 $(window).resize(function(){
     CON_MON.resize();
 });
