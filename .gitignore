@@ -6,3 +6,4 @@ app.db
 .sass-cache/*
 static/scss/.sass-cache/*
 config.py
+wrk/*
