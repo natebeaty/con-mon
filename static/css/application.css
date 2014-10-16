@@ -804,11 +804,13 @@ textarea {
   margin: 8px 0 0; }
 
 label {
-  display: none;
+  display: block;
   font-size: .7rem;
   color: #543729;
   text-transform: uppercase;
   margin: 8px 0 0; }
+  label.showme {
+    display: block !important; }
   label.checkbox {
     display: inline-block; }
   label em {
@@ -949,6 +951,9 @@ footer {
     list-style: none; }
 
 @media only screen and (min-width: 768px) {
+  label {
+    display: none; }
+
   .upcoming table {
     width: 80%;
     margin: 20px auto; }

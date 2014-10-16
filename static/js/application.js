@@ -31,7 +31,7 @@ CON_MON = (function() {
 
         // change datepickers to native if on mobile and input type=date is supported
         if (Modernizr.inputtypes.date && Modernizr.touch) {
-            $('.dp').attr('type', 'date');
+            $('.dp').attr('type', 'date').prev('label').addClass('showme');
         } else {
             // otherwise use js datepickers
             $('.dp').datepicker({
