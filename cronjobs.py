@@ -12,8 +12,8 @@ manager = Manager(app)
 class Twitter(Command):
     """
     Twitter alerts! 
-    Weekly and monthly notices of oncoming conventions
-    Weekly notices of oncoming deadlines
+    Weekly and monthly notices of approaching convention dates
+    Weekly notices of approaching registration deadlines
     """
 
     def post_to_twitter(self,twitter_api,message):
