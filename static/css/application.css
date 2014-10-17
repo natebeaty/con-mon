@@ -269,17 +269,36 @@ input, select {
   -webkit-transition-delay: .1s; }
   .clndr-grid li.today {
     color: #000;
-    box-shadow: inset 0 0 10px #00acee; }
+    box-shadow: inset 0 0 20px #00acee; }
   .clndr-grid li.event {
-    background: #00acee;
+    background: #ffcc2f;
     color: #fff;
-    box-shadow: inset 0 0 10px rgba(84, 55, 41, 0.3); }
+    box-shadow: inset 0 0 10px rgba(84, 55, 41, 0.3);
+    position: relative; }
+    .clndr-grid li.event.tagged-Indie {
+      background: #ffcc2f; }
+    .clndr-grid li.event.tagged-Superhero {
+      background: #ff80eb; }
+    .clndr-grid li.event.tagged-Zines {
+      background: #ff9d45; }
+    .clndr-grid li.event.multiple-events.tagged-Indie.tagged-Superhero {
+      background: #ffcc2f; }
+    .clndr-grid li.event.multiple-events.tagged-Indie.tagged-Superhero:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 0;
+      height: 0;
+      border-left: 20px solid transparent;
+      border-top: 20px solid transparent;
+      border-right: 20px solid #ff80eb; }
   .clndr-grid li.empty {
     background: rgba(84, 55, 41, 0.15); }
   .clndr-grid li.inactive {
     opacity: .3; }
   .clndr-grid li.current {
-    background: #ffcc2f !important; }
+    box-shadow: inset 0 0 20px #00acee; }
 .clndr-grid .days-of-the-week li {
   font: bold 12px/1 'Arvo';
   background: rgba(84, 55, 41, 0.65);
@@ -825,6 +844,9 @@ form {
   form .extras input, form .extras textarea {
     width: 100%; }
 
+.filtering {
+  font-size: .7rem; }
+
 header {
   background: #543729;
   color: #00acee;
@@ -857,9 +879,20 @@ header {
 
 a.tag {
   text-decoration: none;
-  background: #00acee; }
+  background: transparent;
+  font-size: .7rem;
+  color: #ffcc2f; }
+  a.tag.tagged-Superhero {
+    color: #ff80eb; }
+  a.tag.tagged-Zines {
+    color: #ff9d45; }
   a.tag.on, a.tag:hover {
-    background: #ffcc2f; }
+    background: #ffcc2f;
+    color: #fff; }
+    a.tag.on.tagged-Superhero, a.tag:hover.tagged-Superhero {
+      background: #ff80eb; }
+    a.tag.on.tagged-Zines, a.tag:hover.tagged-Zines {
+      background: #ff9d45; }
   a.tag.on:before {
     content: '✓ '; }
 
@@ -873,13 +906,6 @@ a.tag {
   border-radius: 4px; }
   .tag.closed {
     background: rgba(84, 55, 41, 0.3); }
-
-.tags {
-  font-size: .7rem; }
-  .tags.filtering .tag:not(.on) {
-    background: #ccc; }
-    .tags.filtering .tag:not(.on):hover {
-      background: #ffcc2f; }
 
 .missing {
   margin: 1rem;
@@ -918,6 +944,26 @@ a.tag {
   .upcoming h2, .upcoming h3 {
     margin: 0; }
 
+.tagged-Indie a {
+  color: #ffcc2f; }
+
+.tagged-Indie.tagged-Zines a::after,
+.tagged-Superhero.tagged-Indie a::after {
+  content: ' ';
+  background-color: #ffcc2f;
+  display: inline-block;
+  vertical-align: top;
+  margin: 4px 0 0 8px;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px; }
+
+.tagged-Indie.tagged-Zines a::after {
+  background-color: #ff9d45; }
+
+.tagged-Superhero a {
+  color: #ff80eb; }
+
 .condate.inactive {
   display: none; }
 
@@ -932,6 +978,18 @@ footer {
   text-align: center;
   color: #00acee;
   padding: 1rem; }
+
+.clixel {
+  vertical-align: middle;
+  display: inline-block;
+  width: 82px;
+  height: 34px;
+  overflow: hidden;
+  background: url("http://static.tumblr.com/mfxbogb/JRDmu7wtb/clixel-sprite.png") no-repeat;
+  text-indent: -9999em;
+  transition: background-position .15s ease; }
+  .clixel:hover {
+    background-position: 0 -34px; }
 
 .keep-drawing {
   display: none; }

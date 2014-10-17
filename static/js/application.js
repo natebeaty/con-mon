@@ -70,6 +70,7 @@ CON_MON = (function() {
     }
 
     function _initClndr() {
+        // build year view of calendars
         for (var i = 0; i < 13; i++) {
             calendars.clndr1 = $('.cal'+i).clndr({
                 template: $('#template-calendar').html(),
@@ -89,6 +90,7 @@ CON_MON = (function() {
                 adjacentDaysChangeMonth: false
             });
         }
+        // filter condates by tag
         $('.tags').on('click', 'a', function(e) {
             e.preventDefault();
             // ensure one tag is always selected
@@ -100,17 +102,25 @@ CON_MON = (function() {
         // highlight event dates on hover
         $('.event').each(function() {
             var $tip = $(this).find('.event-detail');
-            $(this).on('mouseenter', function() {
-                var id = $(this).find('h3:first').data('condate-id');
+            var $this = $(this);
+            $.each( $tip.attr('class').split(/\s+/), function(index, item){
+                if (item != 'event-detail') {
+                   $this.addClass(item);
+                }
+            });
+            // mark as multiple events for css styling
+            if ($this.find('.event-detail h3').length>1) $this.addClass('multiple-events');
+            $this.on('mouseenter', function() {
+                var id = $this.find('h3:first').data('condate-id');
                 $('.days li').removeClass('current');
                 $dates = $('.event-detail h3[data-condate-id="'+id+'"]');
                 $dates.each(function() {
-                    $(this).parents('li:first').addClass('current');
+                    $this.parents('li:first').addClass('current');
                 });
             }).on('mouseleave', function() {
                 $('.days li').removeClass('current');
             });
-            $(this).tooltipster({
+            $this.tooltipster({
                 content: $tip.html(),
                 delay: 0,
                 contentAsHTML: true,
@@ -136,7 +146,7 @@ CON_MON = (function() {
     function _filterCondates() {
         $('.condate').addClass('inactive');
         $('.tag.on').each(function() {
-            $('.condate.tag-' + $(this).text()).removeClass('inactive');
+            $('.condate.tagged-' + $(this).text()).removeClass('inactive');
         });
     }
     function _resize() {

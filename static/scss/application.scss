@@ -65,7 +65,7 @@ label {
 }
 form {
 	padding: 10px;
-	border: 1px solid #ccc;
+	border: 1px solid $midgray;
 	background: #f8f8f8;
 	fieldset {
 	}
@@ -74,6 +74,9 @@ form {
 			width: 100%;
 		}
 	}
+}
+.filtering {
+	font-size: .7rem;
 }
 header {
 	background: $dark;
@@ -115,10 +118,25 @@ header {
 
 a.tag { 
 	text-decoration: none; 
-	background: $highlight;
+	background: transparent;
+	font-size: .7rem;
+	color: $indie;
+	&.tagged-Superhero {
+		color: $superhero;
+	}
+	&.tagged-Zines {
+		color: $zines;
+	}
 	&.on,
 	&:hover {
-		background: $vibrant;
+		background: $indie;
+		color: #fff;
+		&.tagged-Superhero {
+			background: $superhero;
+		}
+		&.tagged-Zines {
+			background: $zines;
+		}
 	}
 	&.on:before {
 		content: '✓ ';
@@ -136,19 +154,6 @@ a.tag {
 		background: rgba($dark,.3);
 	}
 }
-.tags {
-	font-size: .7rem;
-	&.filtering {
-		.tag {
-			&:not(.on) {
-				background: #ccc;
-				&:hover {
-					background: $vibrant;
-				}
-			}
-		}
-	}
-}
 .missing {
 	margin: 1rem;
 	font-size: .8rem;
@@ -161,11 +166,11 @@ a.tag {
 	}
 	th {
 		font-size: .7em;
-		background: #ccc;
+		background: $midgray;
 		color: $dark;
 		text-transform: uppercase;
 		text-align: center;
-		border: 1px solid #ccc;
+		border: 1px solid $midgray;
 		padding: 4px;
 		vertical-align: middle;
 	}
@@ -176,7 +181,7 @@ a.tag {
 	}
 	td {
 		vertical-align: middle;
-		border: 1px solid #ccc;
+		border: 1px solid $midgray;
 		padding: 4px;
 		background: #fff;
 	}
@@ -194,6 +199,29 @@ a.tag {
 	h2,h3 {
 		margin: 0;
 	}
+}
+.tagged-Indie a {
+	color: $indie;
+}
+// .tagged-Zines a {
+// 	color: $zines;
+// }
+.tagged-Indie.tagged-Zines a::after,
+.tagged-Superhero.tagged-Indie a::after {
+	content: ' ';
+	background-color: $indie;
+	display: inline-block;
+	vertical-align: top;
+	margin: 4px 0 0 8px;
+	border-radius: 50%;
+	width: 10px;
+	height: 10px;
+}
+.tagged-Indie.tagged-Zines a::after {
+	background-color: $zines;
+}
+.tagged-Superhero a {
+	color: $superhero;
 }
 .condate {
 	&.inactive {
@@ -213,7 +241,19 @@ footer {
 	color: $highlight;
 	padding: 1rem;
 }
-
+.clixel {
+	vertical-align: middle;
+	display: inline-block;
+	width: 82px;
+	height: 34px;
+	overflow: hidden;
+	background: url('http://static.tumblr.com/mfxbogb/JRDmu7wtb/clixel-sprite.png') no-repeat;
+	text-indent: -9999em;
+	transition: background-position .15s ease;
+	&:hover {
+		background-position: 0 -34px;
+	}
+}
 .keep-drawing {
 	display: none;
 }
@@ -225,7 +265,7 @@ footer {
 	width: 50%;
 	margin: 0 auto 20px;
 	padding: 8px;
-	border: 1px solid #ccc;
+	border: 1px solid $midgray;
 	background: #e4ffca;
 	text-align: center;
 	list-style: none;

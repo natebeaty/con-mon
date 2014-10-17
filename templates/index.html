@@ -6,14 +6,14 @@
 	<p class="tags filtering">
 	Show: 
 	{% for tag in tags %}
-		<a class="tag {% if tag.title == "Indie" %}on{% endif %}" href="/tagged/{{ tag.title }}/">{{ tag.title }}</a>
+		<a class="tag tagged-{{ tag.title }} {% if tag.title == "Indie" %}on{% endif %}" href="/tagged/{{ tag.title }}/">{{ tag.title }}</a>
 	{% endfor %}
 	</p>
 	{% if condates %}
 		<table><tbody>
 		<tr><th>Con</th><th>Date</th><th class="keep-drawing">Keep Drawing</th><th><span class="small-only">Reg. Status</span><span class="large-only">Registration Status</span></th></tr>
 		{% for condate in condates %}
-			<tr class="condate {% for tag in condate.convention.tags %}tag-{{ tag.title }} {% endfor %}" data-condate-id="{{ condate.id }}">
+			<tr class="condate {% for tag in condate.convention.tags %}tagged-{{ tag.title }} {% endfor %}" data-condate-id="{{ condate.id }}">
 				<td><h2><a target="_blank" href="{{ condate.convention.url }}" class="tooltip" title="{{ condate.convention.location }}">{{ condate.convention.title }}</a></h2></td>
 				 <td class="date">
 				 <time class="dtstart" datetime="{{ condate.start_date }}">{{ condate.start_date.strftime('%b %e')|trim }}</time>
@@ -149,7 +149,7 @@
 			<% _.each(days, function(day) { %>
 				<li class="<%= day.classes %>">
 				<%= day.day %>
-				<div class="event-detail"><% _.each(day.events, function(event){ %>
+				<div class="event-detail<% _.each(day.events, function(event){ %><% _.each(event.convention.tags, function(tag){ %> tagged-<%= tag.title %><% }); %><% }); %>"><% _.each(day.events, function(event){ %>
 					<h3 data-condate-id="<%= event.id %>"><%= event.title %></h3>
 				<% }); %></div>
 				</li>

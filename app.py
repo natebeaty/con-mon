@@ -81,14 +81,14 @@ class TagSerializer(Serializer):
         fields = ('id', 'title')
 
 class ConventionSerializer(Serializer):
-    tags = fields.Nested(TagSerializer)
+    tags = fields.Nested(TagSerializer, many=True)
     class Meta:
-        fields = ('id', 'title', 'location', 'url')
+        fields = ('id', 'title', 'location', 'url', 'tags')
 
 class CondateSerializer(Serializer):
     convention = fields.Nested(ConventionSerializer)
     class Meta:
-        fields = ('id', 'title', 'notes', 'start_date', 'end_date')
+        fields = ('id', 'title', 'notes', 'start_date', 'end_date', 'convention')
 
 ### template filters
 
@@ -134,12 +134,12 @@ def index():
 
 @app.route('/condates.json')
 def condates():
-    condates = Condate.query.filter(Condate.start_date >= date.today()).order_by(Condate.start_date).all()
+    condates = Condate.query.filter(Condate.start_date >= date.today(), Condate.published == True).order_by(Condate.start_date).all()
     return CondateSerializer(condates, many=True).json
 
 @app.route('/submit_note', methods=['GET', 'POST'])
 def submit_note():
-    msg = Message("New con-mon note",
+    msg = Message("New con-mon note from %s" % request.form['note_email'],
         sender = "hal@cons.clixel.com",
         reply_to = request.form['note_email'],
         recipients = ["nate@clixel.com"])
@@ -190,7 +190,7 @@ def submit_condate():
     db.session.commit()
 
     # email details
-    submit_msg = "New Condate submission!\n\n"
+    submit_msg = "New Condate submission! (%s)\n\n" % condate.title
     submit_msg = submit_msg + "Convention: %s\n" % convention.title
     submit_msg = submit_msg + "Start date: %s\n" % request.form['start_date']
     submit_msg = submit_msg + "End date: %s\n" % request.form['end_date']
