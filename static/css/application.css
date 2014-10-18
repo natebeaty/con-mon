@@ -822,6 +822,9 @@ textarea {
 .actions {
   margin: 8px 0 0; }
 
+.ical {
+  text-align: center; }
+
 label {
   display: none;
   font-size: .7rem;

@@ -2,131 +2,131 @@
 {% block content %}
 	
 	<section class="upcoming">
-	<h2>Upcoming Conventions</h2>
-	<p class="tags filtering">
-	Show: 
-	{% for tag in tags %}
-		<a class="tag tagged-{{ tag.title }} {% if tag.title == "Indie" %}on{% endif %}" href="/tagged/{{ tag.title }}/">{{ tag.title }}</a>
-	{% endfor %}
-	</p>
-	{% if condates %}
-		<table><tbody>
-		<tr><th>Con</th><th>Date</th><th class="keep-drawing">Keep Drawing</th><th><span class="small-only">Reg. Status</span><span class="large-only">Registration Status</span></th></tr>
-		{% for condate in condates %}
-			<tr class="condate {% for tag in condate.convention.tags %}tagged-{{ tag.title }} {% endfor %}" data-condate-id="{{ condate.id }}">
-				<td><h2><a target="_blank" href="{{ condate.convention.url }}" class="tooltip" title="{{ condate.convention.location }}">{{ condate.convention.title }}</a></h2></td>
-				 <td class="date">
-				 <time class="dtstart" datetime="{{ condate.start_date }}">{{ condate.start_date.strftime('%b %e')|trim }}</time>
-				{%- if condate.end_date and condate.end_date != condate.start_date -%}
-					&ndash;<time class="dtstart" datetime="{{ condate.end_date }}">{{ condate.end_date.strftime('%e')|trim }}</time>
-				{%- endif %}, {{ condate.start_date.strftime('%Y') }}
-				</td>
-				<td class="keep-drawing">
-					<span class="days-away">{{ condate.start_date|timeaway }}</span>
-				</td>
-				<td>
-				{% if condate.registration_opens %}
-					{% if condate.registration_closes and condate.registration_closes|in_past %}
-						<span class="reg-status tag closed">Registration Closed</span>
-					{% elif condate.registration_opens|in_past %}
-						{% if condate.registration_closes %}
-							<span class="reg-status tag">Registration Closes {{ condate.registration_closes.strftime('%b %e')|trim }}</span>
+		<h2>Upcoming Conventions</h2>
+		<p class="tags filtering">
+		Show: 
+		{% for tag in tags %}
+			<a class="tag tagged-{{ tag.title }} {% if tag.title == "Indie" %}on{% endif %}" href="/tagged/{{ tag.title }}/">{{ tag.title }}</a>
+		{% endfor %}
+		</p>
+		{% if condates %}
+			<table><tbody>
+			<tr><th>Con</th><th>Date</th><th class="keep-drawing">Keep Drawing</th><th><span class="small-only">Reg. Status</span><span class="large-only">Registration Status</span></th></tr>
+			{% for condate in condates %}
+				<tr class="condate {% for tag in condate.convention.tags %}tagged-{{ tag.title }} {% endfor %}" data-condate-id="{{ condate.id }}">
+					<td><h2><a target="_blank" href="{{ condate.convention.url }}" class="tooltip" title="{{ condate.convention.location }}">{{ condate.convention.title }}</a></h2></td>
+					 <td class="date">
+					 <time class="dtstart" datetime="{{ condate.start_date }}">{{ condate.start_date.strftime('%b %e')|trim }}</time>
+					{%- if condate.end_date and condate.end_date != condate.start_date -%}
+						&ndash;<time class="dtstart" datetime="{{ condate.end_date }}">{{ condate.end_date.strftime('%e')|trim }}</time>
+					{%- endif %}, {{ condate.start_date.strftime('%Y') }}
+					</td>
+					<td class="keep-drawing">
+						<span class="days-away">{{ condate.start_date|timeaway }}</span>
+					</td>
+					<td>
+					{% if condate.registration_opens %}
+						{% if condate.registration_closes and condate.registration_closes|in_past %}
+							<span class="reg-status tag closed">Registration Closed</span>
+						{% elif condate.registration_opens|in_past %}
+							{% if condate.registration_closes %}
+								<span class="reg-status tag">Registration Closes {{ condate.registration_closes.strftime('%b %e')|trim }}</span>
+							{% else %}
+								<span class="reg-status tag">Registration Open</span>
+							{% endif %}
 						{% else %}
-							<span class="reg-status tag">Registration Open</span>
+							<span class="reg-status tag">Registration Opens {{ condate.registration_opens.strftime('%b %e')|trim }}</span>
 						{% endif %}
 					{% else %}
-						<span class="reg-status tag">Registration Opens {{ condate.registration_opens.strftime('%b %e')|trim }}</span>
+						{# <span class="reg-status tag closed">Unknown</span> #}
 					{% endif %}
-				{% else %}
-					{# <span class="reg-status tag closed">Unknown</span> #}
-				{% endif %}
 
-				</td>
-{# 				<td>
-				{% if condate.convention.tags %}
-					{% for tag in condate.convention.tags %}
-						<span class="tag">{{ tag.title }}</span>
+					</td>
+	{# 				<td>
+					{% if condate.convention.tags %}
+						{% for tag in condate.convention.tags %}
+							<span class="tag">{{ tag.title }}</span>
+						{% endfor %}
+					{% endif %}
+					</td>
+	 #}			</tr>
+			{% endfor %}
+			</tbody></table>
+		{% endif %}
+		<p class="missing">Am I missing something? <a href="#" class="button show-submit-condate">Submit a Convention Date</a> <br>or just <a href="#" class="button show-submit-note">Send a Quick Note</a></p>
+
+		<form action="/submit_condate" method="post" class="submit-condate hidden">
+			<fieldset>
+				<div class="row">
+					<label for="convention">Convention</label>
+					<select class="chzn" id="convention" name="convention" required>
+					<option value="">Select Convention...</option>
+					{% for convention in conventions %}
+						<option value="{{ convention.id }}">{{ convention.title }}</option>
 					{% endfor %}
-				{% endif %}
-				</td>
- #}			</tr>
-		{% endfor %}
-		</tbody></table>
-	{% endif %}
-	<p class="missing">Am I missing something? <a href="#" class="button show-submit-condate">Submit a Convention Date</a> <br>or just <a href="#" class="button show-submit-note">Send a Quick Note</a></p>
+						<option value="other">Other...</option>
+					</select>
+					<div class="other-fields hidden">
+						<input type="text" name="convention_title" placeholder="Convention name">
+						<input type="text" name="convention_location" placeholder="City, ST">
+						<input type="text" name="convention_url" placeholder="http://">
+						<div>
+						{% for tag in tags %}
+							<label for="tag-{{ tag.id }}" class="checkbox"><input id="tag-{{ tag.id }}" type="checkbox" name="convention_tags" value="{{ tag.id }}"> {{ tag.title }}</label>
+						{% endfor %}
 
-	<form action="/submit_condate" method="post" class="submit-condate hidden">
-		<fieldset>
-			<div class="row">
-				<label for="convention">Convention</label>
-				<select class="chzn" id="convention" name="convention" required>
-				<option value="">Select Convention...</option>
-				{% for convention in conventions %}
-					<option value="{{ convention.id }}">{{ convention.title }}</option>
-				{% endfor %}
-					<option value="other">Other...</option>
-				</select>
-				<div class="other-fields hidden">
-					<input type="text" name="convention_title" placeholder="Convention name">
-					<input type="text" name="convention_location" placeholder="City, ST">
-					<input type="text" name="convention_url" placeholder="http://">
-					<div>
-					{% for tag in tags %}
-						<label for="tag-{{ tag.id }}" class="checkbox"><input id="tag-{{ tag.id }}" type="checkbox" name="convention_tags" value="{{ tag.id }}"> {{ tag.title }}</label>
-					{% endfor %}
-
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<div class="row">
-				<label for="start_date">Start Date</label>
-				<input class="dp" autocomplete="off" size="15" id="start_date" name="start_date" type="text" value="" placeholder="Start Date" required>
-			</div>
-			
-			<div class="row">
-				<label for="end_date">End Date</label>
-				<input class="dp" autocomplete="off" size="15" id="end_date" name="end_date" type="text" value="" placeholder="End Date">
-			</div>
-			
-			<div class="row">
-				<label for="registration_opens">Registration Opens</label>
-				<input class="dp" autocomplete="off" size="15" id="registration_opens" name="registration_opens" type="text" value="" placeholder="Reg. Opens">
-			</div>
-			
-			<div class="row">
-				<label for="registration_closes">Registration Closes</label>
-				<input class="dp" autocomplete="off" size="15" id="registration_closes" name="registration_closes" type="text" value="" placeholder="Reg. Closes">
-			</div>
-		</fieldset>
+				<div class="row">
+					<label for="start_date">Start Date</label>
+					<input class="dp" autocomplete="off" size="15" id="start_date" name="start_date" type="text" value="" placeholder="Start Date" required>
+				</div>
+				
+				<div class="row">
+					<label for="end_date">End Date</label>
+					<input class="dp" autocomplete="off" size="15" id="end_date" name="end_date" type="text" value="" placeholder="End Date">
+				</div>
+				
+				<div class="row">
+					<label for="registration_opens">Registration Opens</label>
+					<input class="dp" autocomplete="off" size="15" id="registration_opens" name="registration_opens" type="text" value="" placeholder="Reg. Opens">
+				</div>
+				
+				<div class="row">
+					<label for="registration_closes">Registration Closes</label>
+					<input class="dp" autocomplete="off" size="15" id="registration_closes" name="registration_closes" type="text" value="" placeholder="Reg. Closes">
+				</div>
+			</fieldset>
 
-		<fieldset class="extras">
-			<label for="notes">Extra Bonus Notes Section</label>
-			<textarea name="notes" id="notes" cols="50" rows="4" placeholder="Extra Bonus Notes Section"></textarea>
-			<div>
-				<label for="notes">Your Email</label>
-				<input type="text" name="email" placeholder="Your Email" size="15">
+			<fieldset class="extras">
+				<label for="notes">Extra Bonus Notes Section</label>
+				<textarea name="notes" id="notes" cols="50" rows="4" placeholder="Extra Bonus Notes Section"></textarea>
+				<div>
+					<label for="notes">Your Email</label>
+					<input type="text" name="email" placeholder="Your Email" size="15">
+				</div>
+			</fieldset>
+
+			<div class="actions">
+				<input type="submit" class="button" value="Looks Good!">
 			</div>
-		</fieldset>
+	  </form>
 
-		<div class="actions">
-			<input type="submit" class="button" value="Looks Good!">
-		</div>
-  </form>
+		<form action="/submit_note" method="post" class="submit-note hidden">
+			<fieldset class="extras">
+				<textarea name="note_body" cols="50" rows="4" placeholder="Shoot Nate a quick note! Registration opening date, suggestions for improvements, blathering praise, etc." required></textarea>
+				<div>
+					<label for="notes">Your Email</label>
+					<input type="text" name="note_email" placeholder="Your Email" size="15" required>
+				</div>
+			</fieldset>
 
-	<form action="/submit_note" method="post" class="submit-note hidden">
-		<fieldset class="extras">
-			<textarea name="note_body" cols="50" rows="4" placeholder="Shoot Nate a quick note! Registration opening date, suggestions for improvements, blathering praise, etc." required></textarea>
-			<div>
-				<label for="notes">Your Email</label>
-				<input type="text" name="note_email" placeholder="Your Email" size="15" required>
+			<div class="actions">
+				<input type="submit" class="button" value="Looks Good!">
 			</div>
-		</fieldset>
-
-		<div class="actions">
-			<input type="submit" class="button" value="Looks Good!">
-		</div>
-  </form>
+	  </form>
 
 	</section>
 
@@ -136,6 +136,9 @@
 		{% endfor %}
 		<div class="loading"><i></i><i></i><i></i><i></i></div>
 	</section>
+
+	<p class="ical">Subscribe to this calendar: <input type="text" class="autograb" value="http://cons.clixel.com/condates.ics" size="35" onclick="javascript:this.select()"></p>
+
 
 	<script type="text/template" id="template-calendar">
 	<div class="clndr-grid">
