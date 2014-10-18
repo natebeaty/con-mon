@@ -1,7 +1,7 @@
 from flask import Flask
 from flask.ext.script import Manager,Command
 from datetime import date, datetime, timedelta
-from app import Condate
+from app import Condate,Tag
 import config
 import twitter
 import random
@@ -49,6 +49,8 @@ class Twitter(Command):
         for c in daily_notices:
             if superhero_tag not in c.convention.tags:
                 message = "%s %s is a week away. %s" % (random.choice(phrases), c.convention.title, c.convention.url)
+                if c.convention.twitter:
+                    message = message + " @%s" % (c.convention.twitter)
                 output = output + self.post_to_twitter(twitter_api,message) + "\n" + message
 
         # cons that are a month away
@@ -57,6 +59,8 @@ class Twitter(Command):
         for c in monthly_notices:
             if superhero_tag not in c.convention.tags:
                 message = "%s %s is a month away. %s" % (random.choice(phrases), c.convention.title, c.convention.url)
+                if c.convention.twitter:
+                    message = message + " @%s" % (c.convention.twitter)
                 output = output + self.post_to_twitter(twitter_api,message) + "\n" + message
 
         # cons that have registrations closing in a week
@@ -65,6 +69,8 @@ class Twitter(Command):
         for c in weekly_registration_notices:
             if superhero_tag not in c.convention.tags:
                 message = "%s %s registration closes in a week. %s" % (random.choice(phrases), c.convention.title, c.convention.url)
+                if c.convention.twitter:
+                    message = message + " @%s" % (c.convention.twitter)
                 output = output + self.post_to_twitter(twitter_api,message) + "\n" + message
 
         print output

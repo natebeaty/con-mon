@@ -30,6 +30,7 @@ class Convention(db.Model):
     title = db.Column(db.String(250))
     url = db.Column(db.String(250))
     location = db.Column(db.String(250))
+    twitter = db.Column(db.String(250))
     tags = db.relationship('Tag', secondary=tags_conventions,
         backref=db.backref('conventions', lazy='dynamic'))
 
@@ -215,7 +216,7 @@ def submit_condate():
 
 class ConventionAdmin(model.ModelAdmin):
     session = db.session
-    fields = list_display = ('title', 'location', 'url', 'tags')
+    fields = list_display = ('title', 'location', 'url', 'twitter','tags')
 
 class TagAdmin(model.ModelAdmin):
     session = db.session
