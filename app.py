@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, flash, redirect, url_for, Response
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.sendmail import Mail, Message
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 from marshmallow import Serializer, fields, pprint
 from flask.ext.superadmin import Admin, expose, BaseView, model
 from dateutil import parser
@@ -147,7 +147,8 @@ def condates_ics():
         e.add('dtstart', condate.start_date)
         if condate.end_date:
             e.add('dtend', condate.start_date)
-        # e.add('duration',timedelta(hours=2.5))
+        else:
+            e.add('duration',timedelta(hours=6))
         e.add('location',condate.convention.location)
         e.add('url', condate.convention.url)
         cal.add_component(e)
@@ -159,6 +160,8 @@ def condates_ics():
             e.add('dtstart', condate.registration_opens)
             if condate.registration_closes:
                 e.add('dtend', condate.registration_closes)
+            else:
+                e.add('duration',timedelta(hours=6))
             e.add('url', condate.convention.url)
             cal.add_component(e)
 
