@@ -146,7 +146,7 @@ def condates_ics():
         e.add('summary', condate.title)
         e.add('dtstart', condate.start_date)
         if condate.end_date:
-            e.add('dtend', condate.start_date)
+            e.add('dtend', condate.end_date)
         e.add('location',condate.convention.location)
         e.add('url', condate.convention.url)
         cal.add_component(e)
