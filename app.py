@@ -147,8 +147,6 @@ def condates_ics():
         e.add('dtstart', condate.start_date)
         if condate.end_date:
             e.add('dtend', condate.start_date)
-        else:
-            e.add('duration',timedelta(hours=6))
         e.add('location',condate.convention.location)
         e.add('url', condate.convention.url)
         cal.add_component(e)
@@ -156,12 +154,14 @@ def condates_ics():
         # any registration dates?
         if condate.registration_opens:
             e = Event()
-            e.add('summary', "%s registration open" % condate.title)
+            e.add('summary', "%s registration opens" % condate.title)
             e.add('dtstart', condate.registration_opens)
-            if condate.registration_closes:
-                e.add('dtend', condate.registration_closes)
-            else:
-                e.add('duration',timedelta(hours=6))
+            e.add('url', condate.convention.url)
+            cal.add_component(e)
+        if condate.registration_closes:
+            e = Event()
+            e.add('summary', "%s registration closes" % condate.title)
+            e.add('dtstart', condate.registration_closes)
             e.add('url', condate.convention.url)
             cal.add_component(e)
 
