@@ -1,10 +1,11 @@
-from flask import Flask, render_template, request, flash, redirect, url_for
+from flask import Flask, render_template, request, flash, redirect, url_for, Response
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.sendmail import Mail, Message
 from datetime import datetime, date
 from marshmallow import Serializer, fields, pprint
 from flask.ext.superadmin import Admin, expose, BaseView, model
 from dateutil import parser
+from icalendar import Calendar, Event
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -133,8 +134,38 @@ def index():
         condates = Condate.query.filter(Condate.start_date >= date.today(), Condate.published == True).order_by(Condate.start_date).all()
         )
 
+@app.route('/condates.ics')
+def condates_ics():
+    condates = Condate.query.filter(Condate.start_date >= date.today(), Condate.published == True).order_by(Condate.start_date).all()
+    cal = Calendar()
+    cal.add('prodid','-//Con-Mon cartoonist convention calendar//cons.clixel.com//EN')
+    cal.add('version','2.0')
+    cal.add('X-WR-CALNAME','Con-Mon cartoonist convention calendar')
+    for condate in condates:
+        e = Event()
+        e.add('summary', condate.title)
+        e.add('dtstart', condate.start_date)
+        if condate.end_date:
+            e.add('dtend', condate.start_date)
+        # e.add('duration',timedelta(hours=2.5))
+        e.add('location',condate.convention.location)
+        e.add('url', condate.convention.url)
+        cal.add_component(e)
+
+        # any registration dates?
+        if condate.registration_opens:
+            e = Event()
+            e.add('summary', "%s registration open" % condate.title)
+            e.add('dtstart', condate.registration_opens)
+            if condate.registration_closes:
+                e.add('dtend', condate.registration_closes)
+            e.add('url', condate.convention.url)
+            cal.add_component(e)
+
+    return Response(cal.to_ical(), mimetype='text/calendar')
+
 @app.route('/condates.json')
-def condates():
+def condates_json():
     condates = Condate.query.filter(Condate.start_date >= date.today(), Condate.published == True).order_by(Condate.start_date).all()
     return CondateSerializer(condates, many=True).json
 
