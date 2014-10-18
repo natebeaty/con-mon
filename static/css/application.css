@@ -826,7 +826,6 @@ label {
   display: none;
   font-size: .7rem;
   color: #543729;
-  text-transform: uppercase;
   margin: 8px 0 0; }
   label.showme {
     display: block !important; }
