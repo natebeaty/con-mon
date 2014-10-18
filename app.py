@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, flash, redirect, url_for, Response
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.sendmail import Mail, Message
-from datetime import datetime, date, timedelta
+from datetime import datetime, date, time, timedelta
 from marshmallow import Serializer, fields, pprint
 from flask.ext.superadmin import Admin, expose, BaseView, model
 from dateutil import parser
@@ -146,7 +146,7 @@ def condates_ics():
         e.add('summary', condate.title)
         e.add('dtstart', condate.start_date)
         if condate.end_date:
-            e.add('dtend', condate.end_date)
+            e.add('dtend', datetime.combine(condate.end_date, time(23, 00)))
         e.add('location',condate.convention.location)
         e.add('url', condate.convention.url)
         cal.add_component(e)
