@@ -225,7 +225,7 @@ def submit_condate():
     db.session.commit()
 
     # email details
-    submit_msg = "New Condate submission! (%s)\n\n" % condate.title
+    submit_msg = "New Condate submission!\n\n"
     submit_msg = submit_msg + "Convention: %s\n" % convention.title
     submit_msg = submit_msg + "Start date: %s\n" % request.form['start_date']
     submit_msg = submit_msg + "End date: %s\n" % request.form['end_date']
@@ -238,7 +238,7 @@ def submit_condate():
     submit_msg = submit_msg + "\n\nEdit Condate: %sadmin/condate/%s/\n" % (request.url_root, condate.id)
     if request.form['convention'] == 'other':
         submit_msg = submit_msg + "Edit Convention: %sadmin/convention/%s/\n" % (request.url_root, convention.id)
-    msg = Message("New con-mon submission",
+    msg = Message("New con-mon submission (%s)" % condate.title,
         sender="hal@cons.clixel.com",
         recipients=["nate@clixel.com"])
     msg.body = submit_msg
