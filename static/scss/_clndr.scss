@@ -76,11 +76,11 @@ $clndr-border: 1px solid #000;
     .days-of-the-week {
         li {
             font: bold 12px/1 'Arvo';
-            background: rgba($dark,.65);
+            text-shadow: 0 0 1px #000;
+            background: rgba($dark,.35);
             color: #fff;
-            height: 34px;
-            line-height: 34px;
-            border-bottom: 1px solid rgba($dark,.35);
+            height: 18px;
+            line-height: 20px;
         }
     }
     .month {
