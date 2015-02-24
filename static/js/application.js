@@ -18,7 +18,13 @@ CON_MON = (function() {
         _resize();
 
         // init tooltips
-        $('.tooltip').tooltipster({
+        $('.upcoming .tooltip').tooltipster({
+            delay: 0,
+            touchDevices: false,
+            animation: 'slide',
+            position: 'left'
+        });
+        $('.calendars .tooltip').tooltipster({
             delay: 0,
             animation: 'slide'
         });

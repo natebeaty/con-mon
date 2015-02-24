@@ -98,7 +98,7 @@ input, select {
   display: none; }
 
 .button {
-  font-size: .8rem;
+  font-size: .7rem;
   background: #00acee;
   color: #eee;
   border-radius: 4px;
@@ -178,7 +178,7 @@ input, select {
   display: none; }
 
 .button {
-  font-size: .8rem;
+  font-size: .7rem;
   background: #00acee;
   color: #eee;
   border-radius: 4px;
@@ -254,8 +254,7 @@ input, select {
   /* IE10+ */ }
 
 .clndr-grid li {
-  background: #fff;
-  border-bottom: 1px solid rgba(84, 55, 41, 0.15);
+  border-top: 1px solid rgba(84, 55, 41, 0.15);
   display: block;
   float: left;
   width: 14.24%;
@@ -294,15 +293,15 @@ input, select {
       border-top: 20px solid transparent;
       border-right: 20px solid #ff80eb; }
   .clndr-grid li.empty {
-    background: rgba(84, 55, 41, 0.15); }
+    background: none; }
   .clndr-grid li.inactive {
     opacity: .3; }
   .clndr-grid li.current {
-    box-shadow: inset 0 0 20px rgba(84, 55, 41, 0.5); }
+    box-shadow: inset 0 0 20px rgba(84, 55, 41, 0.9); }
 .clndr-grid .days-of-the-week li {
   font: bold 12px/1 'Arvo';
   text-shadow: 0 0 1px #000;
-  background: rgba(84, 55, 41, 0.35);
+  background: rgba(84, 55, 41, 0.3);
   color: #fff;
   height: 18px;
   line-height: 20px; }
@@ -426,7 +425,7 @@ input, select {
   display: none; }
 
 .button {
-  font-size: .8rem;
+  font-size: .7rem;
   background: #00acee;
   color: #eee;
   border-radius: 4px;
@@ -495,7 +494,7 @@ input, select {
     -webkit-transform: translate(30px); } }
 .tooltipster-default {
   border-radius: 3px;
-  background: #00acee;
+  background: #543729;
   color: #fff; }
 
 /* Use this next selector to style things like font-size and line-height: */
@@ -916,6 +915,8 @@ a.tag {
 
 .upcoming {
   text-align: center; }
+  .upcoming .tag {
+    font-size: .6rem; }
   .upcoming table {
     width: 90%;
     margin: 20px auto; }
@@ -925,19 +926,22 @@ a.tag {
     color: #543729;
     text-transform: uppercase;
     text-align: center;
+    font-weight: normal;
     border: 1px solid #ccc;
     padding: 4px;
     vertical-align: middle; }
   .upcoming tr:hover td {
     background: #f4f4f4; }
   .upcoming td {
+    font: .6rem/1.2 'Arimo';
     vertical-align: middle;
     border: 1px solid #ccc;
     padding: 4px;
     background: #fff; }
+    .upcoming td.date {
+      white-space: nowrap; }
   .upcoming .days-away {
     margin-left: .3rem;
-    font-size: .8rem;
     color: rgba(84, 55, 41, 0.3); }
   .upcoming ul {
     margin-top: .5rem;
@@ -945,6 +949,8 @@ a.tag {
     line-height: 1.3; }
   .upcoming h2, .upcoming h3 {
     margin: 0; }
+  .upcoming h2 {
+    font: .9rem/1.2 'Arvo'; }
 
 .tagged-Indie a {
   color: #ffcc2f; }
@@ -1011,9 +1017,18 @@ footer {
     list-style: none; }
 
 @media only screen and (min-width: 768px) {
+  .button {
+    font-size: .7rem; }
+
   .upcoming table {
     width: 80%;
     margin: 20px auto; }
+  .upcoming .tag {
+    font-size: .7rem; }
+  .upcoming td {
+    font-size: .7rem; }
+  .upcoming h2 {
+    font-size: 1.2rem; }
 
   form .row {
     float: left;
