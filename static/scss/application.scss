@@ -126,7 +126,7 @@ header {
 a.tag { 
 	text-decoration: none; 
 	background: transparent;
-	font-size: .7rem;
+	font-size: .8rem;
 	color: $indie;
 	&.tagged-Superhero {
 		color: $superhero;
@@ -167,9 +167,6 @@ a.tag {
 	color: rgba($dark, .3);
 }
 .upcoming {
-	.tag {
-		font-size: .6rem;
-	}
 	table {
 		width: 100%;
 		margin: 20px auto;

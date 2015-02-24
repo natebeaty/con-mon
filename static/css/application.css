@@ -884,7 +884,7 @@ header {
 a.tag {
   text-decoration: none;
   background: transparent;
-  font-size: .7rem;
+  font-size: .8rem;
   color: #ffcc2f; }
   a.tag.tagged-Superhero {
     color: #ff80eb; }
@@ -918,8 +918,6 @@ a.tag {
 
 .upcoming {
   text-align: center; }
-  .upcoming .tag {
-    font-size: .6rem; }
   .upcoming table {
     width: 100%;
     margin: 20px auto; }
