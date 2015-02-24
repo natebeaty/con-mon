@@ -2,9 +2,9 @@
 
 .noselect
 {
-    -webkit-user-select: none; /* Chrome/Safari */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* IE10+ */
+	-webkit-user-select: none; /* Chrome/Safari */
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+ */
 }
 
 //////////////////////////////////
@@ -12,280 +12,276 @@
 $clndr-border: 1px solid #000;
 
 .clndr-grid {
-    .days {
-        // border: 1px solid #ccc;
-        // overflow: hidden;
-    }
-    li {
-        // background: #fff;
-        border-top: 1px solid rgba($dark,.15);
-        display: block;
-        float: left;
-        width: 14.24%;
-        height: 34px;
-        line-height: 34px;
-        text-align: center;
-        color: rgba($dark,.3);
-        -webkit-transition: opacity .2s, background .25s;
-        transition: opacity .2s, background .25s;
-        transition-delay: .1s;
-        -webkit-transition-delay: .1s;
-        &.today {
-            color: #000;
-            box-shadow: inset 0 0 20px $highlight;
-        }
-        &.event {
-            background: $indie;
-            color: #fff;
-            box-shadow: inset 0 0 10px rgba($dark,.3);
-            position: relative;
-            &.tagged-Indie {
-                background: $indie !important;
-            }
-            &.tagged-Superhero {
-                background: $superhero;
-            }
-            &.tagged-Zines {
-                background: $zines;
-            }
-            &.multiple-events.tagged-Indie.tagged-Superhero {
-                background: $indie;
-            }
-            &.multiple-events.tagged-Indie.tagged-Superhero:after {
-                content: '';
-                position: absolute;
-                bottom: 0;
-                right: 0;
-                width: 0;
-                height: 0; 
-                border-left: 20px solid transparent;
-                border-top: 20px solid transparent;
-                border-right: 20px solid $superhero;
-            }
-        }
-        &.empty {
-            background: none;
-            &.next-month {
-                // background: rgba($dark,.35);
-            }
-        }
-        &.inactive {
-            opacity: .3;
-        }
-        &.current  {
-            box-shadow: inset 0 0 20px rgba($dark,.9);
-        }
-    }
-    .days-of-the-week {
-        li {
-            font: bold 12px/1 'Arvo';
-            text-shadow: 0 0 1px #000;
-            background: rgba($dark,.3);
-            color: #fff;
-            height: 18px;
-            line-height: 20px;
-        }
-    }
-    .month {
-        text-transform: uppercase;
-        color: $dark;
-    }
-    .event-detail {
-        display: none;
-    }
+	.days {
+		// border: 1px solid #ccc;
+		// overflow: hidden;
+	}
+	li {
+		background: #fff;
+		border-top: 1px solid rgba($dark,.15);
+		display: block;
+		float: left;
+		width: 14.24%;
+		height: 34px;
+		line-height: 34px;
+		text-align: center;
+		color: rgba($dark,.3);
+		transition: opacity .2s, background .25s;
+		transition-delay: .1s;
+		&.today {
+			color: #000;
+			box-shadow: inset 0 0 20px $highlight;
+		}
+		&.event {
+			background: $indie;
+			color: #fff;
+			box-shadow: inset 0 0 10px rgba($dark,.3);
+			position: relative;
+			&.tagged-Indie {
+				background: $indie !important;
+			}
+			&.tagged-Superhero {
+				background: $superhero;
+			}
+			&.tagged-Zines {
+				background: $zines;
+			}
+			&.multiple-events.tagged-Indie.tagged-Superhero {
+				background: $indie;
+			}
+			&.multiple-events.tagged-Indie.tagged-Superhero:after {
+				content: '';
+				position: absolute;
+				bottom: 0;
+				right: 0;
+				width: 0;
+				height: 0; 
+				border-left: 20px solid transparent;
+				border-top: 20px solid transparent;
+				border-right: 20px solid $superhero;
+			}
+		}
+		&.empty {
+			background: none;
+			&.next-month {
+				// background: rgba($dark,.35);
+			}
+		}
+		&.inactive {
+			opacity: .3;
+		}
+		&.current  {
+			box-shadow: inset 0 0 20px rgba($dark,.9);
+		}
+	}
+	.days-of-the-week {
+		li {
+			font: bold 12px/1 'Arvo';
+			text-shadow: 0 0 1px #000;
+			background: rgba($dark,.3);
+			color: #fff;
+			height: 18px;
+			line-height: 20px;
+		}
+	}
+	.month {
+		text-transform: uppercase;
+		color: $dark;
+	}
+	.event-detail {
+		display: none;
+	}
 
 }
 
 .cal {
-    width: 100%;
-    margin: 0 auto 24px;
-    font-size: 14px;
-    &:nth-child(3n+1) {
-        clear: left;
-    }
-    -webkit-transition: opacity .2s;
-    transition: opacity .2s;
-    transition-delay: .1s;
-    -webkit-transition-delay: .1s;
-    &.inactive {
-        opacity: .25;
-    }
+	width: 100%;
+	margin: 0 auto 24px;
+	font-size: 14px;
+	&:nth-child(3n+1) {
+		clear: left;
+	}
+	transition: opacity .2s;
+	transition-delay: .1s;
+	&.inactive {
+		opacity: .25;
+	}
 
-    .clndr
-    {
-        .clndr-controls
-        {
-            @extend .cf;
-            width: 100%;
-            position: relative;
-            margin-bottom: 10px;
+	.clndr
+	{
+		.clndr-controls
+		{
+			@extend .cf;
+			width: 100%;
+			position: relative;
+			margin-bottom: 10px;
 
-            .month
-            {
-                // float: left;
-                // width: 33%;
-                // text-align: center;
-            }
+			.month
+			{
+				// float: left;
+				// width: 33%;
+				// text-align: center;
+			}
 
-            .clndr-control-button
-            {
-                float: left;
-                width: 33%;
-                display: none;
+			.clndr-control-button
+			{
+				float: left;
+				width: 33%;
+				display: none;
 
-                &.rightalign
-                {
-                    text-align: right;
-                    width: 34%;
-                }
-                .clndr-next-button
-                {
-                    cursor: pointer;
-                    @extend .noselect;
-                    &:hover { background: $highlight; }
-                    &.inactive
-                    {
-                        opacity: 0.5;
-                        &:hover
-                        {
-                            background: none;
-                            cursor: default;
-                        }
-                    }
-                }
-                .clndr-previous-button
-                {
-                    cursor: pointer;
-                    @extend .noselect;
-                    &:hover { background: $highlight; }
-                    &.inactive
-                    {
-                        opacity: 0.5;
-                        &:hover
-                        {
-                            background: none;
-                            cursor: default;
-                        }
-                    }
-                }
-            }
-        }
+				&.rightalign
+				{
+					text-align: right;
+					width: 34%;
+				}
+				.clndr-next-button
+				{
+					cursor: pointer;
+					@extend .noselect;
+					&:hover { background: $highlight; }
+					&.inactive
+					{
+						opacity: 0.5;
+						&:hover
+						{
+							background: none;
+							cursor: default;
+						}
+					}
+				}
+				.clndr-previous-button
+				{
+					cursor: pointer;
+					@extend .noselect;
+					&:hover { background: $highlight; }
+					&.inactive
+					{
+						opacity: 0.5;
+						&:hover
+						{
+							background: none;
+							cursor: default;
+						}
+					}
+				}
+			}
+		}
 
-        .clndr-table
-        {
-            table-layout: fixed;
-            width: 100%;
+		.clndr-table
+		{
+			table-layout: fixed;
+			width: 100%;
 
-            .header-days
-            {
-                height: 30px;
-                font-size: 10px;
-                background: $vibrant;
+			.header-days
+			{
+				height: 30px;
+				font-size: 10px;
+				background: $vibrant;
 
-                .header-day
-                {
-                    vertical-align: middle;
-                    text-align: center;
-                    border-left: $clndr-border;
-                    border-top: $clndr-border;
+				.header-day
+				{
+					vertical-align: middle;
+					text-align: center;
+					border-left: $clndr-border;
+					border-top: $clndr-border;
 
-                    color: #fff;
+					color: #fff;
 
-                    &:last-child
-                    {
-                        border-right: $clndr-border;
-                    }
-                }
-            }
+					&:last-child
+					{
+						border-right: $clndr-border;
+					}
+				}
+			}
 
-            tr
-            {
-                height: 35px;
+			tr
+			{
+				height: 35px;
 
-                td
-                {
-                    vertical-align: top;
-                }
+				td
+				{
+					vertical-align: top;
+				}
 
-                .day
-                {
-                    border-left: $clndr-border;
-                    border-top: $clndr-border;
-                    width: 100%;
-                    height: inherit;
+				.day
+				{
+					border-left: $clndr-border;
+					border-top: $clndr-border;
+					width: 100%;
+					height: inherit;
 
-                    &:hover { background: #eee; }
+					&:hover { background: #eee; }
 
-                    &.today
-                    {
-                        background: #9AD6E3;
-                        &:hover { background: darken(#9AD6E3, 10%); }
-                        &.event
-                        {
-                            background: mix(#B4E09F, #9AD6E3);
-                        }
-                    }
+					&.today
+					{
+						background: #9AD6E3;
+						&:hover { background: darken(#9AD6E3, 10%); }
+						&.event
+						{
+							background: mix(#B4E09F, #9AD6E3);
+						}
+					}
 
-                    &.event
-                    {
-                        background: #B4E09F;
-                        &:hover
-                        {
-                            background: darken(#B4E09F, 10%);
-                        }
-                    }
+					&.event
+					{
+						background: #B4E09F;
+						&:hover
+						{
+							background: darken(#B4E09F, 10%);
+						}
+					}
 
-                    &.inactive
-                    {
-                        background: $highlight;
-                    }
+					&.inactive
+					{
+						background: $highlight;
+					}
 
-                    &:last-child
-                    {
-                        border-right: $clndr-border;
-                    }
+					&:last-child
+					{
+						border-right: $clndr-border;
+					}
 
-                    .day-contents
-                    {
-                        box-sizing: border-box;
-                        // width: 100%;
-                        // height: 100%;
-                        padding: 8px;
-                        font-size: 12px;
-                        text-align: right;
-                    }
-                }
+					.day-contents
+					{
+						box-sizing: border-box;
+						// width: 100%;
+						// height: 100%;
+						padding: 8px;
+						font-size: 12px;
+						text-align: right;
+					}
+				}
 
-                .empty, .adjacent-month
-                {
-                    border-left: $clndr-border;
-                    border-top: $clndr-border;
-                    width: 100%;
-                    height: inherit;
-                    background: #eee;
+				.empty, .adjacent-month
+				{
+					border-left: $clndr-border;
+					border-top: $clndr-border;
+					width: 100%;
+					height: inherit;
+					background: #eee;
 
-                    &:hover { background: $highlight; }
+					&:hover { background: $highlight; }
 
-                    &:last-child
-                    {
-                        border-right: $clndr-border;
-                    }
-                }
+					&:last-child
+					{
+						border-right: $clndr-border;
+					}
+				}
 
-                &:last-child
-                {
-                    .day
-                    {
-                        border-bottom: $clndr-border;
-                    }
+				&:last-child
+				{
+					.day
+					{
+						border-bottom: $clndr-border;
+					}
 
-                    .empty
-                    {
-                        border-bottom: $clndr-border;
-                    }
-                }
-            }
-        }
-    }
+					.empty
+					{
+						border-bottom: $clndr-border;
+					}
+				}
+			}
+		}
+	}
 
 }
