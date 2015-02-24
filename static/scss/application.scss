@@ -198,6 +198,7 @@ a.tag {
 	text-align: center;
 	.days-away {
 		margin-left: .3rem;
+		font-size: .8rem;
 		color: rgba($dark, .3);
 	}
 	ul {
@@ -209,7 +210,7 @@ a.tag {
 		margin: 0;
 	}
 	h2 {
-		font: .9rem/1.2 'Arvo';
+		font: 1rem/1.2 'Arvo';
 	}
 }
 .tagged-Indie a {
@@ -289,19 +290,13 @@ footer {
 
 // mobile
 @media only screen and (min-width: 768px) {
-	.button {
-		font-size: .7rem;
-	}
 	.upcoming {
 		table {
 			width: 80%;
 			margin: 20px auto;
 		}
-		.tag {
-			font-size: .7rem;
-		}
 		td {
-			font-size: .7rem;
+			font-size: .8rem;
 		}
 		h2 {
 			font-size: 1.2rem;

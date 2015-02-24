@@ -98,7 +98,7 @@ input, select {
   display: none; }
 
 .button {
-  font-size: .7rem;
+  font-size: .8rem;
   background: #00acee;
   color: #eee;
   border-radius: 4px;
@@ -178,7 +178,7 @@ input, select {
   display: none; }
 
 .button {
-  font-size: .7rem;
+  font-size: .8rem;
   background: #00acee;
   color: #eee;
   border-radius: 4px;
@@ -425,7 +425,7 @@ input, select {
   display: none; }
 
 .button {
-  font-size: .7rem;
+  font-size: .8rem;
   background: #00acee;
   color: #eee;
   border-radius: 4px;
@@ -942,6 +942,7 @@ a.tag {
       white-space: nowrap; }
   .upcoming .days-away {
     margin-left: .3rem;
+    font-size: .8rem;
     color: rgba(84, 55, 41, 0.3); }
   .upcoming ul {
     margin-top: .5rem;
@@ -950,7 +951,7 @@ a.tag {
   .upcoming h2, .upcoming h3 {
     margin: 0; }
   .upcoming h2 {
-    font: .9rem/1.2 'Arvo'; }
+    font: 1rem/1.2 'Arvo'; }
 
 .tagged-Indie a {
   color: #ffcc2f; }
@@ -1017,16 +1018,11 @@ footer {
     list-style: none; }
 
 @media only screen and (min-width: 768px) {
-  .button {
-    font-size: .7rem; }
-
   .upcoming table {
     width: 80%;
     margin: 20px auto; }
-  .upcoming .tag {
-    font-size: .7rem; }
   .upcoming td {
-    font-size: .7rem; }
+    font-size: .8rem; }
   .upcoming h2 {
     font-size: 1.2rem; }
 
