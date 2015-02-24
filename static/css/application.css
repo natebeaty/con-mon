@@ -312,7 +312,7 @@ input, select {
   display: none; }
 
 .cal {
-  width: 90%;
+  width: 100%;
   margin: 0 auto 24px;
   font-size: 14px;
   -webkit-transition: opacity .2s;
@@ -791,6 +791,9 @@ body {
 a {
   color: #ffcc2f; }
 
+.cal h3 {
+  text-align: center; }
+
 h1, h2, h3 {
   font-family: 'Arvo';
   margin: .5rem 0 1rem; }
@@ -918,7 +921,7 @@ a.tag {
   .upcoming .tag {
     font-size: .6rem; }
   .upcoming table {
-    width: 90%;
+    width: 100%;
     margin: 20px auto; }
   .upcoming th {
     font-size: .7em;
@@ -933,7 +936,7 @@ a.tag {
   .upcoming tr:hover td {
     background: #f4f4f4; }
   .upcoming td {
-    font: .6rem/1.2 'Arimo';
+    font: .7rem/1.2 'Arimo';
     vertical-align: middle;
     border: 1px solid #ccc;
     padding: 4px;
@@ -1033,7 +1036,7 @@ footer {
     width: 300px; }
 
   .large-only {
-    display: block; }
+    display: inline-block; }
 
   .small-only {
     display: none; }

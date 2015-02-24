@@ -27,15 +27,15 @@
 					<td>
 					{% if condate.registration_opens %}
 						{% if condate.registration_closes and condate.registration_closes|in_past %}
-							<span class="reg-status tag closed">Registration Closed</span>
+							<span class="reg-status tag closed"><span class="small-only">Reg.</span><span class="large-only">Registration</span> Closed</span>
 						{% elif condate.registration_opens|in_past %}
 							{% if condate.registration_closes %}
-								<span class="reg-status tag">Registration Closes {{ condate.registration_closes.strftime('%b %e')|trim }}</span>
+								<span class="reg-status tag"><span class="small-only">Reg.</span><span class="large-only">Registration</span> Closes {{ condate.registration_closes.strftime('%b %e')|trim }}</span>
 							{% else %}
-								<span class="reg-status tag">Registration Open</span>
+								<span class="reg-status tag"><span class="small-only">Reg.</span><span class="large-only">Registration</span> Open</span>
 							{% endif %}
 						{% else %}
-							<span class="reg-status tag">Registration Opens {{ condate.registration_opens.strftime('%b %e')|trim }}</span>
+							<span class="reg-status tag"><span class="small-only">Reg.</span><span class="large-only">Registration</span> Opens {{ condate.registration_opens.strftime('%b %e')|trim }}</span>
 						{% endif %}
 					{% else %}
 						{# <span class="reg-status tag closed">Unknown</span> #}

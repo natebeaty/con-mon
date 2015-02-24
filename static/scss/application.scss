@@ -12,6 +12,11 @@ body {
 a {
 	color: $vibrant;
 }
+.cal {
+	h3 {
+		text-align: center;
+	}
+}
 h1,h2,h3 {
 	font-family: 'Arvo';
 	margin: .5rem 0 1rem;
@@ -166,7 +171,7 @@ a.tag {
 		font-size: .6rem;
 	}
 	table {
-		width: 90%;
+		width: 100%;
 		margin: 20px auto;
 	}
 	th {
@@ -186,7 +191,7 @@ a.tag {
 		}
 	}
 	td {
-		font: .6rem/1.2 'Arimo';
+		font: .7rem/1.2 'Arimo';
 		vertical-align: middle;
 		border: 1px solid $midgray;
 		padding: 4px;
@@ -314,7 +319,7 @@ footer {
 		}
 	}
 	.large-only {
-		display: block;
+		display: inline-block;
 	}
 	.small-only {
 		display: none;
