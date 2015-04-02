@@ -140,7 +140,7 @@ def condates_ics():
     cal = Calendar()
     cal.add('prodid','-//Con-Mon//cons.clixel.com//EN')
     cal.add('version','2.0')
-    cal.add('X-WR-CALNAME','Con-Mon cartoonist convention calendar')
+    cal.add('X-WR-CALNAME','Con-Mon')
     for condate in condates:
         e = Event()
         e.add('summary', condate.title)
