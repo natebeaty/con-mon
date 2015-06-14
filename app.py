@@ -128,7 +128,7 @@ def in_past(dt):
 @app.route('/')
 def index():
     return render_template('index.html',
-        conventions = Convention.query.all(),
+        conventions = Convention.query.order_by(Convention.title).all(),
         tags = Tag.query.all(),
         settings = app.config,
         condates = Condate.query.filter(Condate.start_date >= date.today(), Condate.published == True).order_by(Condate.start_date).all()
