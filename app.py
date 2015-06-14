@@ -138,9 +138,9 @@ def index():
 def condates_ics():
     condates = Condate.query.filter(Condate.start_date >= date.today(), Condate.published == True).order_by(Condate.start_date).all()
     cal = Calendar()
-    cal.add('prodid','-//Con-Mon cartoonist convention calendar//cons.clixel.com//EN')
+    cal.add('prodid','-//Con-Mon//cons.clixel.com//EN')
     cal.add('version','2.0')
-    cal.add('X-WR-CALNAME','Con-Mon cartoonist convention calendar')
+    cal.add('X-WR-CALNAME','Con-Mon')
     for condate in condates:
         e = Event()
         e.add('summary', condate.title)
