@@ -1,8 +1,8 @@
-from flask import Flask, render_template, request, flash, redirect, url_for, Response
+from flask import Flask, render_template, request, flash, redirect, url_for, Response, jsonify
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.sendmail import Mail, Message
 from datetime import datetime, date, time, timedelta
-from marshmallow import Serializer, fields, pprint
+from marshmallow import Schema, fields, pprint
 from flask.ext.superadmin import Admin, expose, BaseView, model
 from dateutil import parser
 from icalendar import Calendar, Event
@@ -23,7 +23,7 @@ class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(80))
 
-    def __unicode__(self):
+    def __repr__(self):
         return self.title
 
 class Convention(db.Model):
@@ -35,15 +35,10 @@ class Convention(db.Model):
     tags = db.relationship('Tag', secondary=tags_conventions,
         backref=db.backref('conventions', lazy='dynamic'))
 
-    def __init__(self, title, location, url):
-        self.title = title
-        self.location = location
-        self.url = url
-
     def __repr__(self):
         return '<Convention %r>' % self.title
 
-    def __unicode__(self):
+    def __repr__(self):
         return self.title
 
 class Condate(db.Model):
@@ -60,35 +55,25 @@ class Condate(db.Model):
     convention = db.relationship('Convention',
         backref=db.backref('conventions', lazy='dynamic'))
 
-    def __init__(self, convention_id, title, start_date, end_date, registration_opens, registration_closes, notes):
-        self.convention_id = convention_id
-        self.title = title
-        self.start_date = start_date
-        self.end_date = end_date
-        self.registration_opens = registration_opens
-        self.registration_closes = registration_closes
-        self.notes = notes
-        self.published = False
-
     def __repr__(self):
         return '<Condate %r>' % self.title
 
-    def __unicode__(self):
+    def __repr__(self):
         return self.title
 
 ### json serialization
 
-class TagSerializer(Serializer):
+class TagSchema(Schema):
     class Meta:
         fields = ('id', 'title')
 
-class ConventionSerializer(Serializer):
-    tags = fields.Nested(TagSerializer, many=True)
+class ConventionSchema(Schema):
+    tags = fields.Nested(TagSchema, many=True)
     class Meta:
         fields = ('id', 'title', 'location', 'url', 'tags')
 
-class CondateSerializer(Serializer):
-    convention = fields.Nested(ConventionSerializer)
+class CondateSchema(Schema):
+    convention = fields.Nested(ConventionSchema)
     class Meta:
         fields = ('id', 'title', 'notes', 'start_date', 'end_date', 'convention')
 
@@ -170,7 +155,8 @@ def condates_ics():
 @app.route('/condates.json')
 def condates_json():
     condates = Condate.query.filter(Condate.start_date >= date.today(), Condate.published == True).order_by(Condate.start_date).all()
-    return CondateSerializer(condates, many=True).json
+    result = CondateSchema(many=True).dump(condates)
+    return jsonify({'condates': result.data})
 
 @app.route('/submit_note', methods=['GET', 'POST'])
 def submit_note():
@@ -185,13 +171,18 @@ def submit_note():
 
 @app.route('/submit_condate', methods=['GET', 'POST'])
 def submit_condate():
+    if request.form['diebots_5000']:
+        flash('Your submission is suspected as spam!')
+        return redirect(url_for('index'))
+
     if request.form['convention'] == 'other':
         convention = Convention.query.filter(Convention.title == request.form['convention_title']).first()
         if not convention:
             convention = Convention(
-                request.form['convention_title'], 
-                request.form['convention_location'],
-                request.form['convention_url']
+                title=request.form['convention_title'], 
+                twitter=request.form['convention_twitter'],
+                location=request.form['convention_location'],
+                url=request.form['convention_url']
                 )
             db.session.add(convention)
             db.session.commit()
@@ -203,23 +194,24 @@ def submit_condate():
     else:
         convention = Convention.query.filter(Convention.id == request.form['convention']).first()
 
-    end_date, registration_opens, registration_close = [None, None, None]
+    end_date, registration_opens, registration_closes = [None, None, None]
     start_date = parser.parse(request.form['start_date'])
     if request.form['end_date']:
         end_date = parser.parse(request.form['end_date'])
     if request.form['registration_opens']:
         registration_opens = parser.parse(request.form['registration_opens'])
     if request.form['registration_closes']:
-        registration_close = parser.parse(request.form['registration_closes'])
+        registration_closes = parser.parse(request.form['registration_closes'])
 
     condate = Condate(
-        convention.id,
-        convention.title + ' ' + request.form['start_date'][:4],
-        start_date,
-        end_date,
-        registration_opens,
-        registration_close,
-        request.form['notes']
+        convention_id=convention.id,
+        title=convention.title + ' ' + request.form['start_date'][:4],
+        start_date=start_date,
+        end_date=end_date,
+        registration_opens=registration_opens,
+        registration_closes=registration_closes,
+        notes=request.form['notes'],
+        published=False
         )
     db.session.add(condate)
     db.session.commit()

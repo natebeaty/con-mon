@@ -31,7 +31,7 @@ CON_MON = (function() {
 
         // pull in condate data and build year view
         $.getJSON( '/condates.json', function( data ) {
-            eventsArray = data;
+            eventsArray = data.condates;
             _initClndr();
         });
 
