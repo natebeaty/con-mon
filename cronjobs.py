@@ -58,7 +58,6 @@ class Twitter(Command):
             'Shhhhhhh:',
             'Hey! You! Yeah you!',
             'My robot brain informed me that',
-            'My robot brain informed me that',
             'I just heard that',
             'Whoa!',
             'OMG',
