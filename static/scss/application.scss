@@ -152,7 +152,7 @@ a.tag {
 .tag {
 	display: inline-block;
 	padding: 4px 8px;
-	background: rgba($dark,.65);
+	background: $dark;
 	color: #fff;
 	font-size: .7rem;
 	line-height: 1;
@@ -176,29 +176,32 @@ a.tag {
 		background: $midgray;
 		color: $dark;
 		text-transform: uppercase;
-		text-align: center;
+		text-align: left;
 		font-weight: normal;
-		border: 1px solid $midgray;
+		border-bottom: 1px solid $midgray;
 		padding: 4px;
 		vertical-align: middle;
 	}
 	tr:hover,
 	tr:nth-child(odd):hover {
 		td {
-			background: #eee;
+			background: #E7FFCF;
 		}
 	}
 	tr:nth-child(odd) {
 		td {
-			background: #f8f8f8;
+			background: #fff;
 		}
 	}
 	td {
 		font: .7rem/1.2 'Arimo';
 		vertical-align: middle;
-		border: 1px solid $midgray;
+		border-bottom: 1px solid $midgray;
 		padding: 4px;
-		background: #fff;
+		transition: background-color .5s;
+		a {
+			color: $dark;
+		}
 		&.date {
 			white-space: nowrap;
 		}
@@ -207,6 +210,17 @@ a.tag {
 	.days-away {
 		margin-left: .3rem;
 		font-size: .8rem;
+	}
+	tr.month-away .days-away,
+	tr.month-away .date {
+		color: rgba($dark, .7);
+	}
+	tr.two-months-away .days-away,
+	tr.two-months-away .date {
+		color: rgba($dark, .5);
+	}
+	tr.far-away .days-away,
+	tr.far-away .date {
 		color: rgba($dark, .3);
 	}
 	ul {

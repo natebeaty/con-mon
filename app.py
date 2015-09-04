@@ -108,6 +108,17 @@ def in_past(dt):
     now = datetime.utcnow().date()
     return dt < now
 
+@app.template_filter()
+def away_tags(dt):
+    output = ''
+    if dt > date.today() + timedelta(30):
+        output += ' month-away'
+    if dt > date.today() + timedelta(60):
+        output += ' two-months-away'
+    if dt > date.today() + timedelta(90):
+        output += ' far-away'
+    return output
+
 ### main views
 
 @app.route('/')
