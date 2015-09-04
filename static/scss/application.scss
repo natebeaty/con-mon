@@ -182,14 +182,15 @@ a.tag {
 		padding: 4px;
 		vertical-align: middle;
 	}
-	tr:hover {
+	tr:hover,
+	tr:nth-child(odd):hover {
 		td {
-			background: #F0F0F0;
+			background: #eee;
 		}
 	}
 	tr:nth-child(odd) {
 		td {
-			background: #F8F8F8;
+			background: #f8f8f8;
 		}
 	}
 	td {
