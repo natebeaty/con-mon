@@ -187,6 +187,11 @@ a.tag {
 			background: #f4f4f4;
 		}
 	}
+	tr:nth-child(odd) {
+		td {
+			background: #ededed;
+		}
+	}
 	td {
 		font: .7rem/1.2 'Arimo';
 		vertical-align: middle;
