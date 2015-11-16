@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+	
+	<section class="upcoming">
+		<h1>All Conventions</h1>
+		{% for convention in conventions %}
+			<article class="convention" data-id="{{ convention.id }}">
+				<h2>{{ convention.title }} <small style="font-size: 14px; color: #aaa;">({{ convention.location }})</small></h2>
+				<ul class="condates">
+				{% for condate in convention.condates %}
+					<li class="{% for tag in condate.convention.tags %}tagged-{{ tag.title }} {% endfor %}{{ condate.start_date|away_tags }}" data-condate-id="{{ condate.id }}">
+						<span class="title">{{ condate.title }}</span>
+						 <span class="date">
+						 {{ condate.start_date.strftime('%b %e')|trim }}
+						{%- if condate.end_date and condate.end_date != condate.start_date -%}
+							&ndash;{{ condate.end_date.strftime('%e')|trim }}
+						{%- endif %}, {{ condate.start_date.strftime('%Y') }}
+						</span>
+					{% endfor %}
+				</ul>
+			</article>
+		{% endfor %}
+
+	</section>
+
+{% endblock content %}

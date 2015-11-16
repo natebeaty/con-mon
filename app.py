@@ -32,6 +32,8 @@ class Convention(db.Model):
     url = db.Column(db.String(250))
     location = db.Column(db.String(250))
     twitter = db.Column(db.String(250))
+    condates = db.relationship('Condate',
+        backref=db.backref('condates'))
     tags = db.relationship('Tag', secondary=tags_conventions,
         backref=db.backref('conventions', lazy='dynamic'))
 
@@ -168,6 +170,16 @@ def condates_json():
     condates = Condate.query.filter(Condate.start_date >= date.today(), Condate.published == True).order_by(Condate.start_date).all()
     result = CondateSchema(many=True).dump(condates)
     return jsonify({'condates': result.data})
+
+@app.route('/condates', methods=['GET', 'POST'])
+def condates():
+    return render_template('condates.html',
+        conventions = Convention.query.order_by(Convention.title).all(),
+        tags = Tag.query.all(),
+        settings = app.config,
+        all_condates = Condate.query.filter(Condate.published == True).order_by(Condate.start_date).all(),
+        current_condates = Condate.query.filter(Condate.start_date >= date.today(), Condate.published == True).order_by(Condate.start_date).all()
+        )
 
 @app.route('/submit_note', methods=['GET', 'POST'])
 def submit_note():
