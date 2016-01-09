@@ -250,11 +250,15 @@ def submit_condate():
         submit_msg = submit_msg + "\nNotes:\n%s\n" % request.form['notes']
     if request.form['email']:
         submit_msg = submit_msg + "\nSender:\n%s\n" % request.form['email']
+        reply_to = request.form['email']
+    else:
+        reply_to = ''
     submit_msg = submit_msg + "\n\nEdit Condate: %sadmin/condate/%s/\n" % (request.url_root, condate.id)
     if request.form['convention'] == 'other':
         submit_msg = submit_msg + "Edit Convention: %sadmin/convention/%s/\n" % (request.url_root, convention.id)
     msg = Message("New con-mon submission (%s)" % condate.title,
         sender="hal@cons.clixel.com",
+        reply_to = reply_to,
         recipients=["nate@clixel.com"])
     msg.body = submit_msg
     mail.send(msg)
