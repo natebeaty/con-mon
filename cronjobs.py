@@ -1,5 +1,5 @@
 from flask import Flask
-from flask.ext.script import Manager,Command
+from flask_script import Manager,Command
 from datetime import date, datetime, timedelta
 from app import Condate,Tag
 import config
@@ -11,7 +11,7 @@ manager = Manager(app)
 
 class Twitter(Command):
     """
-    Twitter alerts! 
+    Twitter alerts!
     Weekly and monthly notices of approaching convention dates
     Weekly notices of approaching registration deadlines
     """

@@ -1,9 +1,9 @@
 from flask import Flask, render_template, request, flash, redirect, url_for, Response, jsonify
-from flask.ext.sqlalchemy import SQLAlchemy
-from flask.ext.sendmail import Mail, Message
+from flask_sqlalchemy import SQLAlchemy
+from flask_sendmail import Mail, Message
 from datetime import datetime, date, time, timedelta
 from marshmallow import Schema, fields, pprint
-from flask.ext.superadmin import Admin, expose, BaseView, model
+from flask_superadmin import Admin, expose, BaseView, model
 from dateutil import parser
 from icalendar import Calendar, Event
 
@@ -202,7 +202,7 @@ def submit_condate():
         convention = Convention.query.filter(Convention.title == request.form['convention_title']).first()
         if not convention:
             convention = Convention(
-                title=request.form['convention_title'], 
+                title=request.form['convention_title'],
                 twitter=request.form['convention_twitter'],
                 location=request.form['convention_location'],
                 url=request.form['convention_url']
