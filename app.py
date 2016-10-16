@@ -92,16 +92,16 @@ def timeaway(dt, default="tomorrow"):
     diff = dt - now
 
     periods = (
-        (diff.days / 365, "year", "years"),
+        # (diff.days / 365, "year", "years"),
         (diff.days / 30, "month", "months"),
-        (diff.days / 7, "week", "weeks"),
+        # (diff.days / 7, "week", "weeks"),
         (diff.days, "day", "days"),
     )
 
     for period, singular, plural in periods:
 
         if period:
-            return "%d %s away" % (period, singular if period == 1 else plural)
+            return "%s%d %s" % ('~' if singular != 'day' else '', period, singular if period == 1 else plural)
 
     return default
 
