@@ -10,4 +10,4 @@ def upgrade(migrate_engine):
 def downgrade(migrate_engine):
     meta = MetaData(bind=migrate_engine)
     condate = Table('condate', meta, autoload=True)
-    condate.c.body.alter(name='body')
+    condate.c.notes.alter(name='body')
