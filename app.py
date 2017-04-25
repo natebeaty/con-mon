@@ -38,9 +38,6 @@ class Convention(db.Model):
         backref=db.backref('conventions', lazy='dynamic'))
 
     def __repr__(self):
-        return '<Convention %r>' % self.title
-
-    def __repr__(self):
         return self.title
 
 class Condate(db.Model):
@@ -58,10 +55,16 @@ class Condate(db.Model):
         backref=db.backref('conventions', lazy='dynamic'))
 
     def __repr__(self):
-        return '<Condate %r>' % self.title
+        return self.title
+
+class Phrase(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    body = db.Column(db.String(250))
+    num_uses = db.Column(db.Integer)
 
     def __repr__(self):
-        return self.title
+        return self.body
+
 
 ### json serialization
 
@@ -269,7 +272,7 @@ def submit_condate():
 
 class ConventionAdmin(model.ModelAdmin):
     session = db.session
-    fields = list_display = ('title', 'location', 'url', 'twitter','tags')
+    fields = list_display = ('title', 'location', 'url', 'twitter','tags',)
 
 class TagAdmin(model.ModelAdmin):
     session = db.session
@@ -277,13 +280,18 @@ class TagAdmin(model.ModelAdmin):
 
 class CondateAdmin(model.ModelAdmin):
     session = db.session
-    fields = ('convention', 'title', 'start_date', 'end_date', 'registration_opens', 'registration_closes', 'published', 'notes')
-    list_display = ('title', 'start_date', 'end_date', 'registration_opens', 'registration_closes', 'published')
+    fields = ('convention', 'title', 'start_date', 'end_date', 'registration_opens', 'registration_closes', 'published', 'notes',)
+    list_display = ('title', 'start_date', 'end_date', 'registration_opens', 'registration_closes', 'published',)
+
+class PhraseAdmin(model.ModelAdmin):
+    session = db.session
+    fields = list_display = ('body','num_uses',)
 
 admin = Admin(app)
 admin.register(Convention, ConventionAdmin)
 admin.register(Condate, CondateAdmin)
 admin.register(Tag, TagAdmin)
+admin.register(Phrase, PhraseAdmin)
 
 ### fire up the mothership
 
