@@ -14,10 +14,10 @@
 					<h2>{{ convention.title }} <small>({{ convention.location }})</small></h2>
 					<p class="meta">
 						{% if convention.url %}
-							<a href="{{ convention.url }}">{{ convention.url }}</a>
+							<a target="_blank" href="{{ convention.url }}">{{ convention.url }}</a>
 						{% endif %}
 						{% if convention.twitter %}
-							{% if convention.url %}—{% endif %} <a href="https://twitter.com/{{ convention.twitter }}">@{{ convention.twitter }}</a>
+							{% if convention.url %}—{% endif %} <a target="_blank" href="https://twitter.com/{{ convention.twitter }}">@{{ convention.twitter }}</a>
 						{% endif %}
 					</p>
 					<ul class="condates">
