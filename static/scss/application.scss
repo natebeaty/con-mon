@@ -60,6 +60,7 @@ label {
 	}
 	&.checkbox {
 		display: inline-block;
+		margin-right: 10px;
 	}
 	// &.inline {
 	// 	display: inline-block;
@@ -175,9 +176,9 @@ a.tag {
 	}
 }
 .missing {
-	margin: 1rem;
-	font-size: .8rem;
-	color: rgba($dark, .3);
+	// margin: 1rem;
+	// font-size: .8rem;
+	// color: rgba($dark, .3);
 }
 .upcoming {
 	table {
@@ -347,8 +348,9 @@ footer {
 			width: 20%;
 		}
 		.extras {
-			input,textarea {
-				width: 300px;
+			input,
+			textarea {
+				width: 50%;
 			}
 		}
 	}
@@ -432,25 +434,39 @@ footer {
 	.add-new-condate {
 		margin-top: 6px;
 	}
-	form {
-		.row {
-			float: left;
-			width: 50%;
-			input {
-				width: 98%;
-			}
-		  @include min-screen($breakpoint-medium) {
+}
+form.submit-condate {
+	max-width: 400px;
+	margin: 10px auto;
+	.select-convention {
+		select,
+		label {
+			display: inline-block;
+			font-size: 14px;
+			margin-bottom: 10px;
+		}
+		select,
+		input {
+			vertical-align: baseline;
+			margin-bottom: 10px;
+		}
+	}
+	.row {
+		float: left;
+		width: 50%;
+		input {
+			width: 98%;
+		}
+		@include min-screen($breakpoint-medium) {
+			&:not(.half) {
 				width: 25%;
-				input {
-					width: 100%;
-				}
 			}
 		}
-		&.submitted-ok {
-			fieldset,
-			.actions {
-				display: none;
-			}
+	}
+	&.submitted-ok {
+		fieldset,
+		.actions {
+			display: none;
 		}
 	}
 }

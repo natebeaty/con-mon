@@ -207,9 +207,10 @@ def submit_condate():
     elif convention_id == 'other':
         convention = Convention.query.filter(Convention.title == request.form.get('convention_title', '')).first()
         if not convention:
+            twitter_handle = request.form.get('convention_twitter', '').replace('@','')
             convention = Convention(
                 title = request.form.get('convention_title', ''),
-                twitter = request.form.get('convention_twitter', ''),
+                twitter = twitter_handle,
                 location = request.form.get('convention_location', ''),
                 url = request.form.get('convention_url', '')
                 )

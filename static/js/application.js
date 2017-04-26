@@ -18,8 +18,42 @@ CON_MON = (function() {
     function _init() {
         _resize();
 
+        // init submission form handlers
+        $('.show-submit-condate').click(function(e) {
+            e.preventDefault();
+            $('.submit-condate').toggleClass('hidden');
+        });
+        // "other convention" fields hide/show
+        $('#convention').on('change', function() {
+            $('.other-fields').toggleClass('hidden', $(this).val() != 'other');
+        });
+
+        // Homepage
         if ($('body#home').length) {
-            _initHome();
+            // init tooltips
+            $('.upcoming .tooltip').tooltipster({
+                delay: 0,
+                side: 'left'
+            });
+            $('.calendars .tooltip').tooltipster({
+                delay: 0
+            });
+
+            // pull in condate data and build year view
+            $.getJSON( '/condates.json', function( data ) {
+                eventsArray = data.condates;
+                _initClndr();
+            });
+
+            // hide any unused tags
+            $('.filtering .tag').each(function() {
+                $(this).toggleClass('hidden', $('.condate.tagged-' + $(this).text()).length===0);
+            });
+            // totally hide filters if there's only one
+            $('.filtering').toggleClass('hidden', $('p.tags .tag:not(.hidden)').length===1);
+
+            // init condate filters
+            _filterCondates();
         }
 
         // Bulk condates page
@@ -83,43 +117,6 @@ CON_MON = (function() {
             },
             selector: 'h2',
             noResults: '.no-results'
-        });
-    }
-
-    function _initHome() {
-        // init tooltips
-        $('.upcoming .tooltip').tooltipster({
-            delay: 0,
-            side: 'left'
-        });
-        $('.calendars .tooltip').tooltipster({
-            delay: 0
-        });
-
-        // pull in condate data and build year view
-        $.getJSON( '/condates.json', function( data ) {
-            eventsArray = data.condates;
-            _initClndr();
-        });
-
-        // hide any unused tags
-        $('.filtering .tag').each(function() {
-            $(this).toggleClass('hidden', $('.condate.tagged-' + $(this).text()).length===0);
-        });
-        // totally hide filters if there's only one
-        $('.filtering').toggleClass('hidden', $('p.tags .tag:not(.hidden)').length===1);
-
-        // init condate filters
-        _filterCondates();
-
-        // init submission form handlers
-        $('.show-submit-condate').click(function(e) {
-            e.preventDefault();
-            $('.submit-condate').toggleClass('hidden');
-        });
-        // "other convention" fields hide/show
-        $('#convention').on('change', function() {
-            $('.other-fields').toggleClass('hidden', $(this).val() != 'other');
         });
     }
 

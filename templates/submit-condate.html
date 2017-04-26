@@ -3,23 +3,23 @@
 		{% if convention_id is defined %}
 			<input type="hidden" name="convention" value="{{ convention_id }}">
 		{% else %}
-			<div class="row">
-				<label for="convention">Convention</label>
+			<div class="select-convention">
+				<label for="convention">Select convention:</label>
 				<select class="chzn" id="convention" name="convention" required>
-				<option value="">Select convention...</option>
+				<option value="">...</option>
 				{% for convention in conventions %}
 					<option value="{{ convention.id }}">{{ convention.title }}</option>
 				{% endfor %}
 					<option value="other">Other...</option>
 				</select>
 				<div class="other-fields hidden">
-					<input type="text" name="convention_title" placeholder="Convention name">
-					<input type="text" name="convention_twitter" placeholder="Twitter name">
-					<input type="text" name="convention_location" placeholder="City, ST">
-					<input type="text" name="convention_url" placeholder="http://">
+					<div class="row half"><input type="text" name="convention_title" placeholder="Convention name"></div>
+					<div class="row half"><input type="text" name="convention_twitter" placeholder="Twitter handle"></div>
+					<div class="row half"><input type="text" name="convention_location" placeholder="City, ST"></div>
+					<div class="row half"><input type="text" name="convention_url" placeholder="http://"></div>
 					<div>
 					{% for tag in tags %}
-						<label for="tag-{{ tag.id }}" class="checkbox"><input id="tag-{{ tag.id }}" type="checkbox" name="convention_tags" value="{{ tag.id }}"> {{ tag.title }}</label>
+						<label for="tag-{{ tag.id }}" class="checkbox"><input id="tag-{{ tag.id }}" type="checkbox" name="convention_tags" value="{{ tag.id }}" {% if tag.title=='Indie' %}checked{% endif %}> {{ tag.title }}</label>
 					{% endfor %}
 					</div>
 				</div>
