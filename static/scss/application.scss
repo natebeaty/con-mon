@@ -153,7 +153,7 @@ a.tag {
 		content: '✓ ';
 	}
 }
-.tag:not(.hidden) {
+.tag {
 	display: inline-block;
 	padding: 4px 8px;
 	background: $dark;
@@ -163,6 +163,9 @@ a.tag {
 	border-radius: 4px;
 	&.closed {
 		background: rgba($dark,.3);
+	}
+	&.hidden {
+		display: none;
 	}
 }
 .missing {
