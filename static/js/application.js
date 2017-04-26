@@ -81,6 +81,7 @@ CON_MON = (function() {
             onAfter: function () {
                 $('.conventions').toggleClass('searching', $('.quicksearch input[name="term"]').val()!=='');
             },
+            selector: 'h2',
             noResults: '.no-results'
         });
     }

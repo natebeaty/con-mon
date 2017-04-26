@@ -40,6 +40,9 @@ h3 {
 input[type=text],
 textarea {
 	padding: 4px 6px;
+	&::placeholder {
+		color: $gray;
+	}
 }
 textarea {
 	margin: 10px 0;
@@ -405,12 +408,12 @@ footer {
 			margin: 0;
 			font-size: 12px;
 			a {
-				color: $midgray;
+				color: $gray;
 			}
 		}
 		h2 small {
 			font-size: 14px;
-			color: $midgray;
+			color: $gray;
 		}
 	}
 	.add-new-condate {
