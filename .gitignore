@@ -8,3 +8,4 @@ static/scss/.sass-cache/*
 config.py
 wrk/*
 .DS_Store
+config.codekit3
