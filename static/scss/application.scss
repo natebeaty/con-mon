@@ -77,6 +77,7 @@ form {
 	fieldset {
 	}
 	.extras {
+		margin: 10px 0;
 		input,textarea {
 			width: 100%;
 		}
@@ -123,8 +124,8 @@ header {
 	}
 }
 
-a.tag { 
-	text-decoration: none; 
+a.tag {
+	text-decoration: none;
 	background: transparent;
 	font-size: .8rem;
 	color: $indie;
@@ -149,7 +150,7 @@ a.tag {
 		content: '✓ ';
 	}
 }
-.tag {
+.tag:not(.hidden) {
 	display: inline-block;
 	padding: 4px 8px;
 	background: $dark;
@@ -368,5 +369,72 @@ footer {
 		width: 294px;
 		margin: 0 16px 20px 0;
 		overflow: hidden;
+	}
+}
+
+.quicksearch {
+	max-width: 400px;
+	margin: 20px auto 0;
+	input {
+		width: 100%;
+		font-size: 16px;
+		line-height: 1.2;
+	}
+}
+.status {
+	&.success,
+	&.error {
+		padding: 10px;
+		background: $vibrant2;
+		color: #fff;
+		margin: 10px 0;
+	}
+	&.success {
+		background: $highlight2;
+	}
+}
+#condates {
+	.conventions {
+		padding: 10px;
+	}
+	.convention {
+		margin: 20px auto;
+		max-width: 400px;
+		text-align: left;
+		p.meta {
+			margin: 0;
+			font-size: 12px;
+			a {
+				color: $midgray;
+			}
+		}
+		h2 small {
+			font-size: 14px;
+			color: $midgray;
+		}
+	}
+	.add-new-condate {
+		margin-top: 6px;
+	}
+	form {
+		.row {
+			float: left;
+			width: 50%;
+			input {
+				width: 98%;
+			}
+		  @include min-screen($breakpoint-medium) {
+				width: 25%;
+				input {
+					width: 100%;
+				}
+			}
+		}
+		&.submitted-ok {
+			fieldset,
+			.actions {
+				display: none;
+			}
+		}
 	}
 }

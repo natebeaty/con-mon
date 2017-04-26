@@ -1,10 +1,12 @@
 {% extends "base.html" %}
+{% block body_id %}home{% endblock body_id %}
+
 {% block content %}
-	
+
 	<section class="upcoming">
 		<h2>Upcoming Conventions</h2>
 		<p class="tags filtering">
-		Show: 
+		Show:
 		{% for tag in tags %}
 			<a class="tag tagged-{{ tag.title }} {% if tag.title == "Indie" %}on{% endif %}" href="/tagged/{{ tag.title }}/">{{ tag.title }}</a>
 		{% endfor %}
@@ -53,82 +55,9 @@
 			{% endfor %}
 			</tbody></table>
 		{% endif %}
-		<p class="missing">Am I missing something? <a href="#" class="button show-submit-condate">Submit a Convention Date</a> <br>or just <a href="#" class="button show-submit-note">Send a Quick Note</a></p>
+		<p class="missing">Am I missing something? <a href="#" class="button show-submit-condate">Submit a Convention Date</a> <br>or <a href="/condates" class="button accent">Bulk Submit Condates</a></p>
 
-		<form action="/submit_condate" method="post" class="submit-condate hidden">
-			<fieldset>
-				<div class="row">
-					<label for="convention">Convention</label>
-					<select class="chzn" id="convention" name="convention" required>
-					<option value="">Select Convention...</option>
-					{% for convention in conventions %}
-						<option value="{{ convention.id }}">{{ convention.title }}</option>
-					{% endfor %}
-						<option value="other">Other...</option>
-					</select>
-					<div class="other-fields hidden">
-						<input type="text" name="convention_title" placeholder="Convention name">
-						<input type="text" name="convention_twitter" placeholder="Twitter name">
-						<input type="text" name="convention_location" placeholder="City, ST">
-						<input type="text" name="convention_url" placeholder="http://">
-						<div>
-						{% for tag in tags %}
-							<label for="tag-{{ tag.id }}" class="checkbox"><input id="tag-{{ tag.id }}" type="checkbox" name="convention_tags" value="{{ tag.id }}"> {{ tag.title }}</label>
-						{% endfor %}
-
-						</div>
-					</div>
-				</div>
-
-				<div class="row">
-					<label for="start_date">Start Date</label>
-					<input class="dp" autocomplete="off" size="15" id="start_date" name="start_date" type="text" value="" placeholder="Start Date" required>
-				</div>
-				
-				<div class="row">
-					<label for="end_date">End Date</label>
-					<input class="dp" autocomplete="off" size="15" id="end_date" name="end_date" type="text" value="" placeholder="End Date">
-				</div>
-				
-				<div class="row">
-					<label for="registration_opens">Registration Opens</label>
-					<input class="dp" autocomplete="off" size="15" id="registration_opens" name="registration_opens" type="text" value="" placeholder="Reg. Opens">
-				</div>
-				
-				<div class="row">
-					<label for="registration_closes">Registration Closes</label>
-					<input class="dp" autocomplete="off" size="15" id="registration_closes" name="registration_closes" type="text" value="" placeholder="Reg. Closes">
-				</div>
-			</fieldset>
-
-			<fieldset class="extras">
-				<label for="notes">Extra Bonus Notes Section</label>
-				<textarea name="notes" id="notes" cols="50" rows="4" placeholder="Extra Bonus Notes Section"></textarea>
-				<div>
-					<label for="notes">Your Email</label>
-					<input type="text" name="email" placeholder="Your Email" size="15">
-				</div>
-			</fieldset>
-
-			<div class="actions">
-				<!-- die bots --><div style="position: absolute; left: -5000px;"><input type="text" name="diebots_5000" tabindex="-1" value=""></div>
-				<input type="submit" class="button" value="Looks Good!">
-			</div>
-	  </form>
-
-		<form action="/submit_note" method="post" class="submit-note hidden">
-			<fieldset class="extras">
-				<textarea name="note_body" cols="50" rows="4" placeholder="Shoot Nate a quick note! Registration opening date, suggestions for improvements, blathering praise, etc." required></textarea>
-				<div>
-					<label for="notes">Your Email</label>
-					<input type="text" name="note_email" placeholder="Your Email" size="15" required>
-				</div>
-			</fieldset>
-
-			<div class="actions">
-				<input type="submit" class="button" value="Looks Good!">
-			</div>
-	  </form>
+		{% include "submit-condate.html" %}
 
 	</section>
 

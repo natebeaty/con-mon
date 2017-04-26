@@ -174,7 +174,7 @@ def condates_json():
     result = CondateSchema(many=True).dump(condates)
     return jsonify({'condates': result.data})
 
-@app.route('/condates', methods=['GET', 'POST'])
+@app.route('/condates', methods=['GET'])
 def condates():
     return render_template('condates.html',
         conventions = Convention.query.order_by(Convention.title).all(),
@@ -184,7 +184,7 @@ def condates():
         current_condates = Condate.query.filter(Condate.start_date >= date.today(), Condate.published == True).order_by(Condate.start_date).all()
         )
 
-@app.route('/submit_note', methods=['GET', 'POST'])
+@app.route('/submit_note', methods=['POST'])
 def submit_note():
     msg = Message("New con-mon note from %s" % request.form['note_email'],
         sender = "hal@cons.clixel.com",
@@ -195,78 +195,94 @@ def submit_note():
     flash('Your note was sent ok! Thanks!')
     return redirect(url_for('index'))
 
-@app.route('/submit_condate', methods=['GET', 'POST'])
+@app.route('/submit_condate', methods=['POST'])
 def submit_condate():
-    if request.form['diebots_5000']:
+    if request.form.get('diebots_5000', None):
         flash('Your submission is suspected as spam!')
         return redirect(url_for('index'))
 
-    if request.form['convention'] == 'other':
-        convention = Convention.query.filter(Convention.title == request.form['convention_title']).first()
+    convention_id = request.form.get('convention', None)
+    if not convention_id:
+        return jsonify({ 'message': 'Bad request' })
+    elif convention_id == 'other':
+        convention = Convention.query.filter(Convention.title == request.form.get('convention_title', '')).first()
         if not convention:
             convention = Convention(
-                title=request.form['convention_title'],
-                twitter=request.form['convention_twitter'],
-                location=request.form['convention_location'],
-                url=request.form['convention_url']
+                title = request.form.get('convention_title', ''),
+                twitter = request.form.get('convention_twitter', ''),
+                location = request.form.get('convention_location', ''),
+                url = request.form.get('convention_url', '')
                 )
             db.session.add(convention)
             db.session.commit()
         # any tags for convention?
-        if request.form['convention_tags']:
+        if request.form.get('convention_tags', None):
             for tag in request.form.getlist('convention_tags'):
                 tag = Tag.query.filter(Tag.id == tag).first()
                 convention.tags.append(tag)
     else:
-        convention = Convention.query.filter(Convention.id == request.form['convention']).first()
+        convention = Convention.query.filter(Convention.id == convention_id).first()
 
-    end_date, registration_opens, registration_closes = [None, None, None]
-    start_date = parser.parse(request.form['start_date'])
-    if request.form['end_date']:
-        end_date = parser.parse(request.form['end_date'])
-    if request.form['registration_opens']:
-        registration_opens = parser.parse(request.form['registration_opens'])
-    if request.form['registration_closes']:
-        registration_closes = parser.parse(request.form['registration_closes'])
-
+    notes = request.form.get('notes', '')
+    email = request.form.get('email', None)
+    if email:
+        notes = "%s (submitted by %s)" % (notes, email)
+    start_date = request.form.get('start_date', '')
+    title = convention.title + ' ' + start_date[:4]
     condate = Condate(
-        convention_id=convention.id,
-        title=convention.title + ' ' + request.form['start_date'][:4],
-        start_date=start_date,
-        end_date=end_date,
-        registration_opens=registration_opens,
-        registration_closes=registration_closes,
-        notes=request.form['notes'],
-        published=False
+        convention_id = convention.id,
+        title = title,
+        start_date = parser.parse(start_date),
+        notes = notes,
+        published = False
         )
+
+    # optional dates
+    registration_opens = request.form.get('registration_opens', None)
+    registration_closes = request.form.get('registration_closes', None)
+    end_date = request.form.get('end_date', None)
+    if end_date:
+        condate.end_date = parser.parse(end_date)
+    if registration_opens:
+        condate.registration_opens = parser.parse(registration_opens)
+    if registration_closes:
+        condate.registration_closes = parser.parse(registration_closes)
+
     db.session.add(condate)
     db.session.commit()
 
     # email details
     submit_msg = "New Condate submission!\n\n"
     submit_msg = submit_msg + "Convention: %s\n" % convention.title
-    submit_msg = submit_msg + "Start date: %s\n" % request.form['start_date']
-    submit_msg = submit_msg + "End date: %s\n" % request.form['end_date']
-    submit_msg = submit_msg + "Registration opens: %s\n" % request.form['registration_opens']
-    submit_msg = submit_msg + "Registration closes: %s\n" % request.form['registration_closes']
-    if request.form['notes']:
-        submit_msg = submit_msg + "\nNotes:\n%s\n" % request.form['notes']
-    if request.form['email']:
-        submit_msg = submit_msg + "\nSender:\n%s\n" % request.form['email']
-        reply_to = request.form['email']
+    submit_msg = submit_msg + "Start date: %s\n" % condate.start_date
+    submit_msg = submit_msg + "End date: %s\n" % condate.end_date
+    submit_msg = submit_msg + "Registration opens: %s\n" % condate.registration_opens
+    submit_msg = submit_msg + "Registration closes: %s\n" % condate.registration_closes
+    if notes:
+        submit_msg = submit_msg + "\nNotes:\n%s\n" % notes
+    if email:
+        submit_msg = submit_msg + "\nSender:\n%s\n" % email
+        reply_to = email
     else:
         reply_to = ''
     submit_msg = submit_msg + "\n\nEdit Condate: %sadmin/condate/%s/\n" % (request.url_root, condate.id)
-    if request.form['convention'] == 'other':
+    if convention_id == 'other':
         submit_msg = submit_msg + "Edit Convention: %sadmin/convention/%s/\n" % (request.url_root, convention.id)
     msg = Message("New con-mon submission (%s)" % condate.title,
-        sender="hal@cons.clixel.com",
+        sender = "hal@cons.clixel.com",
         reply_to = reply_to,
-        recipients=["nate@clixel.com"])
+        recipients = ["nate@clixel.com"])
     msg.body = submit_msg
     mail.send(msg)
-    flash('The condate was submitted ok and is in review!')
-    return redirect(url_for('index'))
+
+    if request.is_xhr:
+        return jsonify({
+            'success': True,
+            'message': 'The condate was submitted ok and is in review!'
+            })
+    else:
+        flash('The condate was submitted ok and is in review!')
+        return redirect(url_for('index'))
 
 ### admin views
 

@@ -1,26 +1,47 @@
 {% extends "base.html" %}
+{% block body_id %}condates{% endblock body_id %}
+
 {% block content %}
-	
+
 	<section class="upcoming">
 		<h1>All Conventions</h1>
-		{% for convention in conventions %}
-			<article class="convention" data-id="{{ convention.id }}">
-				<h2>{{ convention.title }} <small style="font-size: 14px; color: #aaa;">({{ convention.location }})</small></h2>
-				<ul class="condates">
-				{% for condate in convention.condates %}
-					<li class="{% for tag in condate.convention.tags %}tagged-{{ tag.title }} {% endfor %}{{ condate.start_date|away_tags }}" data-condate-id="{{ condate.id }}">
-						<span class="title">{{ condate.title }}</span>
-						 <span class="date">
-						 {{ condate.start_date.strftime('%b %e')|trim }}
-						{%- if condate.end_date and condate.end_date != condate.start_date -%}
-							&ndash;{{ condate.end_date.strftime('%e')|trim }}
-						{%- endif %}, {{ condate.start_date.strftime('%Y') }}
-						</span>
+		<form class="quicksearch" action="#">
+			<input type="text" name="term" placeholder="Quick search...">
+		</form>
+		<div class="conventions">
+			{% for convention in conventions %}
+				<article class="convention" data-id="{{ convention.id }}">
+					<h2>{{ convention.title }} <small>({{ convention.location }})</small></h2>
+					<p class="meta">
+						{% if convention.url %}
+							<a href="{{ convention.url }}">{{ convention.url }}</a>
+						{% endif %}
+						{% if convention.twitter %}
+							{% if convention.url %}—{% endif %} <a href="https://twitter.com/{{ convention.twitter }}">@{{ convention.twitter }}</a>
+						{% endif %}
+					</p>
+					<ul class="condates">
+					{% for condate in convention.condates %}
+						{% if condate.published %}
+						<li class="{% for tag in condate.convention.tags %}tagged-{{ tag.title }} {% endfor %}{{ condate.start_date|away_tags }}" data-condate-id="{{ condate.id }}">
+							<span class="title">{{ condate.title }}</span>
+							 <span class="date">
+							 {{ condate.start_date.strftime('%b %e')|trim }}
+							{%- if condate.end_date and condate.end_date != condate.start_date -%}
+								&ndash;{{ condate.end_date.strftime('%e')|trim }}
+							{%- endif %}, {{ condate.start_date.strftime('%Y') }}
+							</span>
+						</li>
+						{% endif %}
 					{% endfor %}
-				</ul>
-			</article>
-		{% endfor %}
-
+					</ul>
+					<a href="#" class="add-new-condate button">+ Add Condate</a>
+					{% with convention_id=convention.id %}
+						{% include "submit-condate.html" %}
+					{% endwith %}
+				</article>
+			{% endfor %}
+		</div>
 	</section>
 
 {% endblock content %}

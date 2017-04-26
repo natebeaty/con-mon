@@ -8,6 +8,13 @@ $indie: #ffcc2f;
 $zines: #ff9d45;
 $superhero: #ff80eb;
 $midgray: #ccc;
+$black: #222;
+$white: #eee;
+
+// Breakpoints
+$breakpoint-small: 480px;
+$breakpoint-medium: 768px;
+$breakpoint-large: 1200px;
 
 .cf:before,
 .cf:after {
@@ -22,19 +29,25 @@ $midgray: #ccc;
 }
 .button {
 	font-size: .8rem;
-  background: $highlight; 
+  background: $highlight;
   color: #eee;
-  border-radius: 4px;
-  padding: 3px 8px;
+  border-radius: 3px;
+  padding: 5px 8px 4px;
   white-space: nowrap;
-  display:inline-block;
-  margin-bottom:4px; 
+  display: inline-block;
+  margin-bottom: 4px;
   text-decoration: none;
-  border:0;
-  cursor:pointer;
+  border: none;
+  cursor: pointer;
   &:hover {
-    text-decoration:none; 
-    background: lighten($highlight, 5%); 
+    text-decoration:none;
+    background: lighten($highlight, 5%);
+  }
+  &.accent {
+  	background: $highlight2;
+  	&:hover {
+		  background: lighten($highlight2, 5%);
+  	}
   }
 }
 
@@ -107,4 +120,28 @@ $circwidth: 30px;
 	100%{
 		-webkit-transform:translate($circwidth);
 	}
+}
+
+@mixin screen($res-min, $res-max)
+{
+  @media screen and ( min-width: $res-min ) and ( max-width: $res-max )
+  {
+    @content;
+  }
+}
+
+@mixin max-screen($res)
+{
+  @media screen and ( max-width: $res )
+  {
+    @content;
+  }
+}
+
+@mixin min-screen($res)
+{
+  @media screen and ( min-width: $res )
+  {
+    @content;
+  }
 }

@@ -4,8 +4,9 @@
 // @codekit-prepend "../bower_components/jquery/dist/jquery.js"
 // @codekit-prepend "../bower_components/underscore/underscore.js"
 // @codekit-prepend "../bower_components/moment/moment.js"
-// @codekit-prepend "../bower_components/tooltipster/js/jquery.tooltipster.js"
+// @codekit-prepend "../bower_components/tooltipster/dist/js/tooltipster.bundle.js"
 // @codekit-prepend "../bower_components/clndr/src/clndr.js"
+// @codekit-prepend "../bower_components/jquery.quicksearch/dist/jquery.quicksearch.js"
 // @codekit-prepend "bootstrap-datepicker.js"
 
 CON_MON = (function() {
@@ -17,23 +18,48 @@ CON_MON = (function() {
     function _init() {
         _resize();
 
-        // init tooltips
-        $('.upcoming .tooltip').tooltipster({
-            delay: 0,
-            touchDevices: false,
-            animation: 'slide',
-            position: 'left'
-        });
-        $('.calendars .tooltip').tooltipster({
-            delay: 0,
-            animation: 'slide'
-        });
+        if ($('body#home').length) {
+            _initHome();
+        }
 
-        // pull in condate data and build year view
-        $.getJSON( '/condates.json', function( data ) {
-            eventsArray = data.condates;
-            _initClndr();
-        });
+        // Bulk condates page
+        if ($('body#condates').length) {
+            // Kill form submit that we don't really need (just quicksearch)
+            $('.quicksearch').on('submit', function(e) {
+                e.preventDefault();
+            }).find('input[name="term"]').focus();
+            // Add "no results" li for quicksearch
+            $('<article class="no-results hidden">None found.</article>').appendTo('.conventions');
+            $(document).on('keydown',function(e) {
+                // Escape clears out search
+                if (e.keyCode === 27) {
+                    $('.quicksearch input[name="term"]').val('');
+                }
+            });
+            _initQuickSearch();
+
+            // Bulk forms
+            $('a.add-new-condate').on('click', function(e) {
+                e.preventDefault();
+                $form = $(this).next('form').toggleClass('hidden');
+            });
+            $('.convention form').on('submit', function(e) {
+                e.preventDefault();
+                $form = $(this);
+                $.post($form.attr('action'), $form.serialize())
+                    .done(function(data) {
+                        if (data.success) {
+                            $form.addClass('submitted-ok').find('.status').removeClass('error').addClass('success').text(data.message);
+                        } else {
+                            $form.find('.status').addClass('error').text(data.message);
+                        }
+                    })
+                    .fail(function() {
+                        $form.find('.status').addClass('error').text('There was an error. Please try again.');
+                    });
+            });
+
+        }
 
         // change datepickers to native if on mobile and input type=date is supported
         if (Modernizr.inputtypes.date && Modernizr.touch) {
@@ -47,27 +73,48 @@ CON_MON = (function() {
             });
         }
 
+    }
+
+    // Quick search on top of /artists/ page
+    function _initQuickSearch() {
+        $('.quicksearch input[name="term"]').quicksearch('.conventions article.convention', {
+            onAfter: function () {
+                $('.conventions').toggleClass('searching', $('.quicksearch input[name="term"]').val()!=='');
+            },
+            noResults: '.no-results'
+        });
+    }
+
+    function _initHome() {
+        // init tooltips
+        $('.upcoming .tooltip').tooltipster({
+            delay: 0,
+            side: 'left'
+        });
+        $('.calendars .tooltip').tooltipster({
+            delay: 0
+        });
+
+        // pull in condate data and build year view
+        $.getJSON( '/condates.json', function( data ) {
+            eventsArray = data.condates;
+            _initClndr();
+        });
+
+        // hide any unused tags
+        $('.filtering .tag').each(function() {
+            $(this).toggleClass('hidden', $('.condate.tagged-' + $(this).text()).length===0);
+        });
+        // totally hide filters if there's only one
+        $('.filtering').toggleClass('hidden', $('p.tags .tag:not(.hidden)').length===1);
+
         // init condate filters
         _filterCondates();
 
         // init submission form handlers
         $('.show-submit-condate').click(function(e) {
             e.preventDefault();
-            if ($('.submit-condate').hasClass('hidden')) {
-                $('.submit-condate').removeClass('hidden');
-                $('.submit-note').addClass('hidden');
-            } else {
-                $('.submit-condate').addClass('hidden');
-            }
-        });
-        $('.show-submit-note').click(function(e) {
-            e.preventDefault();
-            if ($('.submit-note').hasClass('hidden')) {
-                $('.submit-note').removeClass('hidden');
-                $('.submit-condate').addClass('hidden');
-            } else {
-                $('.submit-note').addClass('hidden');
-            }
+            $('.submit-condate').toggleClass('hidden');
         });
         // "other convention" fields hide/show
         $('#convention').on('change', function() {
@@ -77,7 +124,7 @@ CON_MON = (function() {
 
     function _initClndr() {
         // build year view of calendars
-        for (var i = 0; i < 13; i++) {
+        for (var i = 1; i < 13; i++) {
             calendars.clndr1 = $('.cal'+i).clndr({
                 template: $('#template-calendar').html(),
                 startWithMonth: moment().add(i-1, 'month'),
@@ -127,10 +174,7 @@ CON_MON = (function() {
                 $('.days li').removeClass('current');
             });
             $this.tooltipster({
-                content: $tip.html(),
-                delay: 0,
-                contentAsHTML: true,
-                animation: 'slide',
+                content: $tip.text(),
                 delay: 0
             });
         });
