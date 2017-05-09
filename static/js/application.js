@@ -81,7 +81,7 @@ CON_MON = (function() {
                 e.preventDefault();
                 $form = $(this);
                 if ($form.find('input[name=diebots_5000]').val() == '') {
-                    $.post('/submit-condate', $form.serialize())
+                    $.post('/submit_condate', $form.serialize())
                         .done(function(data) {
                             if (data.success) {
                                 $form.addClass('submitted-ok').find('.status').removeClass('error').addClass('success').text(data.message);

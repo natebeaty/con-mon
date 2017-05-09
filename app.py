@@ -6,8 +6,6 @@ from marshmallow import Schema, fields, pprint
 from flask_superadmin import Admin, expose, BaseView, model
 from dateutil import parser
 from icalendar import Calendar, Event
-import random
-import string
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -83,25 +81,6 @@ class CondateSchema(Schema):
     convention = fields.Nested(ConventionSchema)
     class Meta:
         fields = ('id', 'title', 'notes', 'start_date', 'end_date', 'convention')
-
-### CSRF
-
-@app.before_request
-def csrf_protect():
-    if request.method == 'POST' and 'admin' not in request.url:
-        token = session.pop('_csrf_token', None)
-        if not token or token != request.form.get('_csrf_token'):
-            abort(403)
-
-def generate_csrf_token():
-    if '_csrf_token' not in session:
-        session['_csrf_token'] = some_random_string()
-    return session['_csrf_token']
-
-app.jinja_env.globals['csrf_token'] = generate_csrf_token
-
-def some_random_string():
-    return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(20))
 
 
 ### template filters
@@ -219,9 +198,13 @@ def submit_note():
 
 @app.route('/submit_condate', methods=['POST'])
 def submit_condate():
-    if request.form.get('diebots_5000', None):
-        flash('Your submission is suspected as spam!')
-        return redirect(url_for('index'))
+    start_date = request.form.get('start_date', '')
+    if request.form.get('diebots_5000', None) or start_date == '' or start_date == str(datetime.now())[:10]:
+        if request.is_xhr:
+            return jsonify({ 'message': 'Suspected as spam.' })
+        else:
+            flash('Suspected as spam.')
+            return redirect(url_for('index'))
 
     convention_id = request.form.get('convention', None)
     if not convention_id:
@@ -250,7 +233,6 @@ def submit_condate():
     email = request.form.get('email', None)
     if email:
         notes = "%s (submitted by %s)" % (notes, email)
-    start_date = request.form.get('start_date', '')
     title = convention.title + ' ' + start_date[:4]
     condate = Condate(
         convention_id = convention.id,
