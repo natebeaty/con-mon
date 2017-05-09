@@ -88,7 +88,7 @@ class CondateSchema(Schema):
 
 @app.before_request
 def csrf_protect():
-    if request.method == "POST":
+    if request.method == 'POST' and 'admin' not in request.url:
         token = session.pop('_csrf_token', None)
         if not token or token != request.form.get('_csrf_token'):
             abort(403)
