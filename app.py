@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, redirect, url_for, Response, jsonify
+from flask import Flask, render_template, request, flash, redirect, url_for, Response, jsonify, session, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_sendmail import Mail, Message
 from datetime import datetime, date, time, timedelta
@@ -6,6 +6,8 @@ from marshmallow import Schema, fields, pprint
 from flask_superadmin import Admin, expose, BaseView, model
 from dateutil import parser
 from icalendar import Calendar, Event
+import random
+import string
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -81,6 +83,26 @@ class CondateSchema(Schema):
     convention = fields.Nested(ConventionSchema)
     class Meta:
         fields = ('id', 'title', 'notes', 'start_date', 'end_date', 'convention')
+
+### CSRF
+
+@app.before_request
+def csrf_protect():
+    if request.method == "POST":
+        token = session.pop('_csrf_token', None)
+        if not token or token != request.form.get('_csrf_token'):
+            abort(403)
+
+def generate_csrf_token():
+    if '_csrf_token' not in session:
+        session['_csrf_token'] = some_random_string()
+    return session['_csrf_token']
+
+app.jinja_env.globals['csrf_token'] = generate_csrf_token
+
+def some_random_string():
+    return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(20))
+
 
 ### template filters
 

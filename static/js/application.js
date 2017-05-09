@@ -80,17 +80,19 @@ CON_MON = (function() {
             $('.convention form').on('submit', function(e) {
                 e.preventDefault();
                 $form = $(this);
-                $.post($form.attr('action'), $form.serialize())
-                    .done(function(data) {
-                        if (data.success) {
-                            $form.addClass('submitted-ok').find('.status').removeClass('error').addClass('success').text(data.message);
-                        } else {
-                            $form.find('.status').addClass('error').text(data.message);
-                        }
-                    })
-                    .fail(function() {
-                        $form.find('.status').addClass('error').text('There was an error. Please try again.');
-                    });
+                if ($form.find('input[name=diebots_5000]').val() == '') {
+                    $.post('/submit-condate', $form.serialize())
+                        .done(function(data) {
+                            if (data.success) {
+                                $form.addClass('submitted-ok').find('.status').removeClass('error').addClass('success').text(data.message);
+                            } else {
+                                $form.find('.status').addClass('error').text(data.message);
+                            }
+                        })
+                        .fail(function() {
+                            $form.find('.status').addClass('error').text('There was an error. Please try again.');
+                        });
+                }
             });
 
         }
