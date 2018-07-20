@@ -8,6 +8,7 @@ import twitter
 import random
 
 app = Flask(__name__)
+app.config.from_object('config')
 manager = Manager(app)
 db = SQLAlchemy(app)
 
