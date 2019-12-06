@@ -21,11 +21,11 @@ def update():
 
 def pip_install():
     with cd(env.path):
-        run('source ../env/bin/activate && pip install --quiet -r requirements.txt')
+        run('source .venv/bin/activate && pip install --quiet -r requirements.txt')
 
 def migrate():
     with cd(env.path):
-        run('source ../env/bin/activate && python alembic upgrade head')
+        run('source .venv/bin/activate && python alembic upgrade head')
 
 def restart():
     with cd(env.path):
