@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, flash, redirect, url_for, Response, jsonify, session, abort
 from flask_sqlalchemy import SQLAlchemy
-from flask_sendmail import Mail, Message
+from flask_mail import Mail, Message
 from datetime import datetime, date, time, timedelta
 from marshmallow import Schema, fields, pprint
 from flask_superadmin import Admin, expose, BaseView, model
