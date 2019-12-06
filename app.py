@@ -204,7 +204,7 @@ def approve_condate():
     if (condate):
         condate.published = True
         db.session.commit()
-        flash('Condate approved ok!')
+        flash('Condate approved ok! <a href="/admin/condate/%s/">Edit Condate</a>' % condate.id)
     return redirect(url_for('index'))
 
 @app.route('/submit_condate', methods=['POST'])
