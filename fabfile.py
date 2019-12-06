@@ -21,12 +21,12 @@ def update():
 
 def pip_install():
     with cd(env.path):
-        run('pip install -r requirements.txt')
+        run('source ../env/bin/activate && pip install --quiet -r requirements.txt')
 
 def migrate():
     with cd(env.path):
-        run('python alembic upgrade head')
+        run('source ../env/bin/activate && python alembic upgrade head')
 
 def restart():
     with cd(env.path):
-        sudo('../apache2/bin/restart')
+        run('../apache2/bin/restart')

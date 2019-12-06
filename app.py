@@ -283,7 +283,7 @@ def submit_condate():
     else:
         reply_to = ''
     submit_msg = submit_msg + "\n\nEdit Condate: %sadmin/condate/%s/\n" % (request.url_root, condate.id)
-    submit_msg = submit_msg + "\n\nApprove: %sapprove_condate?hash=/%s/\n" % (request.url_root, condate.id)
+    submit_msg = submit_msg + "Approve: %sapprove_condate?hash=%s\n" % (request.url_root, condate.submission_hash)
     if convention_id == 'other':
         submit_msg = submit_msg + "Edit Convention: %sadmin/convention/%s/\n" % (request.url_root, convention.id)
     msg = Message("New con-mon submission (%s)" % condate.title,
