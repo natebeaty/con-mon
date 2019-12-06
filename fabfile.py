@@ -1,13 +1,16 @@
 from fabric.api import *
 
-env.project_name = 'con-mon'
-env.hosts = ['cons.clixel.com']
+env.hosts = ['con-mon.com']
 env.user = 'natebeaty'
 env.git_branch = 'master'
 env.warn_only = True
-env.path = '/var/www/%s/public_html' % (env.project_name)
+env.path = '/home/natebeaty/webapps/conmon/conmon'
 
 def deploy():
+    update()
+    restart()
+
+def install():
     update()
     pip_install()
     restart()
@@ -20,6 +23,10 @@ def pip_install():
     with cd(env.path):
         run('pip install -r requirements.txt')
 
+def migrate():
+    with cd(env.path):
+        run('python alembic upgrade head')
+
 def restart():
     with cd(env.path):
-        sudo('/etc/init.d/uwsgi restart')
+        sudo('../apache2/bin/restart')

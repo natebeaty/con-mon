@@ -7,6 +7,12 @@ Flask app to help frazzled cartoonists keep track of the myriad of conventions i
 
 Let's call it a beta.
 
-<http://con-mon.com/>
+<https://con-mon.com/>
 
-Open to pull requests and/or emails with updated con info.
+## Getting up and running
+
+Set up a virtualenv with python 3, and `pip install -r requirements.txt`
+
+Pull down `db/app.db` and set up `config.py`. Run `python app.py` for development server.
+
+For db migrations: `alembic revision -m "add column foo"` and edit migration, then run `alembic upgrade head`

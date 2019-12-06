@@ -6,6 +6,7 @@ from marshmallow import Schema, fields, pprint
 from flask_superadmin import Admin, expose, BaseView, model
 from dateutil import parser
 from icalendar import Calendar, Event
+import uuid
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -49,6 +50,7 @@ class Condate(db.Model):
     registration_opens = db.Column(db.Date)
     registration_closes = db.Column(db.Date)
     published = db.Column(db.Boolean)
+    submission_hash = db.Column(db.String(250))
 
     convention_id = db.Column(db.Integer, db.ForeignKey('convention.id'))
     convention = db.relationship('Convention',
@@ -173,7 +175,7 @@ def condates_ics():
 def condates_json():
     condates = Condate.query.filter(Condate.start_date >= date.today(), Condate.published == True).order_by(Condate.start_date).all()
     result = CondateSchema(many=True).dump(condates)
-    return jsonify({'condates': result.data})
+    return jsonify({'condates': result})
 
 @app.route('/condates', methods=['GET'])
 def condates():
@@ -194,6 +196,15 @@ def submit_note():
     msg.body = "%s\n\nFrom: %s\n" % (request.form['note_body'], request.form['note_email'])
     mail.send(msg)
     flash('Your note was sent ok! Thanks!')
+    return redirect(url_for('index'))
+
+@app.route('/approve_condate', methods=['GET'])
+def approve_condate():
+    condate = Condate.query.filter(Condate.submission_hash == request.args.get('hash')).one()
+    if (condate):
+        condate.published = True
+        db.session.commit()
+        flash('Condate approved ok!')
     return redirect(url_for('index'))
 
 @app.route('/submit_condate', methods=['POST'])
@@ -239,7 +250,8 @@ def submit_condate():
         title = title,
         start_date = parser.parse(start_date),
         notes = notes,
-        published = False
+        published = False,
+        submission_hash = uuid.uuid4().hex
         )
 
     # optional dates
@@ -271,6 +283,7 @@ def submit_condate():
     else:
         reply_to = ''
     submit_msg = submit_msg + "\n\nEdit Condate: %sadmin/condate/%s/\n" % (request.url_root, condate.id)
+    submit_msg = submit_msg + "\n\nApprove: %sapprove_condate?hash=/%s/\n" % (request.url_root, condate.id)
     if convention_id == 'other':
         submit_msg = submit_msg + "Edit Convention: %sadmin/convention/%s/\n" % (request.url_root, convention.id)
     msg = Message("New con-mon submission (%s)" % condate.title,
@@ -301,7 +314,7 @@ class TagAdmin(model.ModelAdmin):
 
 class CondateAdmin(model.ModelAdmin):
     session = db.session
-    fields = ('convention', 'title', 'start_date', 'end_date', 'registration_opens', 'registration_closes', 'published', 'notes',)
+    fields = ('convention', 'title', 'start_date', 'end_date', 'registration_opens', 'registration_closes', 'published', 'notes','submission_hash',)
     list_display = ('title', 'start_date', 'end_date', 'registration_opens', 'registration_closes', 'published',)
 
 class PhraseAdmin(model.ModelAdmin):
