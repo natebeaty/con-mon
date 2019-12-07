@@ -7,6 +7,7 @@ from datetime import datetime, date, time, timedelta
 from marshmallow import Schema, fields, pprint
 from dateutil import parser
 from icalendar import Calendar, Event
+from functools import wraps
 import uuid
 
 app = Flask(__name__)
@@ -345,11 +346,19 @@ def is_authenticated():
     auth = request.authorization
     return auth and check_auth(auth.username, auth.password)
 
+def requires_admin(f):  # pragma: no cover
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        auth = request.authorization
+        if not auth or not check_auth(auth.username, auth.password):
+            return authenticate()
+        return f(*args, **kwargs)
+    return decorated
+
 class AdminIndexView(_AdminIndexView):
+    @requires_admin
     @expose('/')
     def index(self):
-        if not is_authenticated():
-            return authenticate()
         return super(AdminIndexView, self).index()
 
 admin = Admin(app, index_view=AdminIndexView())
