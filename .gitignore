@@ -10,3 +10,4 @@ wrk/*
 .DS_Store
 config.codekit3
 static/bower_components
+.python-version
