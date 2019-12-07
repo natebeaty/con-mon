@@ -16,7 +16,7 @@
 					<div class="row half"><input type="text" name="convention_title" placeholder="Convention name"></div>
 					<div class="row half"><input type="text" name="convention_twitter" placeholder="Twitter handle"></div>
 					<div class="row half"><input type="text" name="convention_location" placeholder="City, ST"></div>
-					<div class="row half"><input type="text" name="convention_url" placeholder="http://"></div>
+					<div class="row half"><input type="text" name="convention_url" placeholder="https://"></div>
 					<div>
 					{% for tag in tags %}
 						<label for="tag-{{ tag.id }}" class="checkbox"><input id="tag-{{ tag.id }}" type="checkbox" name="convention_tags" value="{{ tag.id }}" {% if tag.title=='Indie' %}checked{% endif %}> {{ tag.title }}</label>

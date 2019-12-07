@@ -82,7 +82,8 @@ form {
 	}
 	.extras {
 		margin: 10px 0;
-		input,textarea {
+		input,
+		textarea {
 			width: 100%;
 		}
 	}
@@ -306,7 +307,7 @@ footer {
 	width: 82px;
 	height: 34px;
 	overflow: hidden;
-	background: url('http://static.tumblr.com/mfxbogb/JRDmu7wtb/clixel-sprite.png') no-repeat;
+	background: url('https://s3.amazonaws.com/static.natebeaty.com/clixel-sprite.png') no-repeat;
 	text-indent: -9999em;
 	transition: background-position .15s ease;
 	&:hover {
