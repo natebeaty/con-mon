@@ -1,10 +1,9 @@
 from flask import Flask, render_template, request, flash, redirect, url_for, Response, jsonify, session, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail, Message
-from flask_superadmin import Admin, expose, AdminIndexView as _AdminIndexView
-from flask_superadmin.model import ModelAdmin as _ModelAdmin
 from datetime import datetime, date, time, timedelta
 from marshmallow import Schema, fields, pprint
+from flask_superadmin import Admin, expose, BaseView, model
 from dateutil import parser
 from icalendar import Calendar, Event
 from functools import wraps
@@ -306,62 +305,24 @@ def submit_condate():
 
 ### admin views
 
-class ModelAdmin(_ModelAdmin):
-    def is_accessible(self):
-        return is_authenticated()
-    def _handle_view(self, name, *args, **kwargs):
-        if not self.is_accessible():
-            return authenticate()
-
-class ConventionAdmin(ModelAdmin):
+class ConventionAdmin(model.ModelAdmin):
     session = db.session
     fields = list_display = ('title', 'location', 'url', 'twitter','tags',)
 
-class TagAdmin(ModelAdmin):
+class TagAdmin(model.ModelAdmin):
     session = db.session
     fields = list_display = ('title',)
 
-class CondateAdmin(ModelAdmin):
+class CondateAdmin(model.ModelAdmin):
     session = db.session
     fields = ('convention', 'title', 'start_date', 'end_date', 'registration_opens', 'registration_closes', 'published', 'notes','submission_hash',)
     list_display = ('title', 'start_date', 'end_date', 'registration_opens', 'registration_closes', 'published',)
 
-class PhraseAdmin(ModelAdmin):
+class PhraseAdmin(model.ModelAdmin):
     session = db.session
     fields = list_display = ('body','num_uses',)
 
-# ridiculously dumb auth for top security admin features
-
-def check_auth(username, password):
-    return username == app.config['ADMIN_USERNAME'] and password == app.config['ADMIN_PASSWORD']
-
-def authenticate():
-    return Response(
-        'You must log-in for ad-min.',
-        401,
-        {'WWW-Authenticate': 'Basic realm="Login Required"'}
-    )
-
-def is_authenticated():
-    auth = request.authorization
-    return auth and check_auth(auth.username, auth.password)
-
-def requires_admin(f):  # pragma: no cover
-    @wraps(f)
-    def decorated(*args, **kwargs):
-        auth = request.authorization
-        if not auth or not check_auth(auth.username, auth.password):
-            return authenticate()
-        return f(*args, **kwargs)
-    return decorated
-
-class AdminIndexView(_AdminIndexView):
-    @requires_admin
-    @expose('/')
-    def index(self):
-        return super(AdminIndexView, self).index()
-
-admin = Admin(app, index_view=AdminIndexView())
+admin = Admin(app)
 admin.register(Convention, ConventionAdmin)
 admin.register(Condate, CondateAdmin)
 admin.register(Tag, TagAdmin)
