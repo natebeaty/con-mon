@@ -6,7 +6,7 @@
 
 body {
 	background: $background;
-	font-family: 'Arimo';
+	font: 16px/1.5 'Arimo', sans-serif;
 	color: $dark;
 }
 a {
@@ -21,20 +21,21 @@ h1,h2,h3 {
 	font-family: 'Arvo';
 	margin: .5rem 0 1rem;
 }
+input,
 p {
-	font: 1rem/1.4 'Arimo';
+	font: 1rem/1.4 'Arimo', sans-serif;
 	margin: .5rem 0;
 }
 h1 {
-	font-size: 2rem;
+	font: 2rem/1 'Arvo', sans-serif;
 	margin: 0;
 	text-align: center;
 }
 h2 {
-	font-size: 1.5rem;
+	font: 1.5rem/1.2 'Arvo', sans-serif;
 }
 h3 {
-	font-size: 1rem;
+	font: 1.2rem/1.2 'Arvo', sans-serif;
 	margin: 0 0 .3rem;
 }
 input[type=text],
@@ -54,7 +55,6 @@ textarea {
 	text-align: center;
 }
 label {
-	display: none;
 	&.showme {
 		display: block !important;
 	}
@@ -65,7 +65,7 @@ label {
 	// &.inline {
 	// 	display: inline-block;
 	// }
-	font-size: .7rem;
+	// font-size: 0.7rem;
 	color: $dark;
 	margin: 8px 0 0;
 	em {
@@ -89,7 +89,8 @@ form {
 	}
 }
 .filtering {
-	font-size: .7rem;
+	display: none;
+	font-size: 0.7rem;
 }
 
 #content {
@@ -101,17 +102,15 @@ header {
 	color: $highlight;
 	margin-bottom: 2rem;
 	h2 {
-		font-size: 15px;
-		line-height: 1.1;
 		text-align: left;
+		font: 1rem/1.2 'Arvo', sans-serif;
 		margin: -4.5rem auto 1.5rem;
 		padding-left: 8rem;
 		width: 170px;
 		color: #eee;
 	}
 	p {
-		margin: 40px 0 20px;
-		font-size: 12px;
+		margin: 20px 0;
 		text-align: center;
 		a {
 			text-decoration: none;
@@ -138,7 +137,7 @@ header {
 a.tag {
 	text-decoration: none;
 	background: transparent;
-	font-size: .8rem;
+	font-size: 0.8rem;
 	color: $indie;
 	&.tagged-Superhero {
 		color: $superhero;
@@ -172,7 +171,7 @@ a.tag {
 	padding: 4px 8px;
 	background: $dark;
 	color: #fff;
-	font-size: .7rem;
+	font-size: 0.8rem;
 	line-height: 1;
 	border-radius: 4px;
 	&.closed {
@@ -220,7 +219,7 @@ a.tag {
 		}
 	}
 	td {
-		font: .7rem/1.2 'Arimo';
+		// font: 0.7rem/1.2 'Arimo';
 		vertical-align: middle;
 		border-bottom: 1px solid $midgray;
 		padding: 4px;
@@ -235,7 +234,7 @@ a.tag {
 	text-align: center;
 	.days-away {
 		margin-left: .3rem;
-		font-size: .8rem;
+		// font-size: .8rem;
 	}
 	tr.month-away .days-away,
 	tr.month-away .date {
@@ -257,9 +256,9 @@ a.tag {
 	h2,h3 {
 		margin: 0;
 	}
-	h2 {
-		font: 1rem/1.2 'Arvo';
-	}
+	// h2 {
+	// 	font: 1rem/1.2 'Arvo';
+	// }
 }
 .tagged-Indie a {
 	color: $indie;
@@ -339,16 +338,20 @@ footer {
 	}
 }
 
+// mobile only
+@media only screen and (max-width: 768px) {
+
+}
+
 
 // desktop
 @media only screen and (min-width: 768px) {
 	.upcoming {
 		table {
-			// width: 80%;
 			margin: 20px auto;
 		}
 		td {
-			font-size: .8rem;
+			// font-size: .8rem;
 		}
 		h2 {
 			font-size: 1.4rem;
@@ -457,7 +460,7 @@ form.submit-condate {
 		select,
 		label {
 			display: inline-block;
-			font-size: 14px;
+			font-size: 16px;
 			margin-bottom: 10px;
 		}
 		select,
@@ -467,8 +470,8 @@ form.submit-condate {
 		}
 	}
 	.row {
-		float: left;
-		width: 50%;
+		// float: left;
+		// width: 50%;
 		input {
 			width: 98%;
 		}
