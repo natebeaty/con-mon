@@ -103,14 +103,14 @@ CON_MON = (function() {
     // } else {
       $('.submit-condate').each(function() {
         var $this = $(this);
-        _startEndDatepickers($this.find('input[name=start_date]'), $this.find('input[name=end_date]'));
+        _startEndDatepickers($this.find('input[name=start_date]'), $this.find('input[name=end_date]'), 1);
         _startEndDatepickers($this.find('input[name=registration_opens]'), $this.find('input[name=registration_closes]'));
       });
     // }
 
   }
 
-  function _startEndDatepickers($el1, $el2) {
+  function _startEndDatepickers($el1, $el2, populateEnd) {
     var nowTemp = new Date();
     var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
     var startDate = $el1.datepicker({
@@ -122,7 +122,9 @@ CON_MON = (function() {
       if (ev.date.valueOf() > endDate.date.valueOf()) {
         var newDate = new Date(ev.date)
         newDate.setDate(newDate.getDate());
-        endDate.setValue(newDate);
+        if (typeof populateEnd !== 'undefined') {
+          endDate.setValue(newDate);
+        }
       }
       startDate.hide();
       $el2[0].focus();
