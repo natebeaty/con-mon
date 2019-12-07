@@ -331,17 +331,19 @@ class PhraseAdmin(ModelAdmin):
 
 # ridiculously dumb auth for top security admin features
 
-def ridiculous_auth(username, password):
-    return username == 'admin' and password == app.config['ADMIN_PWD']
+def check_auth(username, password):
+    return username == app.config['ADMIN_USERNAME'] and password == app.config['ADMIN_PASSWORD']
 
 def authenticate():
     return Response(
-    'You must log-in for ad-min.', 401,
-    { 'WWW-Authenticate': 'Basic realm="Login Required"' })
+        'You must log-in for ad-min.',
+        401,
+        {'WWW-Authenticate': 'Basic realm="Login Required"'}
+    )
 
 def is_authenticated():
     auth = request.authorization
-    return auth and ridiculous_auth(auth.username, auth.password)
+    return auth and check_auth(auth.username, auth.password)
 
 class AdminIndexView(_AdminIndexView):
     @expose('/')
