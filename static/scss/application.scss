@@ -91,6 +91,11 @@ form {
 .filtering {
 	font-size: .7rem;
 }
+
+#content {
+	margin: 0 10px;
+}
+
 header {
 	background: $dark;
 	color: $highlight;
@@ -105,7 +110,7 @@ header {
 		color: #eee;
 	}
 	p {
-		margin: 20px 0;
+		margin: 40px 0 20px;
 		font-size: 12px;
 		text-align: center;
 		a {
@@ -368,6 +373,9 @@ footer {
 		display: none;
 	}
 	header {
+		p {
+			margin: 20px 0;
+		}
 		h2 {
 			font-size: 18px;
 			line-height: 1.1;
