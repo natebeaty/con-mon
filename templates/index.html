@@ -30,7 +30,7 @@
 					{% if condate.registration_opens %}
 						{% if condate.registration_closes and condate.registration_closes|in_past %}
 							<span class="reg-status tag closed"><span class="small-only">Reg.</span><span class="large-only">Registration</span> Closed</span>
-						{% elif condate.registration_opens|in_past %}
+						{% elif condate.registration_opens|is_past_or_today %}
 							{% if condate.registration_closes %}
 								<span class="reg-status tag"><span class="small-only">Reg.</span><span class="large-only">Registration</span> Closes {{ condate.registration_closes.strftime('%b %e')|trim }}</span>
 							{% else %}

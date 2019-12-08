@@ -118,6 +118,11 @@ def in_past(dt):
     return dt < now
 
 @app.template_filter()
+def is_past_or_today(dt):
+    now = datetime.utcnow().date()
+    return dt <= now
+
+@app.template_filter()
 def away_tags(dt):
     output = ''
     if dt > date.today() + timedelta(30):
