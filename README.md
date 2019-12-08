@@ -5,8 +5,6 @@ Con-Mon
 
 Flask app to help frazzled cartoonists keep track of the myriad of conventions in a year.
 
-Let's call it a beta.
-
 <https://con-mon.com/>
 
 ## Getting up and running
