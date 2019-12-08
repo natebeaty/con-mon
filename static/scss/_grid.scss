@@ -1,0 +1,86 @@
+// Grid system
+
+$grid: 6px;
+$mobile-global-padding: 10px;
+$global-padding: 24px;
+$global-columns: 12;
+$column-width: 100% / $global-columns;
+
+// Quickie columns($num-columns, $parent-num-columns) function
+@function columns($num-columns, $parent-num-columns: $global-columns) {
+  @return $column-width * $num-columns * ($global-columns / $parent-num-columns);
+}
+@function grid($num) {
+  @return $grid * $num;
+}
+
+// Common padding
+@mixin global-padding($desktop-padding:12, $desktop-parent-columns:$global-columns) {
+  padding: $mobile-global-padding;
+
+  // Desktop styles
+  @include media-md {
+    padding: grid($desktop-padding) columns(2, $desktop-parent-columns);
+  }
+}
+
+.row {
+  @include clearfix;
+}
+
+// Global flexbox grid styles
+.grid {
+  width: 100%;
+  display: block;
+  @include min-screen($breakpoint-md) {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  &.-persist {
+    display: flex;
+  }
+}
+
+.grid.-persist {
+  .grid-item {
+    flex-basis: auto;
+  }
+  .one-fourth {
+    max-width: 25%;
+    flex-basis: 25%;
+  }
+  .one-third {
+    flex-basis: 33.3333333%;
+    max-width: 33.3333333%;
+  }
+  .one-half {
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+  .two-thirds {
+    flex-basis: 66.6666667%;
+    max-width: 66.6666667%;
+  }
+}
+
+@include min-screen($breakpoint-md) {
+  .grid-item {
+    flex-basis: auto;
+  }
+  .one-fourth {
+    max-width: 25%;
+    flex-basis: 25%;
+  }
+  .one-third {
+    flex-basis: 33.3333333%;
+    max-width: 33.3333333%;
+  }
+  .one-half {
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+  .two-thirds {
+    flex-basis: 66.6666667%;
+    max-width: 66.6666667%;
+  }
+}

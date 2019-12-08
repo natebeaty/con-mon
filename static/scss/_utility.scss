@@ -1,0 +1,54 @@
+// Utility
+.large-only {
+  display: none;
+
+  @include media-md {
+    display: inline-block;
+  }
+}
+@include media-md {
+  .small-only {
+    display: none;
+  }
+}
+
+// Clearfix
+@mixin clearfix {
+  &:after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+.clearfix,
+.cf {
+  @include clearfix;
+}
+
+.hidden {
+	display: none;
+}
+
+.button {
+	// font-size: .8rem;
+  background: $highlight;
+  color: #eee;
+  border-radius: 3px;
+  padding: 5px 8px 4px;
+  white-space: nowrap;
+  display: inline-block;
+  margin-bottom: 4px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    text-decoration:none;
+    background: lighten($highlight, 5%);
+  }
+  &.accent {
+  	background: $highlight2;
+  	&:hover {
+		  background: lighten($highlight2, 5%);
+  	}
+  }
+}

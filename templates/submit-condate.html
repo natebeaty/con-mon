@@ -13,11 +13,25 @@
 					<option value="other">Other...</option>
 				</select>
 				<div class="other-fields hidden">
-					<div class="row half"><input type="text" name="convention_title" placeholder="Convention name"></div>
-					<div class="row half"><input type="text" name="convention_twitter" placeholder="Twitter handle"></div>
-					<div class="row half"><input type="text" name="convention_location" placeholder="City, ST"></div>
-					<div class="row half"><input type="text" name="convention_url" placeholder="https://"></div>
-					<div>
+					<div class="row">
+						<div class="field">
+							<label>Convention name</label>
+							<input type="text" name="convention_title" placeholder="CAKE">
+						</div>
+						<div class="field">
+							<label>City, State</label>
+							<input type="text" name="convention_location" placeholder="Chicago, IL">
+						</div>
+						<div class="field">
+							<label>Website</label>
+							<input type="text" name="convention_url" placeholder="https://cakechicago.com/">
+						</div>
+						<div class="field">
+							<label>Twitter handle</label>
+							<input type="text" name="convention_twitter" placeholder="@CAKEchicago">
+						</div>
+					</div>
+					<div class="row tags">
 					{% for tag in tags %}
 						<label for="tag-{{ tag.id }}" class="checkbox"><input id="tag-{{ tag.id }}" type="checkbox" name="convention_tags" value="{{ tag.id }}" {% if tag.title=='Indie' %}checked{% endif %}> {{ tag.title }}</label>
 					{% endfor %}
@@ -26,30 +40,30 @@
 			</div>
 		{% endif %}
 
-		<div class="row">
-			<label for="start_date">Start date</label>
-			<input class="dp" autocomplete="off" size="15" id="start_date" name="start_date" type="text" value="" placeholder="Start date" required>
-		</div>
+		<div class="con-dates row">
+			<div class="field">
+				<label for="start_date">Start date</label>
+				<input class="dp" autocomplete="off" size="15" id="start_date" name="start_date" type="text" value="" placeholder="Start date" required>
+			</div>
 
-		<div class="row">
-			<label for="end_date">End date</label>
-			<input class="dp" autocomplete="off" size="15" id="end_date" name="end_date" type="text" value="" placeholder="End date">
-		</div>
+			<div class="field">
+				<label for="end_date">End date</label>
+				<input class="dp" autocomplete="off" size="15" id="end_date" name="end_date" type="text" value="" placeholder="End date">
+			</div>
 
-		<div class="row">
-			<label for="registration_opens">Registration opens</label>
-			<input class="dp" autocomplete="off" size="15" id="registration_opens" name="registration_opens" type="text" value="" placeholder="Reg. opens">
-		</div>
+			<div class="field">
+				<label for="registration_opens">Registration opens</label>
+				<input class="dp" autocomplete="off" size="15" id="registration_opens" name="registration_opens" type="text" value="" placeholder="Reg. opens">
+			</div>
 
-		<div class="row">
-			<label for="registration_closes">Registration closes</label>
-			<input class="dp" autocomplete="off" size="15" id="registration_closes" name="registration_closes" type="text" value="" placeholder="Reg. closes">
+			<div class="field">
+				<label for="registration_closes">Registration closes</label>
+				<input class="dp" autocomplete="off" size="15" id="registration_closes" name="registration_closes" type="text" value="" placeholder="Reg. closes">
+			</div>
 		</div>
 	</fieldset>
 
 	<fieldset class="extras">
-		{# <label for="notes">Extra Bonus Notes Section</label> #}
-		{# <textarea name="notes" id="notes" cols="50" rows="4" placeholder="Extra Bonus Notes Section"></textarea> #}
 		<div>
 			<label for="notes">Your email (optional)</label>
 			<input type="text" name="email" placeholder="Your email (optional)" size="15">

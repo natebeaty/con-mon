@@ -15,136 +15,40 @@ $black: #222;
 $white: #eee;
 
 // Breakpoints
-$breakpoint-small: 480px;
-$breakpoint-medium: 768px;
-$breakpoint-large: 1200px;
+$breakpoint-sm: 480px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1200px;
 
-.cf:before,
-.cf:after {
-		content: " ";
-		display: table;
-}
-.cf:after {
-		clear: both;
-}
-.hidden {
-	display: none;
-}
-.button {
-	// font-size: .8rem;
-  background: $highlight;
-  color: #eee;
-  border-radius: 3px;
-  padding: 5px 8px 4px;
-  white-space: nowrap;
-  display: inline-block;
-  margin-bottom: 4px;
-  text-decoration: none;
-  border: none;
-  cursor: pointer;
-  &:hover {
-    text-decoration:none;
-    background: lighten($highlight, 5%);
-  }
-  &.accent {
-  	background: $highlight2;
-  	&:hover {
-		  background: lighten($highlight2, 5%);
-  	}
+// Responsive mixins by Andy Richardson (@andimal): https://github.com/andimal/sass-responsive-mixin-madness
+@mixin media-sm() {
+  @media screen and (min-width: $breakpoint-sm) {
+    @content;
   }
 }
-
-$circwidth: 30px;
-.loaded .loading {
-	opacity: 0;
+@mixin media-md() {
+  @media screen and (min-width: $breakpoint-md) {
+    @content;
+  }
 }
-.loading {
-	position: absolute;
-	top: $circwidth * 3;
-	left: 50%;
-	width: $circwidth * 4;
-	margin: 0 0 0 $circwidth * -2;
-	-webkit-transition: opacity .2s;
-	transition: opacity .2s;
-	i {
-		width: $circwidth;
-		height: $circwidth;
-		display: inline-block;
-		border-radius: 50%;
-		background: $highlight;
-		&:first-child {
-			-webkit-animation:loading-ani2 0.5s linear infinite;
-			animation:loading-ani2 0.5s linear infinite;
-			opacity: 0;
-			-webkit-transform:translate($circwidth * -1);
-			transform:translate($circwidth * -1);
-		}
-		&:nth-child(2),
-		&:nth-child(3) {
-			-webkit-animation:loading-ani3 0.5s linear infinite;
-			animation:loading-ani3 0.5s linear infinite;
-		}
-		&:last-child {
-			-webkit-animation:loading-ani1 0.5s linear infinite;
-			animation:loading-ani1 0.5s linear infinite;
-		}
-	}
-}
-@keyframes loading-ani1{
-	100%{
-		transform:translate($circwidth * 1);
-		opacity: 0;
-	}
-}
-@keyframes loading-ani1{
-	100%{
-		transform:translate($circwidth);
-		opacity: 1;
-	}
-}
-@keyframes loading-ani3{
-	100%{
-		transform:translate($circwidth);
-	}
-}
-@-webkit-keyframes loading-ani1{
-	100%{
-		-webkit-transform:translate($circwidth * 2);
-		opacity: 0;
-	}
-}
-@-webkit-keyframes loading-ani2{
-	100%{
-		-webkit-transform:translate($circwidth);
-		opacity: 1;
-	}
-}
-@-webkit-keyframes loading-ani3{
-	100%{
-		-webkit-transform:translate($circwidth);
-	}
-}
-
-@mixin screen($res-min, $res-max)
-{
-  @media screen and ( min-width: $res-min ) and ( max-width: $res-max )
-  {
+@mixin media-lg() {
+  @media screen and (min-width: $breakpoint-lg) {
     @content;
   }
 }
 
-@mixin max-screen($res)
-{
-  @media screen and ( max-width: $res )
-  {
+// On-the fly media-queries
+@mixin screen($res-min, $res-max) {
+  @media screen and (min-width: $res-min) and (max-width: $res-max) {
     @content;
   }
 }
-
-@mixin min-screen($res)
-{
-  @media screen and ( min-width: $res )
-  {
+@mixin max-screen($res) {
+  @media screen and (max-width: $res - 1px) {
+    @content;
+  }
+}
+@mixin min-screen($res) {
+  @media screen and (min-width: $res) {
     @content;
   }
 }
