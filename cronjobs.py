@@ -78,7 +78,7 @@ class Twitter(Command):
 
         # commit updated phrase num_uses counts
         db.session.commit()
-        print output
+        print(output)
 
 manager.add_command('twitter', Twitter())
 
