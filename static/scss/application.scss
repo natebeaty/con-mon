@@ -249,8 +249,10 @@ a.tag {
   .days-away {
     margin-left: 0.3rem;
   }
+  .days-away-small,
   p.location {
     font-size: 0.8rem;
+    opacity: 0.5;
   }
   tr.month-away .days-away,
   tr.month-away .date {

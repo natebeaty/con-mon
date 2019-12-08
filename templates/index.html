@@ -20,11 +20,12 @@
 						<h2><a rel="noopener" target="_blank" href="{{ condate.convention.url }}">{{ condate.convention.title }}</a></h2>
 						<p class="location">{{ condate.convention.location }}</p>
 					</td>
-					 <td class="date">
-					 <time class="dtstart" datetime="{{ condate.start_date }}">{{ condate.start_date.strftime('%b %e')|trim }}</time>
-					{%- if condate.end_date and condate.end_date != condate.start_date -%}
-						&ndash;<time class="dtstart" datetime="{{ condate.end_date }}">{{ condate.end_date.strftime('%e')|trim }}</time>
-					{%- endif %}, {{ condate.start_date.strftime('%Y') }}
+					<td class="date">
+						 <time class="dtstart" datetime="{{ condate.start_date }}">{{ condate.start_date.strftime('%b %e')|trim }}</time>
+						{%- if condate.end_date and condate.end_date != condate.start_date -%}
+							&ndash;<time class="dtstart" datetime="{{ condate.end_date }}">{{ condate.end_date.strftime('%e')|trim }}</time>
+						{%- endif %}, {{ condate.start_date.strftime('%Y') }}
+						<div class="small-only days-away-small">({{ condate.start_date|timeaway }} away)</div>
 					</td>
 					<td class="keep-drawing">
 						<span class="days-away">{{ condate.start_date|timeaway }}</span>
