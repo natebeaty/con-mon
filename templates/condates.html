@@ -11,13 +11,14 @@
 		<div class="conventions">
 			{% for convention in conventions %}
 				<article class="convention" data-id="{{ convention.id }}">
-					<h2>{{ convention.title }} <small>({{ convention.location }})</small></h2>
+					<h2>{{ convention.title }}</h2>
+					<p class="city">{{ convention.location }}</p>
 					<p class="meta">
 						{% if convention.url %}
-							<a target="_blank" href="{{ convention.url }}">{{ convention.url }}</a>
+							<a rel="noopener" target="_blank" href="{{ convention.url }}">{{ convention.url }}</a>
 						{% endif %}
 						{% if convention.twitter %}
-							{% if convention.url %}—{% endif %} <a target="_blank" href="https://twitter.com/{{ convention.twitter }}">@{{ convention.twitter }}</a>
+							{% if convention.url %}—{% endif %} <a rel="noopener" target="_blank" href="https://twitter.com/{{ convention.twitter }}">@{{ convention.twitter }}</a>
 						{% endif %}
 					</p>
 					<ul class="condates">

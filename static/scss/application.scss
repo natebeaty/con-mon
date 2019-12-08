@@ -444,8 +444,12 @@ footer {
 		p.meta {
 			margin: 0;
 			font-size: 0.8rem;
+			color: $gray;
 			a {
 				color: $gray;
+				&:hover {
+					color: darken($gray, 10%);
+				}
 			}
 		}
 		h2 small {
