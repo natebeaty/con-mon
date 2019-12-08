@@ -24,7 +24,7 @@ h1,h2,h3 {
 input,
 p {
 	font: 1rem/1.4 'Arimo', sans-serif;
-	margin: .5rem 0;
+	margin: .25rem 0;
 }
 h1 {
 	font: 2rem/1 'Arvo', sans-serif;
@@ -197,7 +197,7 @@ a.tag {
 		margin: 20px auto;
 	}
 	th {
-		font-size: .7em;
+		font-size: 0.8rem;
 		background: $midgray;
 		color: $dark;
 		text-transform: uppercase;
@@ -233,7 +233,7 @@ a.tag {
 	}
 	text-align: center;
 	.days-away {
-		margin-left: .3rem;
+		margin-left: 0.3rem;
 		// font-size: .8rem;
 	}
 	tr.month-away .days-away,
@@ -357,6 +357,9 @@ footer {
 			font-size: 1.4rem;
 		}
 	}
+	label {
+		font-size: 0.8em;
+	}
 	form {
 		.row {
 			float: left;
@@ -409,7 +412,7 @@ footer {
 }
 
 .quicksearch {
-	max-width: 400px;
+	max-width: 600px;
 	margin: 20px auto 0;
 	input {
 		width: 100%;
@@ -435,17 +438,17 @@ footer {
 	}
 	.convention {
 		margin: 20px auto;
-		max-width: 400px;
+		max-width: 600px;
 		text-align: left;
 		p.meta {
 			margin: 0;
-			font-size: 12px;
+			font-size: 0.8rem;
 			a {
 				color: $gray;
 			}
 		}
 		h2 small {
-			font-size: 14px;
+			font-size: 1rem;
 			color: $gray;
 		}
 	}
@@ -454,7 +457,7 @@ footer {
 	}
 }
 form.submit-condate {
-	max-width: 400px;
+	max-width: 600px;
 	margin: 10px auto;
 	.select-convention {
 		select,
