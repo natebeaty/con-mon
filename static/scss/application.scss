@@ -311,9 +311,10 @@ footer {
 	width: 82px;
 	height: 34px;
 	overflow: hidden;
-	background: url('https://s3.amazonaws.com/static.natebeaty.com/clixel-sprite.png') no-repeat;
+	background: url('https://s3.amazonaws.com/static.natebeaty.com/clixel-sprite@2x.png') no-repeat;
 	text-indent: -9999em;
 	transition: background-position .15s ease;
+	background-size: 82px 68px;
 	&:hover {
 		background-position: 0 -34px;
 	}
