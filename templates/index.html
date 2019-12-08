@@ -16,7 +16,10 @@
 			<tr><th>Con</th><th>Date</th><th class="keep-drawing">Keep Drawing</th><th><span class="small-only">Reg. Status</span><span class="large-only">Registration Status</span></th></tr>
 			{% for condate in condates %}
 				<tr class="condate {% for tag in condate.convention.tags %}tagged-{{ tag.title }} {% endfor %}{{ condate.start_date|away_tags }}" data-condate-id="{{ condate.id }}">
-					<td><h2><a rel="noopener" target="_blank" href="{{ condate.convention.url }}" class="tooltip" title="{{ condate.convention.location }}">{{ condate.convention.title }}</a></h2></td>
+					<td>
+						<h2><a rel="noopener" target="_blank" href="{{ condate.convention.url }}">{{ condate.convention.title }}</a></h2>
+						<p class="location">{{ condate.convention.location }}</p>
+					</td>
 					 <td class="date">
 					 <time class="dtstart" datetime="{{ condate.start_date }}">{{ condate.start_date.strftime('%b %e')|trim }}</time>
 					{%- if condate.end_date and condate.end_date != condate.start_date -%}

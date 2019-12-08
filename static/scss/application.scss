@@ -248,7 +248,9 @@ a.tag {
   text-align: center;
   .days-away {
     margin-left: 0.3rem;
-    // font-size: .8rem;
+  }
+  p.location {
+    font-size: 0.8rem;
   }
   tr.month-away .days-away,
   tr.month-away .date {
