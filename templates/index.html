@@ -4,13 +4,13 @@
 {% block content %}
 
 	<section class="upcoming">
-		<h2>Upcoming Conventions</h2>
-		<p class="tags filtering">
-		Show:
-		{% for tag in tags %}
-			<a class="tag tagged-{{ tag.title }} {% if tag.title == "Indie" %}on{% endif %}" href="/tagged/{{ tag.title }}/">{{ tag.title }}</a>
-		{% endfor %}
-		</p>
+		<h1>Upcoming Conventions</h1>
+		<div class="tags filtering">
+			Show:
+			{% for tag in tags %}
+				<a class="tag tagged-{{ tag.title }} {% if tag.title == "Indie" %}on{% endif %}" href="/tagged/{{ tag.title }}/">{{ tag.title }}</a>
+			{% endfor %}
+		</div>
 		{% if condates %}
 			<table><tbody>
 			<tr><th>Con</th><th>Date</th><th class="keep-drawing">Keep Drawing</th><th><span class="small-only">Reg. Status</span><span class="large-only">Registration Status</span></th></tr>

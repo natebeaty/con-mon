@@ -31,12 +31,9 @@ CON_MON = (function() {
     // Homepage
     if ($('body#home').length) {
       // init tooltips
-      $('.upcoming .tooltip').tooltipster({
-        delay: 0,
-        side: 'left'
-      });
       $('.calendars .tooltip').tooltipster({
-        delay: 0
+        delay: 0,
+        delayTouch: [0, 500]
       });
 
       // pull in condate data and build year view
