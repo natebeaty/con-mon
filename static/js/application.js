@@ -223,10 +223,11 @@ CON_MON = (function() {
     $('body').addClass('loaded');
   }
   function _filterCondates() {
-    $('.condate').addClass('inactive');
+    $('.condate').addClass('inactive').removeClass('accent');
     $('.tag.on').each(function() {
       $('.condate.tagged-' + $(this).text()).removeClass('inactive');
     });
+    $('.condate:visible:odd').addClass('accent');
   }
   function _resize() {
     var screen_width = document.documentElement.clientWidth;

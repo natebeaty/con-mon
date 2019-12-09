@@ -55,7 +55,7 @@ $clndr-border: 1px solid #000;
 				bottom: 0;
 				right: 0;
 				width: 0;
-				height: 0; 
+				height: 0;
 				border-left: 20px solid transparent;
 				border-top: 20px solid transparent;
 				border-right: 20px solid $superhero;
@@ -85,7 +85,7 @@ $clndr-border: 1px solid #000;
 		}
 	}
 	.month {
-		text-transform: uppercase;
+		// text-transform: uppercase;
 		color: $dark;
 	}
 	.event-detail {

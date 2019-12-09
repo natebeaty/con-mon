@@ -35,11 +35,19 @@ h1 {
   }
 }
 h2 {
-  font: 2rem/1.2 'Arvo', sans-serif;
+  font: 1.5rem/1.2 'Arvo', sans-serif;
+
+  @include media-md {
+    font-size: 2rem;
+  }
 }
 h3 {
-  font: 1.5rem/1.2 'Arvo', sans-serif;
+  font: 1.2rem/1.2 'Arvo', sans-serif;
   margin: 0 0 0.3rem;
+
+  @include media-md {
+    font-size: 1.5rem;
+  }
 }
 input[type=text],
 textarea {
@@ -79,7 +87,7 @@ label {
 }
 
 .filtering {
-  display: none;
+  // display: none;
   font-size: 0.7rem;
 }
 
@@ -224,12 +232,12 @@ a.tag {
     vertical-align: middle;
   }
   tr:hover,
-  tr:nth-child(odd):hover {
+  tr.accent:hover {
     td {
       background: #E7FFCF;
     }
   }
-  tr:nth-child(odd) {
+  tr.accent {
     td {
       background: #fff;
     }
