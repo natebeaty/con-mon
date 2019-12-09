@@ -30,12 +30,6 @@ CON_MON = (function() {
 
     // Homepage
     if ($('body#home').length) {
-      // init tooltips
-      $('.calendars .tooltip').tooltipster({
-        delay: 0,
-        delayTouch: [0, 500]
-      });
-
       // pull in condate data and build year view
       $.getJSON( '/condates.json', function( data ) {
         eventsArray = data.condates;
@@ -201,7 +195,8 @@ CON_MON = (function() {
       });
       $this.tooltipster({
         content: $tip.text(),
-        delay: 0
+        delay: 0,
+        delayTouch: [0, 2500]
       });
     });
     // $('.upcoming tr').on('mouseenter', function() {
