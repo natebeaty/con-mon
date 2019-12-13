@@ -9,7 +9,7 @@
 // @codekit-prepend "../bower_components/jquery.quicksearch/dist/jquery.quicksearch.js"
 // @codekit-prepend "bootstrap-datepicker.js"
 
-CON_MON = (function() {
+var CON_MON = (function() {
   var medium_width = false,
     small_width = false,
     calendars = {}
@@ -137,7 +137,7 @@ CON_MON = (function() {
       onAfter: function () {
         $('.conventions').toggleClass('searching', $('.quicksearch input[name="term"]').val()!=='');
       },
-      selector: 'h2',
+      selector: 'h2, p.city',
       noResults: '.no-results'
     });
   }
