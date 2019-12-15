@@ -26,7 +26,7 @@
 					{% for condate in condates %}
 						<tr class="condate {% for tag in condate.convention.tags %}tagged-{{ tag.title }} {% endfor %}{{ condate.start_date|away_tags }}" data-condate-id="{{ condate.id }}">
 							<td class="contags">
-								<div class="wrap tooltip" title="{% for tag in condate.convention.tags %}{{ tag.title }}{% if not loop.last %}, {% endif %}{% endfor %}">{% for tag in condate.convention.tags %}<span data-tag="{{ tag.title }}"></span>{% endfor %}</div>
+								<div class="wrap tooltip" title="{% for tag in condate.convention.tags %}{{ tag.title }}{% if not loop.last %}, {% endif %}{% endfor %}">{% for tag in condate.convention.tags %}<span data-tag="{{ tag.title }}"></span>{% endfor %}&nbsp;</div>
 							</td>
 							<td>
 								<h3><a rel="noopener" target="_blank" href="{{ condate.convention.url }}">{{ condate.convention.title }}</a></h3>
