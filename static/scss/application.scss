@@ -231,18 +231,26 @@ a.tag {
     width: 100%;
     margin: 20px auto;
   }
+  tr.condate {
+    height: 1px;
+    @supports (-moz-appearance:none) {
+      height: 100%; // whatever, firefox
+    }
+  }
   td.contags {
     width: 10px;
-    height: 100%;
+    height: inherit;
     vertical-align: top;
     div {
       height: 100%;
       display: flex;
+      // position: relative;
       flex-wrap: nowrap;
       flex-direction: column;
     }
     span {
       background: $indie;
+      display: block;
       flex: 1;
       &[data-tag="Superhero"] {
         background: $superhero;
