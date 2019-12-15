@@ -6,6 +6,7 @@
 @import 'datepicker';
 @import 'loading';
 
+// Base styles
 body {
   background: $background;
   font: 16px/1.5 'Arimo', sans-serif;
@@ -86,7 +87,8 @@ label {
   }
 }
 
-.filtering {
+// Filter by tag
+.filters {
   margin: 1rem 0;
   font-size: 0.7rem;
 }
@@ -100,6 +102,7 @@ label {
   }
 }
 
+// Header
 header {
   background: $dark;
   color: $highlight;
@@ -153,6 +156,7 @@ header {
   }
 }
 
+// Tag buttons
 a.tag {
   text-decoration: none;
   background: transparent;
@@ -185,6 +189,9 @@ a.tag {
     content: '✓ ';
   }
 }
+
+
+// Generic tag styles
 .tag {
   display: inline-block;
   padding: 4px 8px;
@@ -200,6 +207,8 @@ a.tag {
     display: none;
   }
 }
+
+// Missing something?
 .missing {
   margin: 20px 0;
   span {
@@ -215,10 +224,36 @@ a.tag {
     }
   }
 }
+
+// Upcoming conventions table
 .upcoming {
   table {
     width: 100%;
     margin: 20px auto;
+  }
+  td.contags {
+    width: 10px;
+    height: 100%;
+    vertical-align: top;
+    div {
+      height: 100%;
+      display: flex;
+      flex-wrap: nowrap;
+      flex-direction: column;
+    }
+    span {
+      background: $indie;
+      flex: 1;
+      &[data-tag="Superhero"] {
+        background: $superhero;
+      }
+      &[data-tag="Kids"] {
+        background: $kids;
+      }
+      &[data-tag="Zines"] {
+        background: $zines;
+      }
+    }
   }
   th {
     font-size: 0.8rem;
@@ -297,24 +332,27 @@ a.tag {
 // .tagged-Zines a {
 //  color: $zines;
 // }
-.tagged-Indie.tagged-Zines a:after,
-.tagged-Indie.tagged-Kids a:after,
-.tagged-Superhero.tagged-Indie a:after {
-  content: ' ';
-  background-color: $indie;
-  display: inline-block;
-  vertical-align: top;
-  margin: 4px 0 0 8px;
-  border-radius: 50%;
-  width: 10px;
-  height: 10px;
-}
-.tagged-Indie.tagged-Zines a:after {
-  background-color: $zines;
-}
-.tagged-Indie.tagged-Kids a:after {
-  background-color: $kids;
-}
+
+// Tag dots after con title (didn't read at all)
+// .tagged-Indie.tagged-Zines a:after,
+// .tagged-Indie.tagged-Kids a:after,
+// .tagged-Superhero.tagged-Indie a:after {
+//   content: ' ';
+//   background-color: $indie;
+//   display: inline-block;
+//   vertical-align: top;
+//   margin: 4px 0 0 8px;
+//   border-radius: 50%;
+//   width: 10px;
+//   height: 10px;
+// }
+// .tagged-Indie.tagged-Zines a:after {
+//   background-color: $zines;
+// }
+// .tagged-Indie.tagged-Kids a:after {
+//   background-color: $kids;
+// }
+
 .tagged-Superhero a {
   color: $superhero;
 }
@@ -323,6 +361,8 @@ a.tag {
     display: none;
   }
 }
+
+// Calendar view
 .calendars {
   @include clearfix;
   margin-top: 2rem;
@@ -345,6 +385,7 @@ a.tag {
   }
 }
 
+// Footer
 footer {
   clear: both;
   background: $dark;
@@ -374,6 +415,7 @@ footer {
   }
 }
 
+// Flash notices at top of page
 .flashes {
   width: 50%;
   margin: 0 auto 20px;
@@ -387,28 +429,7 @@ footer {
   }
 }
 
-.quicksearch {
-  max-width: 600px;
-  margin: 20px auto 0;
-  input {
-    width: 100%;
-    font-size: 16px;
-    line-height: 1.2;
-  }
-}
-.status {
-  &.success,
-  &.error {
-    padding: 10px;
-    background: $vibrant2;
-    color: #fff;
-    margin: 10px 0;
-  }
-  &.success {
-    background: $highlight2;
-  }
-}
-
+// All Conventions page (quick bulk submit)
 #condates {
   .conventions {
     padding: 10px;
@@ -510,5 +531,30 @@ form.submit-condate {
     .actions {
       display: none;
     }
+  }
+}
+
+// Quicksearch form to filter conventions
+.quicksearch {
+  max-width: 600px;
+  margin: 20px auto 0;
+  input {
+    width: 100%;
+    font-size: 16px;
+    line-height: 1.2;
+  }
+}
+
+// AJAX feedback after form submit
+.status {
+  &.success,
+  &.error {
+    padding: 10px;
+    background: $vibrant2;
+    color: #fff;
+    margin: 10px 0;
+  }
+  &.success {
+    background: $highlight2;
   }
 }

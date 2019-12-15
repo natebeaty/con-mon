@@ -36,12 +36,18 @@ var CON_MON = (function() {
         _initClndr();
       });
 
+      $('.upcoming .tooltip').tooltipster({
+        delay: 0,
+        side: 'left',
+        delayTouch: [0, 2500]
+      });
+
       // hide any unused tags
-      $('.filtering .tag').each(function() {
+      $('.filters .tag').each(function() {
         $(this).toggleClass('hidden', $('.condate.tagged-' + $(this).text()).length===0);
       });
       // totally hide filters if there's only one
-      $('.filtering').toggleClass('hidden', $('p.tags .tag:not(.hidden)').length===1);
+      $('.filters').toggleClass('hidden', $('p.tags .tag:not(.hidden)').length===1);
 
       // init condate filters
       _filterCondates();
@@ -199,6 +205,7 @@ var CON_MON = (function() {
         delayTouch: [0, 2500]
       });
     });
+    // To show days in calendar when hoving over a condate
     // $('.upcoming tr').on('mouseenter', function() {
     //     if ($(this).hasClass('inactive')) return;
     //     var id = $(this).data('condate-id');
