@@ -5,59 +5,66 @@
 
 	<section class="upcoming">
 		<h1>Upcoming Conventions</h1>
-		<div class="tags filtering">
+		<div class="tags filters">
 			Show:
 			{% for tag in tags %}
 				<a class="tag tagged-{{ tag.title }} {% if tag.title == "Indie" %}on{% endif %}" href="/tagged/{{ tag.title }}/">{{ tag.title }}</a>
 			{% endfor %}
 		</div>
 		{% if condates %}
-			<table><tbody>
-			<tr><th>Con</th><th>Date</th><th class="keep-drawing">Keep Drawing</th><th><span class="small-only">Reg. Status</span><span class="large-only">Registration Status</span></th></tr>
-			{% for condate in condates %}
-				<tr class="condate {% for tag in condate.convention.tags %}tagged-{{ tag.title }} {% endfor %}{{ condate.start_date|away_tags }}" data-condate-id="{{ condate.id }}">
-					<td>
-						<h3><a rel="noopener" target="_blank" href="{{ condate.convention.url }}">{{ condate.convention.title }}</a></h3>
-						<p class="location">{{ condate.convention.location }}</p>
-					</td>
-					<td class="date">
-						 <time class="dtstart" datetime="{{ condate.start_date }}">{{ condate.start_date.strftime('%b %e')|trim }}</time>
-						{%- if condate.end_date and condate.end_date != condate.start_date -%}
-							&ndash;<time class="dtstart" datetime="{{ condate.end_date }}">{{ condate.end_date.strftime('%e')|trim }}</time>
-						{%- endif %}, {{ condate.start_date.strftime('%Y') }}
-						<div class="small-only days-away-small">({{ condate.start_date|timeaway }} away)</div>
-					</td>
-					<td class="keep-drawing">
-						<span class="days-away">{{ condate.start_date|timeaway }}</span>
-					</td>
-					<td>
-					{% if condate.registration_opens %}
-						{% if condate.registration_closes and condate.registration_closes|in_past %}
-							<span class="reg-status tag closed"><span class="small-only">Reg.</span><span class="large-only">Registration</span> Closed</span>
-						{% elif condate.registration_opens|is_past_or_today %}
-							{% if condate.registration_closes %}
-								<span class="reg-status tag"><span class="small-only">Reg.</span><span class="large-only">Registration</span> Closes {{ condate.registration_closes.strftime('%b %e')|trim }}</span>
-							{% else %}
-								<span class="reg-status tag"><span class="small-only">Reg.</span><span class="large-only">Registration</span> Open</span>
-							{% endif %}
-						{% else %}
-							<span class="reg-status tag"><span class="small-only">Reg.</span><span class="large-only">Registration</span> Opens {{ condate.registration_opens.strftime('%b %e')|trim }}</span>
-						{% endif %}
-					{% else %}
-						{# <span class="reg-status tag closed">Unknown</span> #}
-					{% endif %}
+			<table>
+				<tbody>
 
-					</td>
-	{# 				<td>
-					{% if condate.convention.tags %}
-						{% for tag in condate.convention.tags %}
-							<span class="tag">{{ tag.title }}</span>
-						{% endfor %}
-					{% endif %}
-					</td>
-	 #}			</tr>
-			{% endfor %}
-			</tbody></table>
+					<tr>
+						<th></th>
+						<th>Con</th>
+						<th>Date</th>
+						<th class="keep-drawing">Keep Drawing</th>
+						<th><span class="small-only">Reg. Status</span><span class="large-only">Registration Status</span></th>
+					</tr>
+
+					{% for condate in condates %}
+						<tr class="condate {% for tag in condate.convention.tags %}tagged-{{ tag.title }} {% endfor %}{{ condate.start_date|away_tags }}" data-condate-id="{{ condate.id }}">
+							<td class="contags">
+								<div class="wrap tooltip" title="{% for tag in condate.convention.tags %}{{ tag.title }}{% if not loop.last %}, {% endif %}{% endfor %}">{% for tag in condate.convention.tags %}<span data-tag="{{ tag.title }}"></span>{% endfor %}</div>
+							</td>
+							<td>
+								<h3><a rel="noopener" target="_blank" href="{{ condate.convention.url }}">{{ condate.convention.title }}</a></h3>
+								<p class="location">{{ condate.convention.location }}</p>
+							</td>
+							<td class="date">
+								 <time class="dtstart" datetime="{{ condate.start_date }}">{{ condate.start_date.strftime('%b %e')|trim }}</time>
+								{%- if condate.end_date and condate.end_date != condate.start_date -%}
+									&ndash;<time class="dtstart" datetime="{{ condate.end_date }}">{{ condate.end_date.strftime('%e')|trim }}</time>
+								{%- endif %}, {{ condate.start_date.strftime('%Y') }}
+								<div class="small-only days-away-small">({{ condate.start_date|timeaway }} away)</div>
+							</td>
+							<td class="keep-drawing">
+								<span class="days-away">{{ condate.start_date|timeaway }}</span>
+							</td>
+							<td>
+							{% if condate.registration_opens %}
+								{% if condate.registration_closes and condate.registration_closes|in_past %}
+									<span class="reg-status tag closed"><span class="small-only">Reg.</span><span class="large-only">Registration</span> Closed</span>
+								{% elif condate.registration_opens|is_past_or_today %}
+									{% if condate.registration_closes %}
+										<span class="reg-status tag"><span class="small-only">Reg.</span><span class="large-only">Registration</span> Closes {{ condate.registration_closes.strftime('%b %e')|trim }}</span>
+									{% else %}
+										<span class="reg-status tag"><span class="small-only">Reg.</span><span class="large-only">Registration</span> Open</span>
+									{% endif %}
+								{% else %}
+									<span class="reg-status tag"><span class="small-only">Reg.</span><span class="large-only">Registration</span> Opens {{ condate.registration_opens.strftime('%b %e')|trim }}</span>
+								{% endif %}
+							{% else %}
+								{# <span class="reg-status tag closed">Unknown</span> #}
+							{% endif %}
+
+							</td>
+						</tr>
+					{% endfor %}
+
+				</tbody>
+			</table>
 		{% endif %}
 	</section>
 
@@ -73,7 +80,7 @@
 
 	<script type="text/template" id="template-calendar">
 	<div class="clndr-grid">
-		<div class="month cf tooltip" title="foo"><h3><%= month %> <%= year %></h3></div>
+		<div class="month cf"><h3><%= month %> <%= year %></h3></div>
 		<ul class="days-of-the-week cf">
 			<% _.each(daysOfTheWeek, function(day) { %>
 				<li><%= day %></li>
