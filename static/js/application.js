@@ -38,7 +38,6 @@ var CON_MON = (function() {
 
       $('.upcoming .tooltip').tooltipster({
         delay: 0,
-        side: 'left',
         delayTouch: [0, 2500]
       });
 
