@@ -240,6 +240,7 @@ a.tag {
   td.contags {
     width: 10px;
     height: inherit;
+    font-size: 1px; // make &nbsp; tiny
     vertical-align: top;
     div {
       height: 100%;
