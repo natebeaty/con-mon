@@ -15,6 +15,11 @@ def install():
     pip_install()
     restart()
 
+def migrate():
+    update()
+    alembic_migrate()
+    restart()
+
 def update():
     with cd(env.path):
         run('git pull origin %s' % env.git_branch)
@@ -23,7 +28,7 @@ def pip_install():
     with cd(env.path):
         run('source .venv/bin/activate && pip install --quiet -r requirements.txt')
 
-def migrate():
+def alembic_migrate():
     with cd(env.path):
         run('source .venv/bin/activate && python alembic upgrade head')
 
