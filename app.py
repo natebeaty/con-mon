@@ -38,6 +38,7 @@ class Convention(db.Model):
         backref=db.backref('condates'))
     tags = db.relationship('Tag', secondary=tags_conventions,
         backref=db.backref('conventions', lazy='dynamic'))
+    archived = db.Column(db.Boolean)
 
     def __repr__(self):
         return self.title
@@ -78,7 +79,7 @@ class TagSchema(Schema):
 class ConventionSchema(Schema):
     tags = fields.Nested(TagSchema, many=True)
     class Meta:
-        fields = ('id', 'title', 'location', 'url', 'tags')
+        fields = ('id', 'title', 'location', 'url', 'tags', 'archived')
 
 class CondateSchema(Schema):
     convention = fields.Nested(ConventionSchema)
@@ -312,7 +313,7 @@ def submit_condate():
 
 class ConventionAdmin(model.ModelAdmin):
     session = db.session
-    fields = list_display = ('title', 'location', 'url', 'twitter','tags',)
+    fields = list_display = ('title', 'location', 'url', 'twitter', 'tags', 'archived',)
 
 class TagAdmin(model.ModelAdmin):
     session = db.session

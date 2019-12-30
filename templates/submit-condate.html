@@ -8,7 +8,9 @@
 				<select class="chzn" id="convention" name="convention" required>
 				<option value="">...</option>
 				{% for convention in conventions %}
-					<option value="{{ convention.id }}">{{ convention.title }}</option>
+					{% if not convention.archived %}
+						<option value="{{ convention.id }}">{{ convention.title }}</option>
+					{% endif %}
 				{% endfor %}
 					<option value="other">Other...</option>
 				</select>

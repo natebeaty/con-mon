@@ -10,7 +10,7 @@
 		</form>
 		<div class="conventions">
 			{% for convention in conventions %}
-				<article class="convention" data-id="{{ convention.id }}">
+				<article class="convention{% if convention.archived %} archived{% endif %}" data-id="{{ convention.id }}">
 					<h2>{{ convention.title }}</h2>
 					<p class="city">{{ convention.location }}</p>
 					<p class="meta">
@@ -36,10 +36,12 @@
 						{% endif %}
 					{% endfor %}
 					</ul>
-					<a href="#" class="add-new-condate button">+ Add Condate</a>
-					{% with convention_id=convention.id %}
-						{% include "submit-condate.html" %}
-					{% endwith %}
+					{% if not convention.archived %}
+						<a href="#" class="add-new-condate button">+ Add Condate</a>
+						{% with convention_id=convention.id %}
+							{% include "submit-condate.html" %}
+						{% endwith %}
+					{% endif %}
 				</article>
 			{% endfor %}
 		</div>

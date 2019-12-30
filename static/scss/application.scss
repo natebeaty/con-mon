@@ -448,6 +448,9 @@ footer {
     margin: 20px auto;
     max-width: 600px;
     text-align: left;
+    &.archived {
+      opacity: 0.3;
+    }
     p.meta {
       margin: 0;
       font-size: 0.8rem;
