@@ -238,6 +238,7 @@ a.tag {
     }
     &.cancelled {
       opacity: 0.5;
+      td a,
       td.date {
         text-decoration: line-through;
       }
