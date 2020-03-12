@@ -237,8 +237,8 @@ a.tag {
       height: 100%; // whatever, firefox
     }
     &.cancelled {
+      color: $midgray;
       td a,
-      td.keep-drawing,
       td.date {
         color: $midgray;
         text-decoration: line-through;
