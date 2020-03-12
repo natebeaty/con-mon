@@ -201,7 +201,7 @@ a.tag {
   line-height: 1;
   border-radius: 4px;
   &.closed {
-    background: rgba($dark,.3);
+    background: $midgray;
   }
   &.hidden {
     display: none;
@@ -237,9 +237,10 @@ a.tag {
       height: 100%; // whatever, firefox
     }
     &.cancelled {
-      opacity: 0.5;
       td a,
+      td.keep-drawing,
       td.date {
+        color: $midgray;
         text-decoration: line-through;
       }
     }
@@ -316,7 +317,7 @@ a.tag {
   .days-away-small,
   p.location {
     font-size: 0.8rem;
-    opacity: 0.5;
+    color: $midgray;
     margin: 0;
   }
   tr.month-away .days-away,
@@ -475,22 +476,22 @@ footer {
     max-width: 600px;
     text-align: left;
     &.archived {
-      opacity: 0.3;
+      color: $midgray;
     }
     p.meta {
       margin: 0;
       font-size: 0.8rem;
-      color: $gray;
+      color: $midgray;
       a {
-        color: $gray;
+        color: $midgray;
         &:hover {
-          color: darken($gray, 10%);
+          color: darken($midgray, 10%);
         }
       }
     }
     h2 small {
       font-size: 1rem;
-      color: $gray;
+      color: $midgray;
     }
   }
   .add-new-condate {

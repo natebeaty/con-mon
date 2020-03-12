@@ -11,7 +11,7 @@
 		<div class="conventions">
 			{% for convention in conventions %}
 				<article class="convention{% if convention.archived %} archived{% endif %}" data-id="{{ convention.id }}">
-					<h2>{{ convention.title }}</h2>
+					<h2>{{ convention.title }} <small>{% if convention.archived %}(not active){% endif %}</small></h2>
 					<p class="city">{{ convention.location }}</p>
 					<p class="meta">
 						{% if convention.url %}
