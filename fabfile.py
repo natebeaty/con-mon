@@ -6,6 +6,9 @@ env.git_branch = 'master'
 env.warn_only = True
 env.path = '/home/natebeaty/webapps/conmon/conmon'
 
+def dev():
+    local('python app.py')
+
 def deploy():
     update()
     restart()

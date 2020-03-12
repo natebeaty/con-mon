@@ -90,7 +90,7 @@ class CondateSchema(Schema):
 ### template filters
 
 @app.template_filter()
-def timeaway(dt, default="tomorrow"):
+def timeaway(dt, default='tomorrow'):
     """
     Returns string representing "time away" e.g.
     3 days away, 5 hours away etc.
@@ -99,17 +99,18 @@ def timeaway(dt, default="tomorrow"):
     now = datetime.utcnow().date()
     diff = dt - now
 
+    if diff.days == 0:
+        return ''
+
     periods = (
-        # (diff.days / 365, "year", "years"),
-        (diff.days / 30, "month", "months"),
-        # (diff.days / 7, "week", "weeks"),
-        (diff.days, "day", "days"),
+        (diff.days / 30, 'month', 'months'),
+        # (diff.days / 7, 'week', 'weeks'),
+        (diff.days, 'day', 'days'),
     )
 
     for period, singular, plural in periods:
-
-        if period:
-            return "%s%d %s" % ('~' if singular != 'day' else '', period, singular if period == 1 else plural)
+        if period >= 1:
+            return '%s%d %s' % ('~' if singular != 'day' else '', period, singular if period == 1 else plural)
 
     return default
 
