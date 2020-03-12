@@ -236,6 +236,15 @@ a.tag {
     @supports (-moz-appearance:none) {
       height: 100%; // whatever, firefox
     }
+    &.cancelled {
+      opacity: 0.5;
+      td.date {
+        text-decoration: line-through;
+      }
+    }
+  }
+  p.notes {
+    font-size: 12px;
   }
   td.contags {
     width: 10px;
@@ -330,9 +339,32 @@ a.tag {
     margin: 0;
   }
 
+  // Hide keep-drawing column on mobile
+  th.keep-drawing,
+  td.keep-drawing {
+    display: none;
+  }
+
+  // Hide status column on smaller mobile
+  th.status,
+  td.status {
+    display: none;
+  }
+
+  @include media-sm {
+    th.status,
+    td.status {
+      display: table-cell;
+    }
+  }
+
   @include media-md {
     table {
       margin: 20px auto;
+    }
+    th.keep-drawing,
+    td.keep-drawing {
+      display: table-cell;
     }
   }
 }
@@ -415,13 +447,6 @@ footer {
   background-size: 82px 68px;
   &:hover {
     background-position: 0 -34px;
-  }
-}
-.keep-drawing {
-  display: none;
-
-  @include media-md {
-    display: table-cell;
   }
 }
 
