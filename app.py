@@ -47,11 +47,13 @@ class Condate(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(250))
     notes = db.Column(db.Text)
+    public_notes = db.Column(db.Text)
     start_date = db.Column(db.Date)
     end_date = db.Column(db.Date)
     registration_opens = db.Column(db.Date)
     registration_closes = db.Column(db.Date)
     published = db.Column(db.Boolean)
+    cancelled = db.Column(db.Boolean)
     submission_hash = db.Column(db.String(250))
 
     convention_id = db.Column(db.Integer, db.ForeignKey('convention.id'))
@@ -116,16 +118,27 @@ def timeaway(dt, default='tomorrow'):
 
 @app.template_filter()
 def in_past(dt):
+    """
+    Returns true if datetime in past
+    """
     now = datetime.utcnow().date()
     return dt < now
 
 @app.template_filter()
 def is_past_or_today(dt):
+    """
+    Returns true if datetime in past
+    or today
+    """
     now = datetime.utcnow().date()
     return dt <= now
 
 @app.template_filter()
 def away_tags(dt):
+    """
+    Returns a string of tags for
+    styling (not currently used)
+    """
     output = ''
     if dt > date.today() + timedelta(30):
         output += ' month-away'
@@ -139,6 +152,9 @@ def away_tags(dt):
 
 @app.route('/')
 def index():
+    """
+    Homepage view
+    """
     return render_template('index.html',
         conventions = Convention.query.order_by(Convention.title).all(),
         tags = Tag.query.all(),
@@ -148,6 +164,10 @@ def index():
 
 @app.route('/condates.ics')
 def condates_ics():
+    """
+    Pull active condates for calendar
+    subscriptions in ics format
+    """
     condates = Condate.query.filter(Condate.start_date >= date.today(), Condate.published == True).order_by(Condate.start_date).all()
     cal = Calendar()
     cal.add('prodid','-//Con-Mon//cons.clixel.com//EN')
@@ -155,7 +175,14 @@ def condates_ics():
     cal.add('X-WR-CALNAME','Con-Mon')
     for condate in condates:
         e = Event()
-        e.add('summary', condate.title)
+        title = condate.title
+        # append public_notes to title
+        if condate.public_notes:
+            title += ' (%s)' % condate.public_notes
+        # set status to cancelled?
+        if condate.cancelled:
+            e.add('status', 'CANCELLED')
+        e.add('summary', title)
         e.add('dtstart', condate.start_date)
         if condate.end_date:
             e.add('dtend', datetime.combine(condate.end_date, time(23, 00)))
@@ -166,13 +193,13 @@ def condates_ics():
         # any registration dates?
         if condate.registration_opens:
             e = Event()
-            e.add('summary', "%s registration opens" % condate.title)
+            e.add('summary', '%s registration opens' % condate.title)
             e.add('dtstart', condate.registration_opens)
             e.add('url', condate.convention.url)
             cal.add_component(e)
         if condate.registration_closes:
             e = Event()
-            e.add('summary', "%s registration closes" % condate.title)
+            e.add('summary', '%s registration closes' % condate.title)
             e.add('dtstart', condate.registration_closes)
             e.add('url', condate.convention.url)
             cal.add_component(e)
@@ -181,12 +208,19 @@ def condates_ics():
 
 @app.route('/condates.json')
 def condates_json():
-    condates = Condate.query.filter(Condate.start_date >= date.today(), Condate.published == True).order_by(Condate.start_date).all()
+    """
+    Pull condates in json for
+    clndr view on homepage
+    """
+    condates = Condate.query.filter(Condate.start_date >= date.today(), Condate.published == True, Condate.cancelled == False).order_by(Condate.start_date).all()
     result = CondateSchema(many=True).dump(condates)
     return jsonify({'condates': result})
 
 @app.route('/condates', methods=['GET'])
 def condates():
+    """
+    All Condates view
+    """
     return render_template('condates.html',
         conventions = Convention.query.order_by(Convention.title).all(),
         tags = Tag.query.all(),
@@ -197,17 +231,24 @@ def condates():
 
 @app.route('/submit_note', methods=['POST'])
 def submit_note():
-    msg = Message("New con-mon note from %s" % request.form['note_email'],
-        sender = "hal@cons.clixel.com",
+    """
+    Submit note (not currently used)
+    """
+    msg = Message('New con-mon note from %s' % request.form['note_email'],
+        sender = 'hal@cons.clixel.com',
         reply_to = request.form['note_email'],
-        recipients = ["nate@clixel.com"])
-    msg.body = "%s\n\nFrom: %s\n" % (request.form['note_body'], request.form['note_email'])
+        recipients = ['nate@clixel.com'])
+    msg.body = '%s\n\nFrom: %s\n' % (request.form['note_body'], request.form['note_email'])
     mail.send(msg)
     flash('Your note was sent ok! Thanks!')
     return redirect(url_for('index'))
 
 @app.route('/approve_condate', methods=['GET'])
 def approve_condate():
+    """
+    Approve condate from email link
+    (hash generated on submission)
+    """
     condate = Condate.query.filter(Condate.submission_hash == request.args.get('hash')).one()
     if (condate):
         condate.published = True
@@ -217,6 +258,9 @@ def approve_condate():
 
 @app.route('/submit_condate', methods=['POST'])
 def submit_condate():
+    """
+    User submission of new condate (yay!)
+    """
     start_date = request.form.get('start_date', '')
     if request.form.get('diebots_5000', None) or start_date == '' or start_date == str(datetime.now())[:10]:
         if request.is_xhr:
@@ -251,7 +295,7 @@ def submit_condate():
     notes = request.form.get('notes', '')
     email = request.form.get('email', None)
     if email:
-        notes = "%s (submitted by %s)" % (notes, email)
+        notes = '%s (submitted by %s)' % (notes, email)
     title = convention.title + ' ' + start_date[:4]
     condate = Condate(
         convention_id = convention.id,
@@ -259,6 +303,7 @@ def submit_condate():
         start_date = parser.parse(start_date),
         notes = notes,
         published = False,
+        cancelled = False,
         submission_hash = uuid.uuid4().hex
         )
 
@@ -277,27 +322,27 @@ def submit_condate():
     db.session.commit()
 
     # email details
-    submit_msg = "New Condate submission!\n\n"
-    submit_msg = submit_msg + "Convention: %s\n" % convention.title
-    submit_msg = submit_msg + "Start date: %s\n" % condate.start_date
-    submit_msg = submit_msg + "End date: %s\n" % condate.end_date
-    submit_msg = submit_msg + "Registration opens: %s\n" % condate.registration_opens
-    submit_msg = submit_msg + "Registration closes: %s\n" % condate.registration_closes
+    submit_msg = 'New Condate submission!\n\n'
+    submit_msg = submit_msg + 'Convention: %s\n' % convention.title
+    submit_msg = submit_msg + 'Start date: %s\n' % condate.start_date
+    submit_msg = submit_msg + 'End date: %s\n' % condate.end_date
+    submit_msg = submit_msg + 'Registration opens: %s\n' % condate.registration_opens
+    submit_msg = submit_msg + 'Registration closes: %s\n' % condate.registration_closes
     if notes:
-        submit_msg = submit_msg + "\nNotes:\n%s\n" % notes
+        submit_msg = submit_msg + '\nNotes:\n%s\n' % notes
     if email:
-        submit_msg = submit_msg + "\nSender:\n%s\n" % email
+        submit_msg = submit_msg + '\nSender:\n%s\n' % email
         reply_to = email
     else:
         reply_to = ''
-    submit_msg = submit_msg + "\n\nEdit Condate: %sadmin/condate/%s/\n" % (request.url_root, condate.id)
-    submit_msg = submit_msg + "Approve: %sapprove_condate?hash=%s\n" % (request.url_root, condate.submission_hash)
+    submit_msg = submit_msg + '\n\nEdit Condate: %sadmin/condate/%s/\n' % (request.url_root, condate.id)
+    submit_msg = submit_msg + 'Approve: %sapprove_condate?hash=%s\n' % (request.url_root, condate.submission_hash)
     if convention_id == 'other':
-        submit_msg = submit_msg + "Edit Convention: %sadmin/convention/%s/\n" % (request.url_root, convention.id)
-    msg = Message("New con-mon submission (%s)" % condate.title,
-        sender = "hal@cons.clixel.com",
+        submit_msg = submit_msg + 'Edit Convention: %sadmin/convention/%s/\n' % (request.url_root, convention.id)
+    msg = Message('New con-mon submission (%s)' % condate.title,
+        sender = 'hal@cons.clixel.com',
         reply_to = reply_to,
-        recipients = ["nate@clixel.com"])
+        recipients = ['nate@clixel.com'])
     msg.body = submit_msg
     mail.send(msg)
 
@@ -322,8 +367,8 @@ class TagAdmin(model.ModelAdmin):
 
 class CondateAdmin(model.ModelAdmin):
     session = db.session
-    fields = ('convention', 'title', 'start_date', 'end_date', 'registration_opens', 'registration_closes', 'published', 'notes','submission_hash',)
-    list_display = ('title', 'start_date', 'end_date', 'registration_opens', 'registration_closes', 'published',)
+    fields = ('convention', 'title', 'start_date', 'end_date', 'registration_opens', 'registration_closes', 'published', 'cancelled', 'notes', 'public_notes', 'submission_hash',)
+    list_display = ('title', 'start_date', 'end_date', 'registration_opens', 'registration_closes', 'published', 'cancelled', )
 
 class PhraseAdmin(model.ModelAdmin):
     session = db.session
