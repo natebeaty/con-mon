@@ -35,7 +35,7 @@ class Twitter(Command):
         phrases = Phrase.query.filter(Phrase.num_uses == min_uses).all()
 
         # cons that are a week away
-        daily_notices = Condate.query.filter(Condate.start_date == date.today() + timedelta(days=7), Condate.published == True).all()
+        daily_notices = Condate.query.filter(Condate.start_date == date.today() + timedelta(days=7), Condate.published == True, Condate.cancelled == False).all()
         output = "Condates happening in a week: \n"
         for c in daily_notices:
             if indie_tag in c.convention.tags:
@@ -49,7 +49,7 @@ class Twitter(Command):
                 output = output + self.post_to_twitter(twitter_api,message) + "\n" + message
 
         # cons that are a month away
-        monthly_notices = Condate.query.filter(Condate.start_date == date.today() + timedelta(days=30), Condate.published == True).all()
+        monthly_notices = Condate.query.filter(Condate.start_date == date.today() + timedelta(days=30), Condate.published == True, Condate.cancelled == False).all()
         output = output + "\nCondates happening in a month: \n"
         for c in monthly_notices:
             if indie_tag in c.convention.tags:
@@ -63,7 +63,7 @@ class Twitter(Command):
                 output = output + self.post_to_twitter(twitter_api,message) + "\n" + message
 
         # cons that have registrations closing in a week
-        weekly_registration_notices = Condate.query.filter(Condate.registration_closes == date.today() + timedelta(days=7), Condate.published == True).all()
+        weekly_registration_notices = Condate.query.filter(Condate.registration_closes == date.today() + timedelta(days=7), Condate.published == True, Condate.cancelled == False).all()
         output = output + "\nCondates with registration closing in a week: \n"
         for c in weekly_registration_notices:
             if indie_tag in c.convention.tags:
