@@ -110,7 +110,7 @@ def timeaway(dt, default='tomorrow'):
 
     for period, singular, plural in periods:
         if period >= 1:
-            return '%s%d %s' % ('~' if singular != 'day' else '', period, singular if period == 1 else plural)
+            return '%s%d %s' % ('~' if singular != 'day' else '', period, singular if period < 2 else plural)
 
     return default
 
