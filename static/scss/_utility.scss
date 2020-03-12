@@ -11,6 +11,11 @@
     display: none;
   }
 }
+@include media-sm {
+  .xs-only {
+    display: none;
+  }
+}
 
 // Clearfix
 @mixin clearfix {
