@@ -45,9 +45,7 @@
 							</td>
 							<td class="status">
 							{% if condate.cancelled %}
-								{% if condate.public_notes %}
-									<p class="notes">{{ condate.public_notes }}</p>
-								{% endif %}
+								{# ... #}
 							{% elif condate.registration_opens %}
 								{% if condate.registration_closes and condate.registration_closes|in_past %}
 									<span class="reg-status tag closed"><span class="small-only">Reg.</span><span class="large-only">Registration</span> Closed</span>
@@ -62,6 +60,10 @@
 								{% endif %}
 							{% else %}
 								{# <span class="reg-status tag closed">Unknown</span> #}
+							{% endif %}
+
+							{% if condate.public_notes %}
+								<p class="notes">{{ condate.public_notes|safe }}</p>
 							{% endif %}
 
 							</td>
