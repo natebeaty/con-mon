@@ -18,14 +18,14 @@ $clndr-border: 1px solid #000;
 	}
 	li {
 		background: #fff;
-		border-top: 1px solid rgba($dark,.15);
+		border-top: 1px solid $gray;
 		display: block;
 		float: left;
 		width: 14.24%;
 		height: 34px;
 		line-height: 34px;
 		text-align: center;
-		color: rgba($dark,.3);
+		color: $dark;
 		transition: opacity .2s, background .25s;
 		transition-delay: .1s;
 		&.today {
@@ -34,8 +34,8 @@ $clndr-border: 1px solid #000;
 		}
 		&.event {
 			background: $indie;
-			color: #fff;
-			box-shadow: inset 0 0 10px rgba($dark,.3);
+			// color: $white;
+			box-shadow: inset 0 0 10px rgba($dark, 0.25);
 			position: relative;
 			&.tagged-Indie {
 				background: $indie !important;
@@ -68,18 +68,18 @@ $clndr-border: 1px solid #000;
 			}
 		}
 		&.inactive {
-			opacity: .3;
+			opacity: 0.3;
 		}
 		&.current  {
-			box-shadow: inset 0 0 20px rgba($dark,.9);
+			box-shadow: inset 0 0 20px rgba($dark, 0.35);
 		}
 	}
 	.days-of-the-week {
 		li {
-			font: bold 12px/1 'Arvo';
-			text-shadow: 0 0 1px #000;
-			background: rgba($dark,.3);
-			color: #fff;
+			font-weight: bold;
+			background: $gray;
+			border: none;
+			color: $dark;
 			height: 18px;
 			line-height: 20px;
 		}
@@ -105,6 +105,9 @@ $clndr-border: 1px solid #000;
 	transition-delay: .1s;
 	&.inactive {
 		opacity: .25;
+	}
+	h3 {
+		margin: 1em 0 0.75em;
 	}
 
 	.clndr
@@ -185,7 +188,7 @@ $clndr-border: 1px solid #000;
 					border-left: $clndr-border;
 					border-top: $clndr-border;
 
-					color: #fff;
+					color: $white;
 
 					&:last-child
 					{
@@ -244,8 +247,6 @@ $clndr-border: 1px solid #000;
 					.day-contents
 					{
 						box-sizing: border-box;
-						// width: 100%;
-						// height: 100%;
 						padding: 8px;
 						font-size: 12px;
 						text-align: right;
