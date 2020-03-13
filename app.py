@@ -8,6 +8,7 @@ from dateutil import parser
 from icalendar import Calendar, Event
 from functools import wraps
 import uuid
+import re
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -177,8 +178,8 @@ def condates_ics():
         e = Event()
         title = condate.title
         # append public_notes to title
-        if condate.public_notes:
-            title += ' (%s)' % condate.public_notes
+        if condate.cancelled and condate.public_notes:
+            title += ' (%s)' % re.sub('<[^<]+?>', '', condate.public_notes)
         # set status to cancelled?
         if condate.cancelled:
             e.add('status', 'CANCELLED')
