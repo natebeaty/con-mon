@@ -566,6 +566,9 @@ form.submit-condate {
     }
   }
   &.submitted-ok {
+    background: none;
+    border: none;
+    padding: 0;
     fieldset,
     .actions {
       display: none;
