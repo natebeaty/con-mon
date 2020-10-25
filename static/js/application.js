@@ -78,6 +78,7 @@ var CON_MON = (function() {
         e.preventDefault();
         $form = $(this);
         if ($form.find('input[name=diebots_5000]').val() == '') {
+          $form.addClass('working');
           $.post('/submit_condate', $form.serialize())
             .done(function(data) {
               if (data.success) {
@@ -88,6 +89,9 @@ var CON_MON = (function() {
             })
             .fail(function() {
               $form.find('.status').addClass('error').text('There was an error. Please try again.');
+            })
+            .always(function() {
+              $form.removeClass('working');
             });
         }
       });

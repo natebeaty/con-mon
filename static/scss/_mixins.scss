@@ -52,3 +52,27 @@ $breakpoint-lg: 1200px;
     @content;
   }
 }
+
+// Working state with spinner
+@keyframes spinner {
+  100% { transform: rotate(360deg); }
+}
+.working {
+  > * {
+    opacity: 0.35;
+  }
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    margin: -20px 0 0 -20px;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-top-color: rgba(0, 0, 0, 1);
+    animation: spinner 0.75s linear infinite;
+  }
+}
