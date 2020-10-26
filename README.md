@@ -14,3 +14,9 @@ Set up a virtualenv with python 3, and `pip install -r requirements.txt`
 Pull down `db/app.db` and set up `config.py`. Run `python app.py` for development server.
 
 For db migrations: `alembic revision -m "add column foo"` and edit migration, then run `alembic upgrade head`
+
+## Flask-Superadmin for Python 3
+
+There are several forks with Python 3 support, this is what I'm doing now:
+
+`pip install https://github.com/closeio/Flask-SuperAdmin/archive/master.zip`

@@ -11,7 +11,7 @@ import uuid
 import re
 
 app = Flask(__name__)
-app.config.from_object('config')
+app.config.from_pyfile('config.py')
 db = SQLAlchemy(app)
 mail = Mail(app)
 
@@ -171,7 +171,7 @@ def condates_ics():
     """
     condates = Condate.query.filter(Condate.start_date >= date.today(), Condate.published == True).order_by(Condate.start_date).all()
     cal = Calendar()
-    cal.add('prodid','-//Con-Mon//cons.clixel.com//EN')
+    cal.add('prodid','-//Con-Mon//con-mon.com//EN')
     cal.add('version','2.0')
     cal.add('X-WR-CALNAME','Con-Mon')
     for condate in condates:
@@ -236,7 +236,7 @@ def submit_note():
     Submit note (not currently used)
     """
     msg = Message('New con-mon note from %s' % request.form['note_email'],
-        sender = 'hal@cons.clixel.com',
+        sender = 'hal@con-mon.com',
         reply_to = request.form['note_email'],
         recipients = ['nate@clixel.com'])
     msg.body = '%s\n\nFrom: %s\n' % (request.form['note_body'], request.form['note_email'])
@@ -341,7 +341,7 @@ def submit_condate():
     if convention_id == 'other':
         submit_msg = submit_msg + 'Edit Convention: %sadmin/convention/%s/\n' % (request.url_root, convention.id)
     msg = Message('New con-mon submission (%s)' % condate.title,
-        sender = 'hal@cons.clixel.com',
+        sender = 'hal@con-mon.com',
         reply_to = reply_to,
         recipients = ['nate@clixel.com'])
     msg.body = submit_msg
