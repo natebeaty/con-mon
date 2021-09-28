@@ -26,15 +26,16 @@ def migrate(c):
     restart(c)
 
 def update(c):
+    print("Pulling new code...")
     c.run("cd {} && git pull origin {}".format(remote_path, git_branch))
 
 def alembic_migrate(c):
+    print("Running db migrations...")
     c.run("cd {} && source .venv/bin/activate && python alembic upgrade head".format(remote_path))
 
 def restart(c):
     print("Restarting app...")
-    c.run("cd {} && ../stop".format(remote_path))
-    c.run("cd {} && ../start".format(remote_path))
+    c.run("cd {} && ../stop && ../start".format(remote_path))
 
 # local commands
 @task
