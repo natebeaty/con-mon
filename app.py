@@ -3,12 +3,14 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail, Message
 from datetime import datetime, date, time, timedelta
 from marshmallow import Schema, fields, pprint
-from flask_superadmin import Admin, expose, BaseView, model
+from flask_superadmin import Admin, expose, BaseView, AdminIndexView as _AdminIndexView
+from flask_superadmin.model import ModelAdmin as _ModelAdmin
 from dateutil import parser
 from icalendar import Calendar, Event
 from functools import wraps
 import uuid
 import re
+import config
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
@@ -358,24 +360,57 @@ def submit_condate():
 
 ### admin views
 
-class ConventionAdmin(model.ModelAdmin):
+
+# basic auth
+def check_auth(username, password):
+    return username == config.ADMIN_USERNAME and password == config.ADMIN_PASSWORD
+
+def authenticate():
+    return Response(
+    'Could not verify your access level for that URL.\n'
+    'You have to login with proper credentials', 401,
+    {'WWW-Authenticate': 'Basic realm="Login Required"'})
+
+def is_authenticated():
+    auth = request.authorization
+    return auth and check_auth(auth.username, auth.password)
+
+
+class ModelAdmin(_ModelAdmin):
+
+    def is_accessible(self):
+        return is_authenticated()
+
+    def _handle_view(self, name, *args, **kwargs):
+        if not self.is_accessible():
+            return authenticate()
+
+class AdminIndexView(_AdminIndexView):
+    @expose('/')
+    def index(self):
+        if not is_authenticated():
+            return authenticate()
+        return self.render('admin/index.html')
+        # return super(AdminIndexView, self).index()
+
+class ConventionAdmin(ModelAdmin):
     session = db.session
     fields = list_display = ('title', 'location', 'url', 'twitter', 'tags', 'archived',)
 
-class TagAdmin(model.ModelAdmin):
+class TagAdmin(ModelAdmin):
     session = db.session
     fields = list_display = ('title',)
 
-class CondateAdmin(model.ModelAdmin):
+class CondateAdmin(ModelAdmin):
     session = db.session
     fields = ('convention', 'title', 'start_date', 'end_date', 'registration_opens', 'registration_closes', 'published', 'cancelled', 'notes', 'public_notes', 'submission_hash',)
     list_display = ('title', 'start_date', 'end_date', 'registration_opens', 'registration_closes', 'published', 'cancelled', )
 
-class PhraseAdmin(model.ModelAdmin):
+class PhraseAdmin(ModelAdmin):
     session = db.session
     fields = list_display = ('body','num_uses',)
 
-admin = Admin(app)
+admin = Admin(app, index_view=AdminIndexView(), name='Con Mon')
 admin.register(Convention, ConventionAdmin)
 admin.register(Condate, CondateAdmin)
 admin.register(Tag, TagAdmin)

@@ -9,7 +9,7 @@ Flask app to help frazzled cartoonists keep track of the myriad of conventions i
 
 ## Getting up and running
 
-Set up a virtualenv with python 3, and `pip install -r requirements.txt`
+Set up a virtualenv with python 3, e.g.: `pyenv virtualenv 3.7.7 conmon` and then `pip install -r requirements.txt`
 
 Pull down `db/app.db` and set up `config.py`. Run `python app.py` for development server.
 
