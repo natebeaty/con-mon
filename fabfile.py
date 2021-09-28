@@ -1,40 +1,42 @@
-from fabric.api import *
+from fabric import task
+from invoke import run as local
 
-env.hosts = ['con-mon.com']
-env.user = 'natebeaty'
-env.git_branch = 'master'
-env.warn_only = True
-env.path = '/home/natebeaty/webapps/conmon/conmon'
+remote_path = "/home/natebeaty/apps/con-mon/conmon"
+remote_hosts = ["natebeaty@con-mon.com"]
+git_branch = "master"
 
-def dev():
-    local('python app.py')
+# deploy
+@task(hosts=remote_hosts)
+def deploy(c):
+    update(c)
+    restart(c)
 
-def deploy():
-    update()
-    restart()
+# install
+@task(hosts=remote_hosts)
+def install(c):
+    update(c)
+    pip_install(c)
+    restart(c)
 
-def install():
-    update()
-    pip_install()
-    restart()
+# migrate
+@task(hosts=remote_hosts)
+def migrate(c):
+    update(c)
+    alembic_migrate(c)
+    restart(c)
 
-def migrate():
-    update()
-    alembic_migrate()
-    restart()
+def update(c):
+    c.run("cd {} && git pull origin {}".format(remote_path, git_branch))
 
-def update():
-    with cd(env.path):
-        run('git pull origin %s' % env.git_branch)
+def alembic_migrate(c):
+    c.run("cd {} && source .venv/bin/activate && python alembic upgrade head".format(remote_path))
 
-def pip_install():
-    with cd(env.path):
-        run('source .venv/bin/activate && pip install --quiet -r requirements.txt')
+def restart(c):
+    print("Restarting app...")
+    c.run("cd {} && ../stop".format(remote_path))
+    c.run("cd {} && ../start".format(remote_path))
 
-def alembic_migrate():
-    with cd(env.path):
-        run('source .venv/bin/activate && python alembic upgrade head')
-
-def restart():
-    with cd(env.path):
-        run('../apache2/bin/restart')
+# local commands
+@task
+def dev(c):
+    local("python app.py")
