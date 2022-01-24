@@ -34,9 +34,11 @@ class Twitter(Command):
         min_uses = db.session.query(db.func.min(Phrase.num_uses)).scalar()
         phrases = Phrase.query.filter(Phrase.num_uses == min_uses).all()
 
+        output = "-----------------\nTwitter cronjob: %s\n\n" % str(datetime.now())
+
         # cons that are a week away
         daily_notices = Condate.query.filter(Condate.start_date == date.today() + timedelta(days=7), Condate.published == True, Condate.cancelled == False).all()
-        output = "Condates happening in a week: \n"
+        output = output + "Condates happening in a week: \n"
         for c in daily_notices:
             if indie_tag in c.convention.tags:
                 phrase = random.choice(phrases)
