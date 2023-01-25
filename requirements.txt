@@ -12,7 +12,7 @@ Flask-Sendmail==0.1
 Flask-SQLAlchemy==2.4.1
 Flask-SuperAdmin==1.7.1
 Flask-WTF==0.14.2
-future==0.18.2
+future==0.18.3
 icalendar==4.0.4
 idna==2.8
 itsdangerous==1.1.0
