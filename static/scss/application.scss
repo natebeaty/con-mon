@@ -208,6 +208,16 @@ a.tag {
   }
 }
 
+.socials {
+  display: block;
+  font-size: 18px;
+  margin-top: 8px;
+  @include media-md {
+    font-size: 16px;
+    display: inline-block;
+  }
+}
+
 // Missing something?
 .missing {
   margin: 20px 0;

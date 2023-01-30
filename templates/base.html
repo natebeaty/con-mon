@@ -7,12 +7,12 @@
 	<meta charset='utf-8'>
 	<title>{% block title %}Con-Mon{% endblock %}</title>
 	<link href='https://fonts.googleapis.com/css?family=Arvo:700|Arimo' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="/static/dist/css/application.css?ckcachebust=24444b5cd74d02a05e28ead75ab2d6e5" type="text/css" media="screen">
-	<link rel="shortcut icon" href="/static/img/favicon.png?ckcachebust=f89d97df837efde3bec6fa565174ecd4">
-	<link rel="apple-touch-icon" href="/static/img/apple-touch-icon.png?ckcachebust=f69acac59386498dc9cdb80ccf66c1b6">
+	<link rel="stylesheet" href="/static/dist/css/application.css?ckcachebust=BFFB99208B18D3708AC7E087CECC364F" type="text/css" media="screen">
+	<link rel="shortcut icon" href="/static/img/favicon.png?ckcachebust=C3262E38AFF0E063F3EAB1406C2BDEB4">
+	<link rel="apple-touch-icon" href="/static/img/apple-touch-icon.png?ckcachebust=A31920E02BAED010FEBC98E57EFD2B50">
 	<script src="{{ url_for('static', filename='dist/js/modernizr.js') }}" type="text/javascript"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<link rel="me" href="https://botsin.space/@conmon">
+	<link rel="me" href="https://botsin.space/@conmon?ckcachebust=696784196">
 	<meta name="description" content="A service to help cartoonists keep track of conventions.">
 </head>
 <body id="{% block body_id %}{% endblock %}" class="{% block body_class %}{% endblock %}">
@@ -21,7 +21,10 @@
 		<div class="wrap">
 			<h1><a href="/">Con-Mon</a></h1>
 			<h2>A service to help cartoonists keep track of conventions.</h2>
-			<p>Follow to get a heads up on registration deadlines and upcoming conventions: <a href="https://botsin.space/@conmon">Mastodon</a> &middot; <a href="https://twitter.com/conmonapp">Twitter</a></p>
+			<p>
+				Follow to get a heads up on registration deadlines and upcoming conventions:
+				<span class="socials"><a href="https://botsin.space/@conmon">Mastodon</a> &middot; <a href="https://twitter.com/conmonapp">Twitter</a><span>
+			</p>
 			<p class="missing"><span>Missing something?</span> <a href="#" class="button show-submit-condate">Submit a Convention Date</a> <br>or <a href="/condates" class="button accent">Bulk Submit Condates</a></p>
 			{% include "submit-condate.html" %}
 		</div>
@@ -35,6 +38,6 @@
 		<p><a href="https://clixel.com/" class="clixel">Site by Clixel</a></p>
 	</footer>
 </div><!-- END #wrapper -->
-<script src="/static/dist/js/application.js?ckcachebust=7fd030196ef7359840b8f906f788550b" type="text/javascript"></script>
+<script src="/static/dist/js/application.js?ckcachebust=94D4EB3CFEDD9A1589D101204770B90C" type="text/javascript"></script>
 </body>
 </html>
