@@ -21,10 +21,11 @@
 		<div class="wrap">
 			<h1><a href="/">Con-Mon</a></h1>
 			<h2>A service to help cartoonists keep track of conventions.</h2>
-			<p>
+			<!-- <p>
 				Follow to get a heads up on registration deadlines and upcoming conventions:
 				<span class="socials"><a href="https://botsin.space/@conmon">Mastodon</a>
-			</p>
+			</p> -->
+			<p class="ical">Subscribe to the Con-Mon calendar: <input type="text" class="autograb" value="https://con-mon.com/condates.ics" size="35" onclick="javascript:this.select()"></p>
 			<p class="missing"><span>Missing something?</span> <a href="#" class="button show-submit-condate">Submit a Convention Date</a> <br>or <a href="/condates" class="button accent">Bulk Submit Condates</a></p>
 			{% include "submit-condate.html" %}
 		</div>
