@@ -1,28 +1,43 @@
 alembic==1.3.1
+annotated-types==0.7.0
+anyio==4.9.0
+atproto==0.0.59
 blinker==1.4
 blurhash==1.1.4
 certifi==2022.12.7
+cffi==1.17.1
 chardet==3.0.4
-Click==7.0
+charset-normalizer==3.4.1
+click==8.1.8
+cryptography==44.0.2
 decorator==4.4.1
+dnspython==2.7.0
+exceptiongroup==1.2.2
 Flask==1.1.1
 Flask-Mail==0.9.1
 Flask-Script==2.0.6
 Flask-Sendmail==0.1
 Flask-SQLAlchemy==2.4.1
-Flask-SuperAdmin @ https://github.com/closeio/Flask-SuperAdmin/archive/master.zip
+Flask-SuperAdmin @ https://github.com/closeio/Flask-SuperAdmin/archive/master.zip#sha256=fbc0e812bd81a81f0e526b89783c976557cb8f46a1c448a3570ac3afe0989382
 Flask-WTF==0.14.2
 future==0.18.3
+h11==0.14.0
+httpcore==1.0.7
+httpx==0.28.1
 icalendar==4.0.4
 idna==2.8
 itsdangerous==1.1.0
 Jinja2==2.11.3
+libipld==3.0.1
 Mako==1.1.6
 MarkupSafe==1.1.1
 marshmallow==3.3.0
 Mastodon.py==1.8.0
 oauthlib==3.1.0
 pbr==5.4.4
+pycparser==2.22
+pydantic==2.11.2
+pydantic_core==2.33.1
 python-dateutil==2.8.1
 python-editor==1.0.4
 python-magic==0.4.27
@@ -32,10 +47,14 @@ requests==2.22.0
 requests-oauthlib==1.3.0
 simplejson==3.17.0
 six==1.13.0
+sniffio==1.3.1
 SQLAlchemy==1.3.11
 sqlparse==0.3.0
 Tempita==0.5.2
+typing-inspection==0.4.0
+typing_extensions==4.13.1
 urllib3==1.25.7
-uWSGI @ https://projects.unbit.it/downloads/uwsgi-lts.tar.gz
+uWSGI @ https://projects.unbit.it/downloads/uwsgi-lts.tar.gz#sha256=88ab9867d8973d8ae84719cf233b7dafc54326fcaec89683c3f9f77c002cdff9
+websockets==13.1
 Werkzeug==0.16.0
 WTForms==2.2.1
