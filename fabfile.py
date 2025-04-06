@@ -35,7 +35,7 @@ def alembic_migrate(c):
 
 def restart(c):
     print("Restarting app...")
-    c.run("cd {} && ../stop; ../start".format(remote_path))
+    c.run("cd {} && ../stop; sleep 1; ../start".format(remote_path))
 
 # local commands
 @task
