@@ -6,7 +6,7 @@ from app import Condate,Tag,Phrase
 import config
 import random
 # import twitter
-from mastodon import Mastodon
+# from mastodon import Mastodon
 from atproto import Client
 
 app = Flask(__name__)
@@ -30,12 +30,12 @@ class Social(Command):
 
     #     return ''
 
-    def post_to_mastodon(self, mastodon_api, message):
-        try:
-            mastodon_api.toot(message)
-            return ''
-        except:
-            return "There was an error posting to Mastodon.\n"
+    # def post_to_mastodon(self, mastodon_api, message):
+    #     try:
+    #         mastodon_api.toot(message)
+    #         return ''
+    #     except:
+    #         return "There was an error posting to Mastodon.\n"
 
     def post_to_bluesky(self, bluesky_api, message):
         try:
@@ -46,7 +46,7 @@ class Social(Command):
 
     def run(self):
         # twitter_api = twitter.Api(consumer_key=config.TWITTER_CONSUMER_KEY, consumer_secret=config.TWITTER_CONSUMER_SECRET, access_token_key=config.TWITTER_ACCESS_TOKEN_KEY, access_token_secret=config.TWITTER_ACCESS_TOKEN_SECRET)
-        mastodon_api = Mastodon(access_token=config.MASTODON_ACCESS_TOKEN, api_base_url=config.MASTODON_BASE_URL)
+        # mastodon_api = Mastodon(access_token=config.MASTODON_ACCESS_TOKEN, api_base_url=config.MASTODON_BASE_URL)
         bluesky_api = Client()
         bluesky_api.login(config.BLUESKY_USERNAME, config.BLUESKY_PASSWORD)
 
@@ -69,7 +69,7 @@ class Social(Command):
                 phrase.num_uses += 1
                 phrases.remove(phrase)
                 message = "%s %s is a week away. %s" % (phrase, c.convention.title, c.convention.url)
-                output = output + self.post_to_mastodon(mastodon_api, message)
+                # output = output + self.post_to_mastodon(mastodon_api, message)
                 output = output + self.post_to_bluesky(bluesky_api, message)
                 # if c.convention.twitter:
                 #     message = message + " @%s" % (c.convention.twitter)
@@ -86,7 +86,7 @@ class Social(Command):
                 phrase.num_uses += 1
                 phrases.remove(phrase)
                 message = "%s %s is a month away. %s" % (phrase, c.convention.title, c.convention.url)
-                output = output + self.post_to_mastodon(mastodon_api, message)
+                # output = output + self.post_to_mastodon(mastodon_api, message)
                 output = output + self.post_to_bluesky(bluesky_api, message)
                 # if c.convention.twitter:
                 #     message = message + " @%s" % (c.convention.twitter)
@@ -103,7 +103,7 @@ class Social(Command):
                 phrase.num_uses += 1
                 phrases.remove(phrase)
                 message = "%s %s registration closes in a week. %s" % (phrase, c.convention.title, c.convention.url)
-                output = output + self.post_to_mastodon(mastodon_api, message)
+                # output = output + self.post_to_mastodon(mastodon_api, message)
                 output = output + self.post_to_bluesky(bluesky_api, message)
                 # if c.convention.twitter:
                 #     message = message + " @%s" % (c.convention.twitter)
