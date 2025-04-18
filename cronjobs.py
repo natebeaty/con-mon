@@ -1,13 +1,12 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_script import Manager,Command
+from flask_script import Manager, Command
 from datetime import date, datetime, timedelta
-from app import Condate,Tag,Phrase
+from app import Condate, Tag, Phrase
 import config
 import random
-# import twitter
 # from mastodon import Mastodon
-from atproto import Client
+from atproto import Client, client_utils
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -20,15 +19,6 @@ class Social(Command):
     Weekly and monthly notices of approaching convention dates
     Weekly notices of approaching registration deadlines
     """
-
-    # def post_to_twitter(self, twitter_api, message):
-    #     try:
-    #         twitter_api.PostUpdate(message)
-    #         return ''
-    #     except:
-    #         return "There was an error posting to Twitter.\n"
-
-    #     return ''
 
     # def post_to_mastodon(self, mastodon_api, message):
     #     try:
@@ -45,7 +35,6 @@ class Social(Command):
             return "There was an error posting to Bluesky.\n"
 
     def run(self):
-        # twitter_api = twitter.Api(consumer_key=config.TWITTER_CONSUMER_KEY, consumer_secret=config.TWITTER_CONSUMER_SECRET, access_token_key=config.TWITTER_ACCESS_TOKEN_KEY, access_token_secret=config.TWITTER_ACCESS_TOKEN_SECRET)
         # mastodon_api = Mastodon(access_token=config.MASTODON_ACCESS_TOKEN, api_base_url=config.MASTODON_BASE_URL)
         bluesky_api = Client()
         bluesky_api.login(config.BLUESKY_USERNAME, config.BLUESKY_PASSWORD)
@@ -70,10 +59,8 @@ class Social(Command):
                 phrases.remove(phrase)
                 message = "%s %s is a week away. %s" % (phrase, c.convention.title, c.convention.url)
                 # output = output + self.post_to_mastodon(mastodon_api, message)
-                output = output + self.post_to_bluesky(bluesky_api, message)
-                # if c.convention.twitter:
-                #     message = message + " @%s" % (c.convention.twitter)
-                # output = output + self.post_to_twitter(twitter_api, message)
+                bluesky_message = client_utils.TextBuilder().text("%s " % phrase).link(c.convention.title, c.convention.url).text(" is a week away.");
+                output = output + self.post_to_bluesky(bluesky_api, bluesky_message)
                 output = output + "\n" + message
 
         # cons that are a month away
@@ -87,10 +74,8 @@ class Social(Command):
                 phrases.remove(phrase)
                 message = "%s %s is a month away. %s" % (phrase, c.convention.title, c.convention.url)
                 # output = output + self.post_to_mastodon(mastodon_api, message)
-                output = output + self.post_to_bluesky(bluesky_api, message)
-                # if c.convention.twitter:
-                #     message = message + " @%s" % (c.convention.twitter)
-                # output = output + self.post_to_twitter(twitter_api, message)
+                bluesky_message = client_utils.TextBuilder().text("%s " % phrase).link(c.convention.title, c.convention.url).text(" is a month away.");
+                output = output + self.post_to_bluesky(bluesky_api, bluesky_message)
                 output = output + "\n" + message
 
         # cons that have registrations closing in a week
@@ -104,10 +89,8 @@ class Social(Command):
                 phrases.remove(phrase)
                 message = "%s %s registration closes in a week. %s" % (phrase, c.convention.title, c.convention.url)
                 # output = output + self.post_to_mastodon(mastodon_api, message)
-                output = output + self.post_to_bluesky(bluesky_api, message)
-                # if c.convention.twitter:
-                #     message = message + " @%s" % (c.convention.twitter)
-                # output = output + self.post_to_twitter(twitter_api, message)
+                bluesky_message = client_utils.TextBuilder().text("%s " % phrase).link(c.convention.title, c.convention.url).text(" registration closes in a week.");
+                output = output + self.post_to_bluesky(bluesky_api, bluesky_message)
                 output = output + "\n" + message
 
         # commit updated phrase num_uses counts
